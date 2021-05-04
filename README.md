@@ -1,0 +1,2 @@
+# KrakenEasy
+ KrakenEasy Beta

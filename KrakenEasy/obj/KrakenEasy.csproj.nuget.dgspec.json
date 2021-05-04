@@ -1,0 +1,99 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {
+      "version": "1.7.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+        "projectName": "KrakenEasy",
+        "projectPath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+        "packagesPath": "C:\\Users\\contr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\contr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "LiveCharts.Wpf": {
+              "target": "Package",
+              "version": "[0.9.7, )"
+            },
+            "Microsoft.Expression.Drawing": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.12.2, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.12.2, )"
+            },
+            "MongoDB.Driver.Core": {
+              "target": "Package",
+              "version": "[2.12.2, )"
+            },
+            "System.Management.Automation": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            },
+            "System.ServiceProcess.ServiceController": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

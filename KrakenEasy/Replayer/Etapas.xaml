@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="KrakenEasy.Replayer.Etapas"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KrakenEasy.Replayer"
+             mc:Ignorable="d" Height="80.807" Width="83.855">
+    <Viewbox>
+        <Grid>
+            <TextBlock Text="?" FontSize="50" MinWidth="20" Margin="20.996,0,27.354,19.111" HorizontalAlignment="center" VerticalAlignment="Center" Height="61.696" />
+            <Rectangle Fill="White" HorizontalAlignment="Left" Height="10" Margin="4.278,66.444,0,0" Stroke="Black" VerticalAlignment="Top" Width="62"/>
+        </Grid>
+    </Viewbox>
+</UserControl>
+

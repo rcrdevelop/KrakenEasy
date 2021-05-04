@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="KrakenEasy.Replayer.Cards"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KrakenEasy.Replayer"
+             mc:Ignorable="d" Height="Auto" Width="Auto" Padding="5">
+    <Viewbox Height="Auto" Width="Auto" >
+        <Grid VerticalAlignment="Top" Height="260.069" Width="611.226">
+            <Image Name="Card_Left" Source="Baraja Dorso1.png" Margin="-7,-27,446.226,10.069" />
+            <Label Name="Action" Content="21" Foreground="Orange" FontSize="100" Margin="323,-18,170.226,153.069" RenderTransformOrigin="0.655,0.507" />
+            <Label Name="BB_Action" Content="(29,5)" Foreground="White" FontSize="55" Margin="452,158,11.226,12.069" />
+            <Label Name="SB_Action" Content="(152,5)" Foreground="White" FontSize="55" Margin="426,93,5.226,97.069"/>
+            <Label Name="BB_Restantes" Content="123" Foreground="Beige" FontSize="70" Margin="472,10,-1.774,167.069" />
+            <Image Name="Card_Right" Source="Baraja Dorso1.png" Margin="160,-27,279.226,10.069" />
+        </Grid>
+    </Viewbox>
+</UserControl>

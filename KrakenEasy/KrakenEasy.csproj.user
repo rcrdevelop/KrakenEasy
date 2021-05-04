@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\contr\source\repos\KrakenEasy\KrakenEasy\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="HUDS\ContenedorHUD.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\Controls\ProgressControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\Controls\StatControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\FullHUD.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\HUDControler.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\Progress.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\ProgressKraken.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modals\Carpetas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modals\HandsError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Replayer\Cards.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Replayer\Etapas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Replayer\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Servicios\Error.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Servicios\Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Settings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="HUDS\ContenedorHUD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\Controls\ProgressControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\Controls\StatControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\FullHUD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\HUDControler.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\Progress.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\ProgressKraken.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modals\Carpetas.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modals\HandsError.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Replayer\Cards.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Replayer\Etapas.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Replayer\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Servicios\Error.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KrakenEasy": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
