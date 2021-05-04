@@ -18,9 +18,7 @@ using MongoDB.Bson;
 
 namespace KrakenEasy
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    //Ventana Principal
     public partial class MainWindow : Window
     {
         static Servicios.Servicios _Servicios = new Servicios.Servicios();
@@ -52,7 +50,7 @@ namespace KrakenEasy
                 Detener_Servicio();
             }
         }
-
+        //Iniciar RePlayer
         private void Replayer_Click(object sender, RoutedEventArgs e)
         {
             Replayer.MainWindow _Replayer = new Replayer.MainWindow();
@@ -65,7 +63,7 @@ namespace KrakenEasy
             Detener_Servicio();
             Process.GetCurrentProcess().Kill();
         }
-
+        //Llevar ficheros a KrakenHands manualmente
         private void Importar_Hands(object sender, RoutedEventArgs e)
         {
             main_Manejeador_Manos _Hands = new main_Manejeador_Manos();
@@ -78,6 +76,7 @@ namespace KrakenEasy
 
 
         }
+        //WorkServices
         private static void Iniciar_Servicio()
         {
             Propiedades.SystemActive = true;
@@ -99,32 +98,33 @@ namespace KrakenEasy
                 _Hilo_Monito_HUDS.Start();
             });
         }
+        //Procedimiento para mostras HUDS
         private static void Monitor_HUDS()
         {
 
-              
+
             while (true)
             {
                 if (Casinos.Mesas.Abiertas != null)
                 {
 
-                
+
                     for (int i = 0; i > Casinos.Mesas.Abiertas; i++)
                     {
                         if (Casinos.Mesas.Abiertas.Count > 0)
-                        { 
-                        
-                        MongoAccess _Access = new MongoAccess();
-
-                        List<string> Players = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
-                    
-                        if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
                         {
-                            foreach (string Player in Players)
+
+                            MongoAccess _Access = new MongoAccess();
+
+                            List<string> Players = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
+
+                            if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
                             {
+                                foreach (string Player in Players)
+                                {
                                     Thread _Hilo_Contenedor = new Thread(() => HUDS(Player.Split(" ")[2], Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString));
                                     _Hilo_Contenedor.Start();
-                            }
+                                }
                                 BsonDocument _Data = new BsonDocument();
                                 _Data.Add(new BsonElement("_id", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value));
                                 _Data.Add(new BsonElement("Dimensiones", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Dimensiones").Value));
@@ -136,7 +136,7 @@ namespace KrakenEasy
                                 window.Show();
 
                                 Casinos.Mesas.Abiertas[i] = _Data;
-                        }
+                            }
 
                             //for (int i = 0; i < Players.Count; i++)
                             //{

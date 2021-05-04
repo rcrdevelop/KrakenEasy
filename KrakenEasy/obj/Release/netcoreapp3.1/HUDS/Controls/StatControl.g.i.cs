@@ -53,7 +53,7 @@ namespace KrakenEasy.HUDS.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KrakenEasy;component/huds/controls/statcontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KrakenEasy;V1.7.0.0;component/huds/controls/statcontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\HUDS\Controls\StatControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

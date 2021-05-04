@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uskCyiRStMiUh9ew2JxSycW5uzNvOlvUfR6/9nUDi+6Du72sTVjVvzw8bndak2V7NjhcV5Z6bLLdjhWh+lMUbQ==",
+  "dgSpecHash": "Z4vGljsnPMGGb5eHoovmYFtbfzpn03Lgd7CmCg3eGBrMZy5xNyG/TtbjSCfhC7SmawPW8b4xwNsspRtJTnd5Wg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+  "projectFilePath": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\contr\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",

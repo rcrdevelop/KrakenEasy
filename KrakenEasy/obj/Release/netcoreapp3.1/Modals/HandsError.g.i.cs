@@ -61,7 +61,7 @@ namespace KrakenEasy.Modals {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KrakenEasy;component/modals/handserror.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KrakenEasy;V1.7.0.0;component/modals/handserror.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Modals\HandsError.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

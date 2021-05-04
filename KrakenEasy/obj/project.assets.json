@@ -7774,11 +7774,11 @@
   "project": {
     "version": "1.7.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+      "projectUniqueName": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
       "projectName": "KrakenEasy",
-      "projectPath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+      "projectPath": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
       "packagesPath": "C:\\Users\\contr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\obj\\",
+      "outputPath": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\contr\\AppData\\Roaming\\NuGet\\NuGet.Config",
