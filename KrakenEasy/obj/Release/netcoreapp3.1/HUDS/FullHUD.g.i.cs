@@ -54,7 +54,7 @@ namespace KrakenEasy.HUDS {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KrakenEasy;V1.7.0.0;component/huds/fullhud.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KrakenEasy;component/huds/fullhud.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\HUDS\FullHUD.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

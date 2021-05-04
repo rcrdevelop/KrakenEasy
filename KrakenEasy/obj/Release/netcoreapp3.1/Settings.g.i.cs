@@ -101,7 +101,7 @@ namespace KrakenEasy {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KrakenEasy;V1.7.0.0;component/settings.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KrakenEasy;component/settings.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Settings.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

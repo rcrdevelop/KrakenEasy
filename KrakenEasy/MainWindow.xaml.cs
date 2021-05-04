@@ -115,7 +115,8 @@ namespace KrakenEasy
                         {
 
                             MongoAccess _Access = new MongoAccess();
-
+                            Window window = new Window();
+                            window.Show();
                             List<string> Players = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
 
                             if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
@@ -132,8 +133,7 @@ namespace KrakenEasy
                                 _Data.Add(new BsonElement("Ready", true));
                                 _Data.Add(new BsonElement("Casino", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Casino").Value));
                                 _Data.Add(new BsonElement("_Last_Hand", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_Last_Hand").Value));
-                                Window window = new Window();
-                                window.Show();
+
 
                                 Casinos.Mesas.Abiertas[i] = _Data;
                             }

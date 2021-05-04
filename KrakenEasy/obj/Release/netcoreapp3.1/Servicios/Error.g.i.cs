@@ -61,7 +61,7 @@ namespace KrakenEasy.Servicios {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KrakenEasy;V1.7.0.0;component/servicios/error.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KrakenEasy;component/servicios/error.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Servicios\Error.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
