@@ -63,6 +63,7 @@ namespace KrakenEasy.Servicios
             }
         public static void AnalizarMesaWinamax(String _Ruta)
         {
+
             String[] _Archivos = Directory.GetFiles(_Ruta);
             foreach (IntPtr _Ventana in Mesas_Winamax())
             {
@@ -82,6 +83,14 @@ namespace KrakenEasy.Servicios
                             _Data[3] = "false";
                             _Data[4] = "Winamax";
                             _Access.Set_Mesas(_Data);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Window window = new Window();
+                                Label _Label = new Label();
+                                _Label.Content = Casinos.Mesas.Abiertas.Count;
+                                window.Content = _Label;
+                                window.Show();
+                            });
                         }
                     }
                 }

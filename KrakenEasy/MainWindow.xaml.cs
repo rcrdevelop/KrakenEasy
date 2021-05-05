@@ -15,6 +15,7 @@ using System.Windows.Threading;
 using System.IO;
 using KrakenEasy.HUDS;
 using MongoDB.Bson;
+using System.Windows.Controls;
 
 namespace KrakenEasy
 {
@@ -29,7 +30,7 @@ namespace KrakenEasy
         private void HUD_Click(object sender, RoutedEventArgs e)
         {
             MongoAccess _Access = new MongoAccess();
-            _Access.InicializarMain();
+            //_Access.InicializarMain();
             KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
             Casinos.Mesas.Abiertas = new BsonArray();
             Thread _Hilo_Servicio = new Thread(Iniciar_Servicio);
@@ -105,18 +106,22 @@ namespace KrakenEasy
 
             while (true)
             {
-                if (Casinos.Mesas.Abiertas != null)
+                try
                 {
-
-
-                    for (int i = 0; i > Casinos.Mesas.Abiertas; i++)
+                    if (Casinos.Mesas.Abiertas != null)
                     {
-                        if (Casinos.Mesas.Abiertas.Count > 0)
+
+                        for (int i = 0; i > Casinos.Mesas.Abiertas.Count; i++)
                         {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Window window = new Window();
+                                window.Show();
+                            });
+
 
                             MongoAccess _Access = new MongoAccess();
-                            Window window = new Window();
-                            window.Show();
+
                             List<string> Players = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
 
                             if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
@@ -143,10 +148,15 @@ namespace KrakenEasy
                             //    Thread _Hilo_Contenedor = new Thread(() => HUDS(Players[i], items[0]));
                             //    _Hilo_Contenedor.Start();
                             //}
+
                         }
                     }
+
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
                 }
-                Thread.Sleep(TimeSpan.FromSeconds(1));
+                catch
+                {
+                }
             }
         }
 

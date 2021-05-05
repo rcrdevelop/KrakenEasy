@@ -23,7 +23,6 @@ namespace KrakenEasy.HUDS
         public HUDControler()
         {
             InitializeComponent();
-            EstablecerMongo();
             Hilo();
         }
         private void EstablecerMongo()
@@ -69,7 +68,11 @@ namespace KrakenEasy.HUDS
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+            
         }
         public void Hilo()
         {

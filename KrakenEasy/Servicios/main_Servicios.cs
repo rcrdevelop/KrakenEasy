@@ -28,22 +28,22 @@ namespace KrakenEasy.Servicios
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                try
-                {
-                    if (HUDS.Propiedades.SystemActive)
-                    { 
-                        ServiciosCasinos.main();
-                        ServiciosFicheros.main();
-                    }
-                }
-                catch (Exception ex)
-                {
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    try
+            //    {
+            //        if (HUDS.Propiedades.SystemActive)
+            //        { 
+            //            ServiciosCasinos.main();
+            //            ServiciosFicheros.main();
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
 
-                }
-                await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
-            }
+            //    }
+            //    await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+            //}
         }
         
         public override Task StartAsync(CancellationToken cancellationToken)

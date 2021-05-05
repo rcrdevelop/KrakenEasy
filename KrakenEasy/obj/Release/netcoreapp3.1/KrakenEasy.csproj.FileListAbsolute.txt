@@ -350,7 +350,6 @@ C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.ServiceProcess.ServiceController.dll
-C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.csprojAssemblyReference.cache
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\HUDS\ContenedorHUD.g.cs
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\HUDS\Controls\ProgressControl.g.cs
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\HUDS\Controls\StatControl.g.cs
@@ -396,3 +395,4 @@ C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.dll
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.pdb
 C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.genruntimeconfig.cache
+C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.csprojAssemblyReference.cache

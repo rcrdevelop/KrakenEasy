@@ -32,27 +32,26 @@ namespace KrakenEasy.HUDS
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+            
         }
         private void Opacidad()
         {
-            MongoAccess _Access = new MongoAccess();
-            while (true)
-            {
                 try
                 {
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         this.Opacity = Propiedades.Opacity;
                     }));
-                    Thread.Sleep(TimeSpan.FromSeconds(0.2));
                 }
                 catch (Exception)
                 {
 
                     
                 }
-            }
 
         }
         private void Size()
@@ -61,15 +60,13 @@ namespace KrakenEasy.HUDS
             double _OriginalHeight = this.ActualHeight;
             try
             {
-                while (true)
-                {
+
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         this.Width = _OriginalWidth * Propiedades.Size;
                         this.Height = _OriginalHeight * Propiedades.Size;
                     }));
-                    Thread.Sleep(TimeSpan.FromSeconds(0.2));
-                }
+
             }
            
             
@@ -84,8 +81,7 @@ namespace KrakenEasy.HUDS
         {
             int _HUD = new int();
             bool _Change = new bool();
-            while (true)
-            {
+
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     _HUD = Propiedades.Relative;
@@ -113,8 +109,6 @@ namespace KrakenEasy.HUDS
                         Propiedades.Change = false;
                     }
                 }));
-                Thread.Sleep(TimeSpan.FromSeconds(0.5));
-            }
         }
         private void HUD_Data()
         {
@@ -138,9 +132,9 @@ namespace KrakenEasy.HUDS
         {
             try
             {
-
-            while (true)
-            {
+                HUD_Relative(_Id_Jugador);
+                Opacidad();
+                Size();
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     if (this.WindowState == WindowState.Minimized)
@@ -156,8 +150,6 @@ namespace KrakenEasy.HUDS
                 }));
                 Thread.Sleep(TimeSpan.FromSeconds(0.2));
             }
-
-            }
             catch (Exception)
             {
             }
@@ -165,17 +157,10 @@ namespace KrakenEasy.HUDS
         }
         private void Hilo()
         {
-            Thread _HiloOpacidad = new Thread(Opacidad);
             Thread _HiloData= new Thread(HUD_Data);
-            Thread _HiloSize = new Thread(Size);
-
             Thread _HiloStatus = new Thread(HUD_Status);
             _HiloData.Start();
             _HiloStatus.Start();
-            _HiloSize.Start();
-            _HiloOpacidad.Start();
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
