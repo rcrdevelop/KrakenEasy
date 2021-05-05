@@ -30,7 +30,7 @@ namespace KrakenEasy
         private void HUD_Click(object sender, RoutedEventArgs e)
         {
             MongoAccess _Access = new MongoAccess();
-            //_Access.InicializarMain();
+            _Access.InicializarMain();
             KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
             Casinos.Mesas.Abiertas = new BsonArray();
             Thread _Hilo_Servicio = new Thread(Iniciar_Servicio);

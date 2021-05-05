@@ -73,24 +73,42 @@ namespace KrakenEasy.Servicios
                     {
                         if (_Element.ToUpper().Split("_")[1].Trim().ToUpper() == (Win32.GetWindowText(_Ventana).Split('/')[0].Trim().ToUpper()))
                         {
-                            string[] _Data = new string[5];
-                            RECT rcWindow = new RECT();
-                            MongoAccess _Access = new MongoAccess();
-                            Win32.GetWindowRect(_Ventana, out rcWindow);
-                            _Data[0] = Win32.GetWindowText(_Ventana).Split('/')[0].Trim();
-                            _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
-                            _Data[2] = "true";
-                            _Data[3] = "false";
-                            _Data[4] = "Winamax";
-                            _Access.Set_Mesas(_Data);
-                            Application.Current.Dispatcher.Invoke(() =>
+                            if (Casinos.Mesas.Abiertas != null)
                             {
-                                Window window = new Window();
-                                Label _Label = new Label();
-                                _Label.Content = Casinos.Mesas.Abiertas.Count;
-                                window.Content = _Label;
-                                window.Show();
-                            });
+                                bool registrar = false;
+                                foreach (var Mesa in Mesas.Abiertas)
+                                {
+                                    if (Mesa.AsBsonDocument.GetElement("_id").Value.AsString == Win32.GetWindowText(_Ventana).Split('/')[0].Trim())
+                                    {
+                                      
+                                    }
+                                    else
+                                    {
+                                        registrar = true;
+                                    }
+                                }
+                                if (registrar)
+                                { 
+                                    string[] _Data = new string[5];
+                                    RECT rcWindow = new RECT();
+                                    MongoAccess _Access = new MongoAccess();
+                                    Win32.GetWindowRect(_Ventana, out rcWindow);
+                                    _Data[0] = Win32.GetWindowText(_Ventana).Split('/')[0].Trim();
+                                    _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
+                                    _Data[2] = "true";
+                                    _Data[3] = "false";
+                                    _Data[4] = "Winamax";
+                                    _Access.Set_Mesas(_Data);
+                                    Application.Current.Dispatcher.Invoke(() =>
+                                    {
+                                        Window window = new Window();
+                                        Label _Label = new Label();
+                                        _Label.Content = Casinos.Mesas.Abiertas.Count;
+                                        window.Content = _Label;
+                                        window.Show();
+                                    });
+                                }
+                            }
                         }
                     }
                 }

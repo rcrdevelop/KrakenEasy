@@ -137,7 +137,6 @@ namespace KrakenEasy.Servicios
                             string fileToMove = file;
                             string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
                             File.Copy(fileToMove, moveTo, true);
-                            MongoAccess _Access = new MongoAccess();
                           //  Registros_Data.Set_Last_Hand(System.IO.Path.GetFileName(file).Split(" ")[1]);
                         }
                     }
@@ -158,7 +157,6 @@ namespace KrakenEasy.Servicios
                             string fileToMove = file;
                             string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
                             File.Copy(fileToMove, moveTo, true);
-                            MongoAccess _Access = new MongoAccess();
                            // Registros_Data.Set_Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
                         }
                     }
