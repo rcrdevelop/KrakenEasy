@@ -45,9 +45,9 @@ namespace KrakenEasy
             }
             else
             {
-
-                _Hilo_HUDS.Interrupt();
+                Propiedades.SystemActive = false;
                 this.HUD.Content = "Iniciar Kraken";
+                _Hilo_HUDS.Interrupt();
                 Detener_Servicio();
             }
         }
@@ -111,51 +111,82 @@ namespace KrakenEasy
                     if (Casinos.Mesas.Abiertas != null)
                     {
 
-                        for (int i = 0; i > Casinos.Mesas.Abiertas.Count; i++)
+                        int i = 0;
+                        foreach (var Mesa in Casinos.Mesas.Abiertas)
                         {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                Window window = new Window();
-                                window.Show();
-                            });
 
-
+                            Thread.Sleep(TimeSpan.FromSeconds(1));
                             MongoAccess _Access = new MongoAccess();
 
-                            List<string> Players = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
+                            //List<string> Players = _Access.Get_Players(Mesa.AsBsonDocument.GetElement("_id").Value.AsString);
 
-                            if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
+                            if (Mesa.AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Mesa.AsBsonDocument.GetElement("Ready").Value.AsBoolean)
                             {
-                                foreach (string Player in Players)
-                                {
-                                    Thread _Hilo_Contenedor = new Thread(() => HUDS(Player.Split(" ")[2], Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString));
-                                    _Hilo_Contenedor.Start();
-                                }
+
+                                //foreach (string Player in Players)
+                                //{
+                                //    Thread _Hilo_Contenedor = new Thread(() => HUDS(Player.Split(" ")[2], Mesa.AsBsonDocument.GetElement("_id").Value.AsString));
+                                //    _Hilo_Contenedor.Start();
+                                //}
+                                Thread _Hilo_Contenedor = new Thread(() => HUDS(" dsd"/*(Player.Split(" ")[2]*/, Mesa.AsBsonDocument.GetElement("_id").Value.AsString));
+                                _Hilo_Contenedor.Start();
                                 BsonDocument _Data = new BsonDocument();
-                                _Data.Add(new BsonElement("_id", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value));
-                                _Data.Add(new BsonElement("Dimensiones", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Dimensiones").Value));
-                                _Data.Add(new BsonElement("Activa", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value));
+                                _Data.Add(new BsonElement("_id", Mesa.AsBsonDocument.GetElement("_id").Value));
+                                _Data.Add(new BsonElement("Dimensiones", Mesa.AsBsonDocument.GetElement("Dimensiones").Value));
+                                _Data.Add(new BsonElement("Activa", Mesa.AsBsonDocument.GetElement("Activa").Value));
                                 _Data.Add(new BsonElement("Ready", true));
-                                _Data.Add(new BsonElement("Casino", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Casino").Value));
-                                _Data.Add(new BsonElement("_Last_Hand", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_Last_Hand").Value));
-
-
-                                Casinos.Mesas.Abiertas[i] = _Data;
+                                _Data.Add(new BsonElement("Casino", Mesa.AsBsonDocument.GetElement("Casino").Value));
+                                //_Data.Add(new BsonElement("_Last_Hand", Mesa.AsBsonDocument.GetElement("_Last_Hand").Value));
+                                Thread.Sleep(TimeSpan.FromSeconds(2));
+                               // Casinos.Mesas.Abiertas[i] = _Data;
                             }
-
-                            //for (int i = 0; i < Players.Count; i++)
-                            //{
-                            //    Thread _Hilo_Contenedor = new Thread(() => HUDS(Players[i], items[0]));
-                            //    _Hilo_Contenedor.Start();
-                            //}
-
+                            i++;
                         }
+                        //for (int i = 0; i > Casinos.Mesas.Abiertas.Count; i++)
+                        //{
+                        //    MongoAccess _Access = new MongoAccess();
+
+                        //    List<string> Players = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
+
+                        //    if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
+                        //    {
+
+                        //        foreach (string Player in Players)
+                        //        {
+                        //            Thread _Hilo_Contenedor = new Thread(() => HUDS(Player.Split(" ")[2], Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString));
+                        //            _Hilo_Contenedor.Start();
+                        //        }
+                        //        BsonDocument _Data = new BsonDocument();
+                        //        _Data.Add(new BsonElement("_id", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value));
+                        //        _Data.Add(new BsonElement("Dimensiones", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Dimensiones").Value));
+                        //        _Data.Add(new BsonElement("Activa", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value));
+                        //        _Data.Add(new BsonElement("Ready", true));
+                        //        _Data.Add(new BsonElement("Casino", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Casino").Value));
+                        //        _Data.Add(new BsonElement("_Last_Hand", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_Last_Hand").Value));
+
+                        //        Casinos.Mesas.Abiertas[i] = _Data;
+                        //    }
+
+                        //    //for (int i = 0; i < Players.Count; i++)
+                        //    //{
+                        //    //    Thread _Hilo_Contenedor = new Thread(() => HUDS(Players[i], items[0]));
+                        //    //    _Hilo_Contenedor.Start();
+                        //    //}
+
+                        //}
                     }
 
                     Thread.Sleep(TimeSpan.FromSeconds(1));
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Window window = new Window();
+                        window.Content = ex.Message+" asdas";
+                        window.Show();
+                    });
+                    Thread.Sleep(TimeSpan.FromSeconds(3));
                 }
             }
         }

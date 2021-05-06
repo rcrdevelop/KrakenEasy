@@ -58,8 +58,12 @@ namespace KrakenEasy.Servicios
                     }
                 }
                 catch(Exception ex) {
-
-                }
+                Application.Current.Dispatcher.Invoke(() => {
+                    Window window = new Window();
+                    window.Content = ex.Message;
+                    window.Show();
+                });
+            }
             }
         public static void AnalizarMesaWinamax(String _Ruta)
         {
@@ -67,24 +71,26 @@ namespace KrakenEasy.Servicios
             String[] _Archivos = Directory.GetFiles(_Ruta);
             foreach (IntPtr _Ventana in Mesas_Winamax())
             {
+
                 foreach (string _Element in _Archivos)
                 {
                     if (_Element.ToUpper().Contains("Winamax".ToUpper()))
                     {
-                        if (_Element.ToUpper().Split("_")[1].Trim().ToUpper() == (Win32.GetWindowText(_Ventana).Split('/')[0].Trim().ToUpper()))
+                        if ((_Element.ToUpper().Split("_")[1].ToUpper().Contains(Win32.GetWindowText(_Ventana).Split('/')[0].TrimEnd().ToUpper())))
                         {
                             if (Casinos.Mesas.Abiertas != null)
                             {
-                                bool registrar = false;
+                                
+                                bool registrar = true;
                                 foreach (var Mesa in Mesas.Abiertas)
                                 {
                                     if (Mesa.AsBsonDocument.GetElement("_id").Value.AsString == Win32.GetWindowText(_Ventana).Split('/')[0].Trim())
                                     {
-                                      
+                                        registrar = false;
                                     }
                                     else
                                     {
-                                        registrar = true;
+                                       
                                     }
                                 }
                                 if (registrar)
@@ -93,20 +99,14 @@ namespace KrakenEasy.Servicios
                                     RECT rcWindow = new RECT();
                                     MongoAccess _Access = new MongoAccess();
                                     Win32.GetWindowRect(_Ventana, out rcWindow);
-                                    _Data[0] = Win32.GetWindowText(_Ventana).Split('/')[0].Trim();
+                                    _Data[0] = Win32.GetWindowText(_Ventana).Split('/')[0].TrimEnd();
                                     _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
                                     _Data[2] = "true";
                                     _Data[3] = "false";
                                     _Data[4] = "Winamax";
+                                   // _Data[5] = MongoAccess.Get_Last_Hand(_Data[0]);
                                     _Access.Set_Mesas(_Data);
-                                    Application.Current.Dispatcher.Invoke(() =>
-                                    {
-                                        Window window = new Window();
-                                        Label _Label = new Label();
-                                        _Label.Content = Casinos.Mesas.Abiertas.Count;
-                                        window.Content = _Label;
-                                        window.Show();
-                                    });
+
                                 }
                             }
                         }
@@ -125,16 +125,37 @@ namespace KrakenEasy.Servicios
                     {
                         if (_Element.ToUpper().Contains(Win32.GetWindowText(_Ventana).Split(' ')[0].Trim().ToUpper()))
                         {
-                            string[] _Data = new string[5];
-                            var rcWindow = new RECT();
-                            MongoAccess _Access = new MongoAccess();
-                            Win32.GetWindowRect(_Ventana, out rcWindow);
-                            _Data[0] = Win32.GetWindowText(_Ventana).Split(' ')[0].Trim();
-                            _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
-                            _Data[2] = "true";
-                            _Data[3] = "false";
-                            _Data[4] = "888Poker";
-                            _Access.Set_Mesas(_Data);
+                            if (Casinos.Mesas.Abiertas != null)
+                            {
+
+                                bool registrar = true;
+                                foreach (var Mesa in Mesas.Abiertas)
+                                {
+                                    if (Mesa.AsBsonDocument.GetElement("_id").Value.AsString == Win32.GetWindowText(_Ventana).Split(' ')[0].Trim())
+                                    {
+                                        registrar = false;
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
+                                if (registrar)
+                                {
+                                    string[] _Data = new string[5];
+                                    RECT rcWindow = new RECT();
+                                    MongoAccess _Access = new MongoAccess();
+                                    Win32.GetWindowRect(_Ventana, out rcWindow);
+                                    _Data[0] = Win32.GetWindowText(_Ventana).Split('/')[0].TrimEnd();
+                                    _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
+                                    _Data[2] = "true";
+                                    _Data[3] = "false";
+                                    _Data[4] = "888Poker";
+                                    // _Data[5] = MongoAccess.Get_Last_Hand(_Data[0]);
+                                    _Access.Set_Mesas(_Data);
+
+                                }
+                            }
                         }
                     }
                 }
@@ -151,16 +172,37 @@ namespace KrakenEasy.Servicios
                     {
                         if (_Element.Split(" ")[1].Trim().ToUpper() == Win32.GetWindowText(_Ventana).Split('-')[0].Trim().ToUpper())
                         {
-                            string[] _Data = new string[5];
-                            var rcWindow = new RECT();
-                            MongoAccess _Access = new MongoAccess();
-                            Win32.GetWindowRect(_Ventana, out rcWindow);
-                            _Data[0] = Win32.GetWindowText(_Ventana).Split('-')[0].Trim();
-                            _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
-                            _Data[2] = "true";
-                            _Data[3] = "false";
-                            _Data[4] = "PokerStars";
-                            _Access.Set_Mesas(_Data);
+                            if (Casinos.Mesas.Abiertas != null)
+                            {
+
+                                bool registrar = true;
+                                foreach (var Mesa in Mesas.Abiertas)
+                                {
+                                    if (Mesa.AsBsonDocument.GetElement("_id").Value.AsString == Win32.GetWindowText(_Ventana).Split('-')[0].Trim())
+                                    {
+                                        registrar = false;
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
+                                if (registrar)
+                                {
+                                    string[] _Data = new string[5];
+                                    RECT rcWindow = new RECT();
+                                    MongoAccess _Access = new MongoAccess();
+                                    Win32.GetWindowRect(_Ventana, out rcWindow);
+                                    _Data[0] = Win32.GetWindowText(_Ventana).Split('/')[0].TrimEnd();
+                                    _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
+                                    _Data[2] = "true";
+                                    _Data[3] = "false";
+                                    _Data[4] = "PokerStars";
+                                    // _Data[5] = MongoAccess.Get_Last_Hand(_Data[0]);
+                                    _Access.Set_Mesas(_Data);
+
+                                }
+                            }
                         }
                     }
                 }

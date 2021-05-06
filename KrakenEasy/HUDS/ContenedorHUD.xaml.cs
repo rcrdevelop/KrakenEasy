@@ -130,28 +130,37 @@ namespace KrakenEasy.HUDS
         }
         private void HUD_Status()
         {
-            try
-            {
-                HUD_Relative(_Id_Jugador);
-                Opacidad();
-                Size();
-                Application.Current.Dispatcher.Invoke(new Action(() =>
+            double _OriginalWidth = this.ActualWidth;
+            double _OriginalHeight = this.ActualHeight;
+            while (true) {
+            
+                try
                 {
-                    if (this.WindowState == WindowState.Minimized)
+                    HUD_Relative(_Id_Jugador);
+                    //Opacidad();
+                    //Size();
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        this.Activate();
-                    }
-                    this.Topmost = true;
-                    this.Topmost = false;
-                    if (Casinos.Casinos.Winamax)                    {
-                        this.Close();
-                    }
+                        this.Width = _OriginalWidth * Propiedades.Size;
+                        this.Height = _OriginalHeight * Propiedades.Size;
+                        this.Opacity = Propiedades.Opacity;
 
-                }));
-                Thread.Sleep(TimeSpan.FromSeconds(0.2));
-            }
-            catch (Exception)
-            {
+                        if (this.WindowState == WindowState.Minimized)
+                        {
+                            this.Activate();
+                        }
+                        this.Topmost = true;
+                        this.Topmost = false;
+                        if (!Propiedades.SystemActive)                    {
+                            this.Close();
+                        }
+
+                    }));
+                    Thread.Sleep(TimeSpan.FromSeconds(0.2));
+                }
+                catch (Exception)
+                {
+                }
             }
 
         }

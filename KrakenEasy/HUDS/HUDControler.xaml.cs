@@ -25,11 +25,6 @@ namespace KrakenEasy.HUDS
             InitializeComponent();
             Hilo();
         }
-        private void EstablecerMongo()
-        {
-            MongoAccess _Access = new MongoAccess();
-            _Access.Inicializar();
-        }
 
         private void Focus_Window()
         {
@@ -76,6 +71,8 @@ namespace KrakenEasy.HUDS
         }
         public void Hilo()
         {
+            Propiedades.Opacity = new double();
+            Propiedades.Size = new double();
             Thread _Hilo = new Thread(Focus_Window);
             _Hilo.Start();
         }

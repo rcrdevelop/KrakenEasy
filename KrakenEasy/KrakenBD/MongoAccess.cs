@@ -411,12 +411,12 @@ namespace KrakenEasy.KrakenBD
                     {
                         _Datos.Add(new BsonElement("Casino", Element));
                     }
+                    //if (i == 5)
+                    //{
+                    //    _Datos.Add(new BsonElement("_Last_Hand", Element));
+                    //}
                 }
-                _Datos.Add(new BsonElement("_Last_Hand", Get_Last_Hand(_Mesa[0])));            
                 Mesas.Abiertas.Add(_Datos);
-
-                //_Collection.GetCollection<BsonDocument>("Ventanas").InsertOne(_Datos);
-                //Set_Last_Hand(_Mesa[0]);
         }
         public void Set_Mesas_Activas(string _Nombre)
         {
