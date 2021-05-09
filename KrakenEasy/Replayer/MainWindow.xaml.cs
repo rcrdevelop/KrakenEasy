@@ -87,7 +87,7 @@ namespace KrakenEasy.Replayer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MongoAccess _Access = new MongoAccess();
-            _Access.Inicializar();
+            _Access.InicializarMain();
             Progress _HUD = new Progress(Jugador);
             Cards _Cards = new Cards();
             this.SB_HUD.Children.Add(_HUD);
@@ -136,8 +136,8 @@ namespace KrakenEasy.Replayer
             {
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    _HUD = _Access.Style_HUD();
-                    _Change = _Access.Change_HUD();
+                    _HUD = Propiedades.Relative;
+                    _Change = Propiedades.Change;
 
                     if ((_HUD == 0) && (_Change))
                     {
@@ -320,7 +320,7 @@ namespace KrakenEasy.Replayer
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MongoAccess _Access = new MongoAccess();
-            int _Condicion = _Access.Style_HUD();
+            int _Condicion = Propiedades.Relative;
             if (_Condicion == 0)
             {
                 Propiedades.Relative = 1;

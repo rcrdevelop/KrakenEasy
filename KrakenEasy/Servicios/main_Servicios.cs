@@ -40,7 +40,9 @@ namespace KrakenEasy.Servicios
                 }
                 catch (Exception ex)
                 {
-
+                    Window window = new Window();
+                    window.Content = ex.Message;
+                    window.Show();
                 }
                 await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
             }

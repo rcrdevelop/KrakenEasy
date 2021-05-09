@@ -19,72 +19,10 @@ namespace KrakenEasy.KrakenBD
         public MongoAccess()
         {
 
-            MongoClientSettings Settings = new MongoClientSettings();
-            Settings.MinConnectionPoolSize = 3000;
-            Settings.MaxConnectionPoolSize = 25000;
-            Settings.RetryWrites = true;
-            _Client = new MongoClient(Settings);
+            _Client = new MongoClient("mongodb+srv://Kraken:OPe95ilYpGtvi8TW@cluster0.uo07x.mongodb.net/Kraken?retryWrites=true&w=majority");
+
             _DataBase = _Client.GetDatabase("Kraken");
         }
-        public double Opacidad_HUD()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD");
-            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", "Opacidad");
-            var Opacidad = _Access._DataBase.GetCollection<BsonDocument>("HUD").Find(_Filter).ToList();
-            double _Resultado = new double();
-            foreach (var item in Opacidad)
-            {
-                _Resultado = item.GetValue(1).AsDouble;
-            }
-            return _Resultado;
-        }
-        public double Size_HUD()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD");
-            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", "Size");
-            var Size = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD").Find(_Filter).ToList();
-            double _Resultado = new double();
-            foreach (var item in Size)
-            {
-                _Resultado = item.GetValue(1).AsDouble;
-            }
-            return _Resultado;
-        }
-        public int Style_HUD()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD");
-            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", "Style");
-            var Style = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD").Find(_Filter).ToList();
-            int _Resultado = new int();
-            foreach (var item in Style)
-            {
-                _Resultado = item.GetValue(1).AsInt32;
-            }
-            return _Resultado;
-
-        }
-        public bool Change_HUD()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD");
-            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", "Change");
-            var Change = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD").Find(_Filter).ToList();
-            bool _Resultado = new bool();
-            foreach (var item in Change)
-            {
-                _Resultado = item.GetValue(1).AsBoolean;
-            }
-            return _Resultado;
-
-        }
-
 
         public static string Get_Last_Hand(string Fichero)
         {
@@ -215,25 +153,6 @@ namespace KrakenEasy.KrakenBD
 
         }
 
-        public void Inicializar()
-        {
-            try
-            {
-                MongoAccess _Access = new MongoAccess();
-                _Access._DataBase.CreateCollection("HUD");
-                _Access._DataBase.GetCollection<BsonDocument>("HUD").InsertOne(new BsonDocument { { "_id", "Opacidad" }, { "Valor", (double)1 } });
-                _Access._DataBase.GetCollection<BsonDocument>("HUD").InsertOne(new BsonDocument { { "_id", "Size" }, { "Valor", (double)1 } });
-                _Access._DataBase.GetCollection<BsonDocument>("HUD").InsertOne(new BsonDocument { { "_id", "Style" }, { "HUD", 0 } });
-                _Access._DataBase.GetCollection<BsonDocument>("HUD").InsertOne(new BsonDocument { { "_id", "Change" }, { "Change", false } });
-                _Access._DataBase.GetCollection<BsonDocument>("HUD").InsertOne(new BsonDocument { { "_id", "Hole" }, { "Hole", false } });
-
-            }
-            catch (Exception)
-            {
-
-            }
-
-        }
         public void InicializarMain()
         {
             try
@@ -245,16 +164,25 @@ namespace KrakenEasy.KrakenBD
 
                 void PrimeraVez()
                 {
-                    if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").CountDocuments(new BsonDocument { }) == 0)
+                    try
                     {
-                        InicializarData();
-                    }
-                    else
-                    {
-                     
+                        if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").CountDocuments(new BsonDocument { }) == 0)
+                        {
+                            InicializarData();
+                        }
+                        else
+                        {
 
 
+
+                        }
                     }
+                    catch(Exception ex) {
+                        Window window = new Window();
+                        window.Content = ex.Message;
+                        window.Show();
+                    }
+
                 }
                 static void InicializarData()
                 {
@@ -294,19 +222,25 @@ namespace KrakenEasy.KrakenBD
                         _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_Casino888);
                         _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_CasinoStars);
                         _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_CasinoHabilitado);
-
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("KrakenStatus").InsertOne(_Kraken);
                         Console.WriteLine("Inicializado");
                         Console.ReadLine();
                     }
-                    catch { };
+                    catch(Exception ex) {
+                        Window window = new Window();
+                        window.Content = ex.Message;
+                        window.Show();
+                    };
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Console.WriteLine("Error");
-            }
+ 
+                Window window = new Window();
+                window.Content = ex.Message;
+                window.Show();
+
+        }
 
         }
 

@@ -72,7 +72,6 @@ namespace KrakenEasy
         }
         private static void Detener_Servicio()
         {
-            MongoAccess _Access = new MongoAccess();
             Propiedades.SystemActive = false;
 
 
@@ -137,7 +136,7 @@ namespace KrakenEasy
                                 _Data.Add(new BsonElement("Ready", true));
                                 _Data.Add(new BsonElement("Casino", Mesa.AsBsonDocument.GetElement("Casino").Value));
                                 //_Data.Add(new BsonElement("_Last_Hand", Mesa.AsBsonDocument.GetElement("_Last_Hand").Value));
-                                Thread.Sleep(TimeSpan.FromSeconds(2));
+                                Thread.Sleep(TimeSpan.FromSeconds(8));
                                // Casinos.Mesas.Abiertas[i] = _Data;
                             }
                             i++;

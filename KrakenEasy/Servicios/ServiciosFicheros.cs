@@ -9,6 +9,7 @@ using System.IO;
 using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
 using KrakenEasy.Hands;
+using System.Windows;
 
 namespace KrakenEasy.Servicios
 {
@@ -123,7 +124,9 @@ namespace KrakenEasy.Servicios
                     }
                 }
                 catch(Exception ex) {
- 
+                    Window window = new Window();
+                    window.Content = ex.Message;
+                    window.Show();
                 }
                 try
                 {
