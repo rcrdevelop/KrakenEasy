@@ -120,7 +120,7 @@ namespace KrakenEasy.Servicios
                 }
                 }
                 catch(Exception ex) {
- 
+                    throw;
                 }
                 try
                 {
@@ -140,7 +140,7 @@ namespace KrakenEasy.Servicios
                 }
             }
                 catch(Exception ex) {
-
+                    throw;
                 }
                 try
                 {
@@ -162,11 +162,11 @@ namespace KrakenEasy.Servicios
                 }
                 catch (Exception ex)
                 {
-
+                    throw;
                 }
             }
             catch (Exception ex) {
-
+                throw;
             }
 
         }

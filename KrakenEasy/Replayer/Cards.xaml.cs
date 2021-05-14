@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -27,7 +28,8 @@ namespace KrakenEasy.Replayer
         }
         private void HoleCards() 
         {
-
+            var CurrentDirectory = Environment.CurrentDirectory;
+            var path = CurrentDirectory;
                     if (Registros_Data.Hole_Cards)
                     {
 
@@ -35,15 +37,12 @@ namespace KrakenEasy.Replayer
                         {
                             try
                             {
-
-                                Uri _uri = new Uri("Baraja Dorso1.png", UriKind.Relative);
-                                this.Card_Left.Source = new BitmapImage(_uri);
-                                _uri = new Uri("Baraja Dorso1.png", UriKind.Relative);
-                                this.Card_Right.Source = new BitmapImage(_uri);
+   
+                                this.Card_Left.Source = new BitmapImage(new Uri(path+ "/Replayer/Cartas/Baraja Dorso2.png"));
+                                this.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/Baraja Dorso2.png"));
                             }
                             catch {
-                                Window _Window = new Window();
-                                _Window.Show();
+                                throw;
                             }
                         });
                     }
@@ -51,8 +50,8 @@ namespace KrakenEasy.Replayer
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            this.Card_Right.Source = new BitmapImage(new Uri("/Cartas/Papel 10c.png", UriKind.Relative));
-                            this.Card_Left.Source = new BitmapImage(new Uri("/Cartas/Papel 2h.png", UriKind.Relative));
+                            this.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/Papel 10c.png", UriKind.Relative));
+                            this.Card_Left.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/Papel 2h.png", UriKind.Relative));
                         });
                     }
           

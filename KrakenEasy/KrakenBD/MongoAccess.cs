@@ -64,18 +64,7 @@ namespace KrakenEasy.KrakenBD
         }
         public void Set_Hole_Cards()
         {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", "Hole");
-            var _Update = Builders<BsonDocument>.Update.Set("Hole", true);
-            foreach (BsonDocument Ventana in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD").Find(_Filter).ToList())
-            {
-                if (Ventana.GetElement("Hole").Value.AsBoolean == true)
-                {
-                    _Update = Builders<BsonDocument>.Update.Set("Hole", false);
-                }
-            }
-            _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD").UpdateOne(_Filter, _Update);
+            Registros_Data.Hole_Cards = false;
 
 
         }
