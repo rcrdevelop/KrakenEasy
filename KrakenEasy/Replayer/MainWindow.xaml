@@ -28,7 +28,7 @@
                     </ListView.View>
                 </ListView>
 
-                <Image Name="Card1" Source="Baraja Dorso1.png" Margin="276.81,12.037,608.414,40.13" />
+                <Image Name="Card1" Source="Cartas/Baraja Dorso1.png" Margin="276.81,12.037,608.414,40.13" />
                 <Label Content="Show:" Foreground="White" Margin="128.591,10,841.141,120.454"/>
                 <Button Click="Button_Click" Content="HUDs" Margin="128.591,36.105,804.881,103.071" Background="#FF202221" Foreground="#FF179F32"/>
                 <Button Click="Button_Click_2" Content="Hole Cards" Margin="128.591,67.576,804.881,71.6" Background="#FF222020" Foreground="#FF179F32"/>
@@ -75,10 +75,10 @@
                         <ImageBrush ImageSource="rewind.png"/>
                     </Button.Background>
                 </Button>
-                <Image Name="Card2" Source="Baraja Dorso1.png" Margin="363.8,12.037,521.424,40.13" />
-                <Image Name="Card3" Source="Baraja Dorso1.png" Margin="452.79,12.037,432.434,40.13" />
-                <Image Name="Card4" Source="Baraja Dorso1.png" Margin="539.931,12.037,345.293,40.13" />
-                <Image Name="Card5" Source="Baraja Dorso1.png" Margin="627.24,14.037,257.984,38.13" />
+                <Image Name="Card2" Source="Cartas/Baraja Dorso1.png" Margin="363.8,12.037,521.424,40.13" />
+                <Image Name="Card3" Source="Cartas/Baraja Dorso1.png" Margin="452.79,12.037,432.434,40.13" />
+                <Image Name="Card4" Source="Cartas/Baraja Dorso1.png" Margin="539.931,12.037,345.293,40.13" />
+                <Image Name="Card5" Source="Cartas/Baraja Dorso1.png" Margin="627.24,14.037,257.984,38.13" />
                 <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,737.446,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
                 <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,696.946,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
                 <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,453.974,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
