@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {}
+    "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {}
   },
   "projects": {
-    "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {
+    "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {
       "version": "1.7.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+        "projectUniqueName": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
         "projectName": "KrakenEasy",
-        "projectPath": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+        "projectPath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
         "packagesPath": "C:\\Users\\contr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\obj\\",
+        "outputPath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\contr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Grpc.Core": {
+              "target": "Package",
+              "version": "[2.37.1, )"
+            },
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"
@@ -91,7 +95,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

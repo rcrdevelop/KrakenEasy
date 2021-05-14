@@ -19,10 +19,19 @@ namespace KrakenEasy.KrakenBD
         public MongoAccess()
         {
 
-            _Client = new MongoClient("mongodb+srv://Kraken:OPe95ilYpGtvi8TW@cluster0.uo07x.mongodb.net/Kraken?retryWrites=true&w=majority");
-
-            _DataBase = _Client.GetDatabase("Kraken");
+            if (false) //Settings.MongoCloud
+            {
+                _Client = new MongoClient("mongodb+srv://Kraken:HaMz4uGvG58BbhkP@cluster0.uo07x.mongodb.net/Kraken?retryWrites=true&w=majority");
+                _DataBase = _Client.GetDatabase("Kraken");
+            }
+            else 
+            {
+                _Client = new MongoClient();
+                _DataBase = _Client.GetDatabase("Kraken");
+            }
         }
+
+
 
         public static string Get_Last_Hand(string Fichero)
         {
@@ -36,59 +45,7 @@ namespace KrakenEasy.KrakenBD
             }
             return Resultado;
         }
-        public string Get_Ruta_Casino(string Casino)
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Filter = Builders<BsonDocument>.Filter.Eq("Casino", Casino);
-            var _Session = _Access._Client.StartSession();
-            var _Resultado = "";
-            var Document = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").Find(_Filter).ToList();
-            foreach (var item in Document)
-            {
-                _Resultado = item.GetElement("Ruta_Carpeta").Value.AsString;
-            }
 
-            return _Resultado;
-        }
-        public void Set_Ruta_Casino(string Ruta, string Casino)
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Filter = Builders<BsonDocument>.Filter.Eq("Casino", Casino);
-            var _Session = _Access._Client.StartSession();
-            var _Update = Builders<BsonDocument>.Update.Set("Ruta_Carpeta", Ruta);
-            _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").UpdateOne(_Filter, _Update);
-        }
-        public List<string[]> Get_HUDS_List_Kraken()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            var _Filter = Builders<BsonDocument>.Filter.Eq("HUD", true);
-            List<string[]> _Resultado = new List<string[]>();
-            string[] _Resultado_item = new string[2];
-            Console.WriteLine("antes de for");
-            foreach (BsonDocument HUD in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("HUD").Find(_Filter).ToList())
-            {
-                Console.WriteLine("Consultar HUDS!!" + HUD.GetElement("_id").Value.AsInt32.ToString() + "//" + HUD.GetElement("Ventana").Value.AsString);
-                _Resultado_item[0] = HUD.GetElement("_id").Value.AsString;
-                _Resultado_item[1] = HUD.GetElement("Ventana").Value.AsString;
-                _Resultado.Add(_Resultado_item);
-            }
-            Console.WriteLine("Antes de return");
-            return _Resultado;
-        }
-
-        public List<string> Get_Ventanas_Inactivas_Kraken()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            var _Filter = Builders<BsonDocument>.Filter.Eq("Activa", false);
-            List<string> _Resultado = new List<string>();
-            foreach (BsonDocument Ventana in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Ventanas").Find(_Filter).ToList())
-            {
-                _Resultado.Add(Ventana.GetElement("_id").Value.AsString);
-            }
-            return _Resultado;
-        }
 
         public bool Get_Hole_Cards()
         {
@@ -164,25 +121,15 @@ namespace KrakenEasy.KrakenBD
 
                 void PrimeraVez()
                 {
-                    try
+                    if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").CountDocuments(new BsonDocument { }) == 0)
                     {
-                        if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").CountDocuments(new BsonDocument { }) == 0)
-                        {
-                            InicializarData();
-                        }
-                        else
-                        {
-
-
-
-                        }
+                        InicializarData();
                     }
-                    catch(Exception ex) {
-                        Window window = new Window();
-                        window.Content = ex.Message;
-                        window.Show();
-                    }
+                    else
+                    {
 
+
+                    }
                 }
                 static void InicializarData()
                 {
@@ -190,76 +137,51 @@ namespace KrakenEasy.KrakenBD
                     var _Session = _Access._Client.StartSession();
                     try
                     {
-                        _Session.Client.GetDatabase("Kraken").CreateCollection("Casino");
                         _Session.Client.GetDatabase("Kraken").CreateCollection("Jugadores");
                         _Session.Client.GetDatabase("Kraken").CreateCollection("Replayer");
                         _Session.Client.GetDatabase("Kraken").CreateCollection("Hands");
-
-                        Winamax _Winamax = new Winamax();
-                        Poker888 _888Poker = new Poker888();
-                        PokerStars _PokerStars = new PokerStars();
-
-                        var _CasinoWinamax = new BsonDocument
-            {
-                { "Casino", "Winamax".ToUpper() }, { "Proceso_Name", _Winamax.Proceso().ToUpper() }, { "Activo", false }, { "Ruta_Carpeta", _Winamax.Ruta() }
-            };
-                        var _Casino888 = new BsonDocument
-            {
-                { "Casino", "888Poker".ToUpper() }, { "Proceso_Name", _888Poker.Proceso().ToUpper() }, { "Activo", false }, { "Ruta_Carpeta", _888Poker.Ruta() }
-            };
-                        var _CasinoStars = new BsonDocument
-            {
-                { "Casino", "PokerStars".ToUpper() }, { "Proceso_Name", _PokerStars.Proceso().ToUpper() }, { "Activo", false }, { "Ruta_Carpeta", _PokerStars.Ruta() }
-            };
-                        var _CasinoHabilitado = new BsonDocument
-            {
-                { "WINAMAX", false }, { "888POKER", false }, { "POKERSTARS", false }, { "_id", "Habilitados" }
-            };
-                        BsonDocument _Kraken = new BsonDocument();
-                        _Kraken.Add(new BsonElement("_id", "Kraken"));
-                        _Kraken.Add(new BsonElement("Activo", true));
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_CasinoWinamax);
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_Casino888);
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_CasinoStars);
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").InsertOne(_CasinoHabilitado);
-                        Console.WriteLine("Inicializado");
-                        Console.ReadLine();
                     }
-                    catch(Exception ex) {
-                        Window window = new Window();
-                        window.Content = ex.Message;
-                        window.Show();
-                    };
+                    catch { };
                 }
+
             }
             catch (Exception ex)
             {
-
- 
-                Window window = new Window();
-                window.Content = ex.Message;
-                window.Show();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Window _Window = new Window();
+                    _Window.Content = ex.Message;
+                    _Window.Show();
+                });
+            }
 
         }
-
-        }
-
 
         public List<string> Get_Jugadores()
         {
             MongoAccess _Access = new MongoAccess();
             List<string> _Resultado = new List<string>();
             var _Session = _Access._Client.StartSession();
-            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
+
             foreach (var Jugadores in _Collection.Find(new BsonDocument()).ToList())
             {
-                if ( Jugadores.GetElement("_id").Value.ToString() == 0.ToString())
+                foreach (var item in Jugadores.GetElement("Players").Value.AsBsonArray)
                 {
-                    foreach (var item in Jugadores.GetElement("Jugadores").Value.AsBsonArray)
+                    bool Condicion_Agregar = true;
+                    foreach(var Jugador in _Resultado) 
                     {
-                        _Resultado.Add(item.AsString);
+                        if (Jugador == item)
+                        {
+                            Condicion_Agregar = false;
+                        }
+                    }
+                    if (Condicion_Agregar)
+                    {
+                        _Resultado.Add(item.AsString.Split(":")[1].Split("(")[0]);
                     }
                 }
+                
             }
             return _Resultado;
         }
@@ -303,23 +225,32 @@ namespace KrakenEasy.KrakenBD
             }
         }
 
-        public bool Get_Casino_Habilitado(string Casino)
-        {
-            MongoAccess _Access = new MongoAccess();
-            bool _Resultado = false;
-            var _Session = _Access._Client.StartSession();
 
-            var filter = Builders<BsonDocument>.Filter.Eq("Casino", Casino);
-            foreach (var item in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Casino").Find(filter).ToList())
-            {
-                _Resultado = item.GetElement("Habilitado").Value.AsBoolean;
-            }
-
-            return _Resultado;
-        }
         public void Set_Mesas(string[] _Mesa)
         {
-
+            if (Mesas.Abiertas.Count > 0)
+            {
+                Window _Window = new Window();
+                _Window.Width = 10;
+                _Window.Height = 10;
+                _Window.Show();
+                for (var i = 0; i >= Mesas.Abiertas.Count; i++)
+                {
+                    if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Mesa[0])
+                    {
+                        BsonDocument _Data = new BsonDocument();
+                        _Data.Add(new BsonElement("_id", _Mesa[0]));
+                        _Data.Add(new BsonElement("Dimensiones", _Mesa[1]));
+                        _Data.Add(new BsonElement("Activa", _Mesa[2]));
+                        _Data.Add(new BsonElement("Ready", _Mesa[3]));
+                        _Data.Add(new BsonElement("Casino", _Mesa[4]));
+                        _Data.Add(new BsonElement("_Last_Hand", Get_Last_Hand(_Mesa[0])));
+                        Mesas.Abiertas[i] = _Data;
+                    }
+                }
+            }
+            else
+            {
                 BsonDocument _Datos = new BsonDocument();
 
                 for (int i = 0; i < _Mesa.Length; i++)
@@ -345,12 +276,13 @@ namespace KrakenEasy.KrakenBD
                     {
                         _Datos.Add(new BsonElement("Casino", Element));
                     }
-                    //if (i == 5)
-                    //{
-                    //    _Datos.Add(new BsonElement("_Last_Hand", Element));
-                    //}
                 }
+                _Datos.Add(new BsonElement("_Last_Hand", Get_Last_Hand(_Mesa[0])));            
                 Mesas.Abiertas.Add(_Datos);
+
+                //_Collection.GetCollection<BsonDocument>("Ventanas").InsertOne(_Datos);
+                //Set_Last_Hand(_Mesa[0]);
+            }
         }
         public void Set_Mesas_Activas(string _Nombre)
         {
@@ -362,7 +294,62 @@ namespace KrakenEasy.KrakenBD
 
 
 
+        public void Set_Last_Hand(string _Id_Mesa)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken");
+            var dt = DateTime.Now;
+            long _Hora_Actual = dt.Year * 1000000000000 + dt.Month * 1000000 + dt.Day * 10000 + dt.Hour * 100 + dt.Minute;
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Mesa);
 
+            foreach (var fichero in _Collection.GetCollection<BsonDocument>("Ficheros").Find(new BsonDocument("_id", new Regex(_Id_Mesa))).ToList())
+            {
+                Console.WriteLine(_Hora_Actual.ToString() +"//"+ (long)fichero.GetElement("Last_Write").Value);
+
+                if ((long)fichero.GetElement("Last_Write").Value >= _Hora_Actual -1)
+                {
+                    var N_Hands = (int)_Collection.GetCollection<BsonDocument>("Hands").Find(new BsonDocument("Mesa", new Regex(_Id_Mesa.Trim().ToUpper()))).CountDocuments();
+                    foreach (var hand in _Collection.GetCollection<BsonDocument>("Hands").Find(new BsonDocument("Mesa", new Regex(_Id_Mesa.Trim().ToUpper()))).Skip(N_Hands - 1).ToList())
+                    {
+
+                        if (hand.GetElement("_id").Value.AsString.Contains("888Poker".ToUpper()))
+                        {
+                            if (hand.GetElement("Mesa").Value.AsString.Split(" ")[1] == _Id_Mesa.ToUpper())
+                            {
+                                for (var i = 0; i >= Mesas.Abiertas.Count; i++)
+                                {
+                                    if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Id_Mesa)
+                                    {
+                                        BsonDocument _Data = Mesas.Abiertas[i].AsBsonDocument;
+                                        _Data.Add(new BsonElement("_Last_Hand", hand.GetElement("_id").Value.AsString));
+                                        Mesas.Abiertas[i] = _Data;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (hand.GetElement("Mesa").Value.AsString.Split("'")[1] == _Id_Mesa.ToUpper())
+                            {
+                                for (var i = 0; i >= Mesas.Abiertas.Count; i++)
+                                {
+                                    if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Id_Mesa)
+                                    {
+                                        BsonDocument _Data = Mesas.Abiertas[i].AsBsonDocument;
+                                        _Data.Add(new BsonElement("_Last_Hand", hand.GetElement("_id").Value.AsString));
+                                        Mesas.Abiertas[i] = _Data;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    
+
+                }
+            }
+        }
         public void Set_NPlayers(string _Id_Mesa)
         {
             MongoAccess _Access = new MongoAccess();
@@ -398,18 +385,6 @@ namespace KrakenEasy.KrakenBD
             }
             return _Resultado;
         }
-        public void Set_Mesa_Inactiva(string _Id_Mesa)
-        {
-            for (var i = 0; i >= Mesas.Abiertas.Count; i++)
-            {
-                if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Id_Mesa)
-                {
-                    BsonDocument _Data = Mesas.Abiertas[i].AsBsonDocument;
-                    _Data.Add(new BsonElement("Activa", false));
-                    Mesas.Abiertas[i] = _Data;
-                }
-            }
-        }
         public List<string> Get_Players(string _Id_Ventana)
         {
             
@@ -421,6 +396,7 @@ namespace KrakenEasy.KrakenBD
             {
                 foreach (var Ventana in Mesas.Abiertas)
                 {
+  
                 string _Id_Hand = Ventana.AsBsonDocument.GetElement("_Last_Hand").Value.AsString;
                 var filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Hand);
                 foreach (var hand in _Collection.GetCollection<BsonDocument>("Hands").Find(filter).ToList())
@@ -503,18 +479,6 @@ namespace KrakenEasy.KrakenBD
                 
                 _Collection.GetCollection<BsonDocument>("Ficheros").UpdateOne(filter, update);
             }
-        }
-
-        public void Hands()
-        {
-            MongoAccess _Access = new MongoAccess();
-            var _Session = _Access._Client.StartSession();
-            var _Collection = _Session.Client.GetDatabase("Kraken");
-            //Stats _Stats = new Stats();
-            //foreach (var _Hand in _Collection.GetCollection<BsonDocument>("Hands").Find(new BsonDocument()).ToList())
-            //{
-            //    _Collection.GetCollection<BsonDocument>("Jugadores").InsertOne(_Stats.Analizar_Stats(_Hand));
-            //}
         }
 
  
@@ -684,14 +648,9 @@ namespace KrakenEasy.KrakenBD
         {
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
-            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
             var _Filter = Builders<BsonDocument>.Filter.Eq("_id", Jugador);
-            double Resultado = 0;
-            foreach (var STATS in _Collection.Find(_Filter).ToList())
-            {
-                Resultado = STATS.GetElement("Hands").Value.AsDouble;
-            }
-            return Resultado;
+            return _Collection.Find(new BsonDocument("_id", new Regex(Jugador))).Count();
         }
         public static double VPIP(double VPIP, double OVPIP)
         {

@@ -7,5 +7,6 @@ namespace KrakenEasy.Casinos
     public class Mesas
     {
         public static BsonArray Abiertas { get; set; }
+        public static BsonArray HUDS_Abiertos  { get; set; }
     }
 }

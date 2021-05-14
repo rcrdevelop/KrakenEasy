@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "KrakenEasy/1.7.0": {
         "dependencies": {
+          "Grpc.Core": "2.37.1",
           "LiveCharts.Wpf": "0.9.7",
           "Microsoft.Expression.Drawing": "3.0.0",
           "Microsoft.Extensions.Hosting": "5.0.0",
@@ -26,6 +27,56 @@
           "lib/netstandard2.1/DnsClient.dll": {
             "assemblyVersion": "1.4.0.0",
             "fileVersion": "1.4.0.0"
+          }
+        }
+      },
+      "Grpc.Core/2.37.1": {
+        "dependencies": {
+          "Grpc.Core.Api": "2.37.1",
+          "System.Memory": "4.5.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.Core.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.37.1.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm64/native/libgrpc_csharp_ext.arm64.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libgrpc_csharp_ext.x64.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libgrpc_csharp_ext.x64.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/grpc_csharp_ext.x64.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/grpc_csharp_ext.x86.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Grpc.Core.Api/2.37.1": {
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.Core.Api.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.37.1.0"
           }
         }
       },
@@ -1375,6 +1426,7 @@
           }
         }
       },
+      "System.Memory/4.5.3": {},
       "System.Net.Http/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -1946,6 +1998,20 @@
       "sha512": "sha512-CO1NG1zQdV0nEAXmr/KppLZ0S1qkaPwV0kPX5YPgmYBtrBVh1XMYHM54IXy3RBJu1k4thFtpzwo4HNHqxiuFYw==",
       "path": "dnsclient/1.4.0",
       "hashPath": "dnsclient.1.4.0.nupkg.sha512"
+    },
+    "Grpc.Core/2.37.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3Prm5p6jZefdWqr5CTxAkQKkNyS3cqFCfjvnvIIEpD0zWBIRclNIkirGF1xLmNR7Ch+wPBptcfK8x2Zlya/DTQ==",
+      "path": "grpc.core/2.37.1",
+      "hashPath": "grpc.core.2.37.1.nupkg.sha512"
+    },
+    "Grpc.Core.Api/2.37.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XV5g+jaWqUpbGkRdcdu7wRnDEbDTanV0qr9/HNpChZr7jwHTlw3QW9hAoy81HMs84HIV5OZVCNJW1OJAd/tWWg==",
+      "path": "grpc.core.api/2.37.1",
+      "hashPath": "grpc.core.api.2.37.1.nupkg.sha512"
     },
     "LiveCharts/0.9.7": {
       "type": "package",
@@ -2541,6 +2607,13 @@
       "sha512": "sha512-hE/a5Y9zqWpRkiPbVqyV5mYxJgs5uhJcXeQBkN7dChzmEUXzyQUOR1MrUb/GmUwZFmYkr3kooBIHUE7ws3dnYA==",
       "path": "system.management.automation/6.2.2",
       "hashPath": "system.management.automation.6.2.2.nupkg.sha512"
+    },
+    "System.Memory/4.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "path": "system.memory/4.5.3",
+      "hashPath": "system.memory.4.5.3.nupkg.sha512"
     },
     "System.Net.Http/4.3.0": {
       "type": "package",

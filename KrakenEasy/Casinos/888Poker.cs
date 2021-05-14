@@ -7,7 +7,9 @@ namespace KrakenEasy.Casinos
 {
     public class Poker888
     {
-        public string Proceso()
+        public static string _Ruta { get; set; }
+        public static bool Habilitado { get; set; }
+        public static string Proceso()
         {
             string _Proceso = "QtWebEngineProcess";
             return _Proceso;
@@ -16,13 +18,6 @@ namespace KrakenEasy.Casinos
         {
             string[] _Ventana = { "OMAHA", "NLH" };
             return _Ventana;
-        }
-        public string Ruta()
-        {
-            MongoAccess _Access = new MongoAccess();
-            string _userName = (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1];
-            string _Ruta = _Access.Get_Ruta_Casino("888POKER");
-            return _Ruta;
         }
         public bool Identificador_HandID(String _Line)
         {
@@ -34,6 +29,10 @@ namespace KrakenEasy.Casinos
             {
                 return false;
             }
+        }
+        public static string Id()
+        {
+            return "Game NO";
         }
         public bool Identificador_Mesa(string _Line)
         {

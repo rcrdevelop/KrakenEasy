@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using KrakenEasy.KrakenBD;
+
 namespace KrakenEasy.Replayer
 {
     /// <summary>
@@ -26,30 +27,35 @@ namespace KrakenEasy.Replayer
         }
         private void HoleCards() 
         {
-            MongoAccess _Access = new MongoAccess();
-            Thread _Hilo = new Thread(() =>
-            {
-                while (true) { 
-                    if (_Access.Get_Hole_Cards())
+
+                    if (Registros_Data.Hole_Cards)
                     {
+
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            this.Card_Right.Source = new BitmapImage(new Uri(@"C:\Users\contr\source\repos\KrakenEasy\Replayer\Cartas\Baraja Dorso1.png"));
-                            this.Card_Left.Source = new BitmapImage(new Uri(@"C:\Users\contr\source\repos\KrakenEasy\Replayer\Cartas\Baraja Dorso1.png"));
+                            try
+                            {
+
+                                Uri _uri = new Uri("Baraja Dorso1.png", UriKind.Relative);
+                                this.Card_Left.Source = new BitmapImage(_uri);
+                                _uri = new Uri("Baraja Dorso1.png", UriKind.Relative);
+                                this.Card_Right.Source = new BitmapImage(_uri);
+                            }
+                            catch {
+                                Window _Window = new Window();
+                                _Window.Show();
+                            }
                         });
                     }
                     else
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            this.Card_Right.Source = new BitmapImage(new Uri(@"C:\Users\contr\source\repos\KrakenEasy\Replayer\Cartas\Papel 10c.png"));
-                            this.Card_Left.Source = new BitmapImage(new Uri(@"C:\Users\contr\source\repos\KrakenEasy\Replayer\Cartas\Papel 2h.png"));
+                            this.Card_Right.Source = new BitmapImage(new Uri("/Cartas/Papel 10c.png", UriKind.Relative));
+                            this.Card_Left.Source = new BitmapImage(new Uri("/Cartas/Papel 2h.png", UriKind.Relative));
                         });
                     }
-                    Thread.Sleep(TimeSpan.FromSeconds(0.2));
-                }
-            });
-            _Hilo.Start();
+          
         }
     }
 }

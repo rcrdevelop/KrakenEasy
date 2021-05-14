@@ -23,33 +23,12 @@ namespace KrakenEasy.Servicios
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                try
-                {
-                _logger.LogInformation("Worker running at: {time} HUDS", DateTimeOffset.Now);
-                    MongoAccess _Access = new MongoAccess();
-                    if (KrakenEasy.HUDS.Propiedades.SystemActive)
-                    {
-                        Limpiar_Lista_HUDS();
-                    }
-                    //Seguir_Ventana();
-                }
-                catch (Exception)
-                {
-                }
+
 
                 await Task.Delay(8000, stoppingToken);
             }
         }
-        private void Limpiar_Lista_HUDS()
-        {
-            MongoAccess _Access = new MongoAccess();
-            foreach (string Ventana in _Access.Get_Ventanas_Inactivas_Kraken())
-            {
-                //_Access.Set_Mostrar_False(Ventana);
-                _Access.HUDS_Delete(Ventana);
-            } 
-                
-        }
+
         //private void Seguir_Ventana()
         //{
         //    MongoAccess _Access = new MongoAccess();

@@ -7,7 +7,9 @@ namespace KrakenEasy.Casinos
 {
     public class PokerStars
     {
-        public string Proceso()
+        public static string _Ruta { get; set; }
+        public static bool Habilitado { get; set; }
+        public static string Proceso()
         {
             string _Proceso = "PokerStars";
             return _Proceso;
@@ -17,13 +19,11 @@ namespace KrakenEasy.Casinos
             string[] _Ventanas = { "Omaha", "Hold" };
             return _Ventanas;
         }
-        public string Ruta()
+        public static string Id()
         {
-            MongoAccess _Access = new MongoAccess();
-            String _userName = (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1];
-            String _Ruta = _Access.Get_Ruta_Casino("POKERSTARS");
-            return _Ruta;
+            return "Hand #";
         }
+
         public bool Identificador_HandID(String _Line)
         {
             if (_Line.Contains("Hand #".ToUpper()))

@@ -10,6 +10,7 @@ namespace KrakenEasy.KrakenBD
 {
     public class Registros_Data
     {
+        public static bool Hole_Cards { get; set; }
         public static void Ventanas(string[] _Mesa)
         {
                 if (Mesas.Abiertas.Count != 0)
@@ -71,12 +72,23 @@ namespace KrakenEasy.KrakenBD
             }
             }
 
-        public static void Set_Last_Hand(string _Id_Mesa)
+        public static void InicializarRecursos()
+        {
+            Winamax._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/Winamax Poker/accounts/";
+            Poker888._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/888poker/HandHistory/";
+            PokerStars._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/AppData/Local/PokerStars/HandHistory/";
+            KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
+            Casinos.Mesas.Abiertas = new BsonArray();
+            Casinos.Mesas.HUDS_Abiertos = new BsonArray();
+            Hole_Cards = true;
+        }
+        public static string _Last_Hand(string _Id_Mesa)
         {
             var dt = DateTime.Now;
             long _Hora_Actual = dt.Year * 1000000000000 + dt.Month * 1000000 + dt.Day * 10000 + dt.Hour * 100 + dt.Minute;
             var Folder = @"C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
             string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+            var Resultado ="";
             foreach (string file in ReadFolder)
             {
                 if (System.IO.Path.GetFileName(file).Contains(_Id_Mesa))
@@ -89,14 +101,44 @@ namespace KrakenEasy.KrakenBD
                         {
                             if (System.IO.Path.GetFileName(file).Split(" ")[1] == _Id_Mesa.ToUpper())
                             {
-                                for (var i = 0; i >= Mesas.Abiertas.Count; i++)
+                                using (StreamReader lector = new StreamReader(file))
                                 {
-                                    if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Id_Mesa)
+                                    List<string> _Fichero = new List<string>();
+                                    bool _Inicializar = false;
+                                    bool _Condicion_Primera_Linea = true;
+                                    while (lector.Peek() > -1)
                                     {
-                                        var _Name_Mesa = System.IO.Path.GetFileName(file).Split(" ")[1];
-                                        BsonDocument _Data = Mesas.Abiertas[i].AsBsonDocument;
-                                        _Data.Add(new BsonElement("_Last_Hand", MongoAccess.Get_Last_Hand(_Name_Mesa)));
-                                        Mesas.Abiertas[i] = _Data;
+                                        string linea = lector.ReadLine().ToUpper();
+                                        if (!String.IsNullOrEmpty(linea))
+                                        {
+                                            if (Poker888.Id().Contains(linea))
+                                            {
+                                                return linea.Split(" ")[0];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (System.IO.Path.GetFileName(file).Contains("WINAMAX".ToUpper()))
+                        {
+                            if (System.IO.Path.GetFileName(file).Split("'")[1] == _Id_Mesa.ToUpper())
+                            {
+                                using (StreamReader lector = new StreamReader(file))
+                                {
+                                    List<string> _Fichero = new List<string>();
+                                    bool _Inicializar = false;
+                                    bool _Condicion_Primera_Linea = true;
+                                    while (lector.Peek() > -1)
+                                    {
+                                        string linea = lector.ReadLine().ToUpper();
+                                        if (!String.IsNullOrEmpty(linea))
+                                        {
+                                            if (Winamax.Id().Contains(linea))
+                                            {
+                                                return linea.Split(" ")[0];
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -105,14 +147,21 @@ namespace KrakenEasy.KrakenBD
                         {
                             if (System.IO.Path.GetFileName(file).Split("'")[1] == _Id_Mesa.ToUpper())
                             {
-                                for (var i = 0; i >= Mesas.Abiertas.Count; i++)
+                                using (StreamReader lector = new StreamReader(file))
                                 {
-                                    if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Id_Mesa)
+                                    List<string> _Fichero = new List<string>();
+                                    bool _Inicializar = false;
+                                    bool _Condicion_Primera_Linea = true;
+                                    while (lector.Peek() > -1)
                                     {
-                                        var _Name_Mesa = System.IO.Path.GetFileName(file).Split("_")[1];
-                                        BsonDocument _Data = Mesas.Abiertas[i].AsBsonDocument;
-                                        _Data.Add(new BsonElement("_Last_Hand", MongoAccess.Get_Last_Hand(_Name_Mesa)));
-                                        Mesas.Abiertas[i] = _Data;
+                                        string linea = lector.ReadLine().ToUpper();
+                                        if (!String.IsNullOrEmpty(linea))
+                                        {
+                                            if (PokerStars.Id().Contains(linea))
+                                            {
+                                                return linea.Split(" ")[0];
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -120,6 +169,7 @@ namespace KrakenEasy.KrakenBD
                     }
                 }
             }
+            return Resultado;
         }
     }
 

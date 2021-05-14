@@ -25,9 +25,9 @@ namespace KrakenEasy.Hands
                     string pathString = System.IO.Path.Combine(folderName, "KrakenHands");
                     System.IO.Directory.CreateDirectory(pathString);
                 }
-                string rootFolderPathWinamax = _Access.Get_Ruta_Casino("WINAMAX");
-                string rootFolderPath888Poker = _Access.Get_Ruta_Casino("888PPOKER"); 
-                string rootFolderPathPokerStars = _Access.Get_Ruta_Casino("POKERSTARS");
+                string rootFolderPathWinamax = Winamax._Ruta;
+                string rootFolderPath888Poker = Poker888._Ruta; 
+                string rootFolderPathPokerStars = PokerStars._Ruta;
                 string destinationPathWinamax = folderWinamax;
                 string destinationPath888Poker = folder888Poker;
                 string destinationPathPokerStars = folderPokerStars;

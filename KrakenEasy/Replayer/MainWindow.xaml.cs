@@ -54,9 +54,13 @@ namespace KrakenEasy.Replayer
             {
                 Label item = new Label();
                 item.Content = Name;
+
                 if (_Access.Get_Hands(Name) < 5)
                 {
                     item.Foreground = Brushes.Red;
+                }
+                else {
+                    item.Foreground = Brushes.Black;
                 }
                 ID_HAND.Items.Add(item);
             }
@@ -87,7 +91,6 @@ namespace KrakenEasy.Replayer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MongoAccess _Access = new MongoAccess();
-            _Access.InicializarMain();
             Progress _HUD = new Progress(Jugador);
             Cards _Cards = new Cards();
             this.SB_HUD.Children.Add(_HUD);
@@ -343,62 +346,60 @@ namespace KrakenEasy.Replayer
             bool CondicionHand = true;
             foreach (var item in ID_HAND.Items)
             {
-                //if (ID_HAND.SelectedIndex == i)
-                //{
-                //    Window _Window = new Window();
-                //    Label _Label = new Label();
-                //    foreach (var item2 in _Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()))
-                //    {
-                //        _Label.Content = item2;
-                //    }
-                //    _Window.Content = _Label;
-                //    _Window.Show();
-                //    if (_Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()).Count > 0)
-                //    {
-                //        var Board = _Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()));
-                //        for (int j = 0; j < Board.Split(" ").Count(); j++)
-                //        {
-                //            string card = "";
-                //            string ruta = "C:/Users/contr/source/repos/KrakenEasy/KrakenEasy/Replayer/Cartas";
-                //            string[] FolderList = System.IO.Directory.GetDirectories(ruta);
-                //            foreach (var Folder in FolderList)
-                //            {
-                //                if (Folder.ToUpper().Contains(Board.Split(" ")[j].ToUpper()))
-                //                {
-                //                    CondicionHand = false;
+                if (ID_HAND.SelectedIndex == i)
+                {
+                    Label _Label = new Label();
+                    foreach (var item2 in _Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()))
+                    {
+                        _Label.Content = item2;
+                    }
 
-                //                    card = Folder;
-                //                    if (j == 0)
-                //                    {
-                //                        this.Card1.Source = new BitmapImage(new Uri(card));
-                //                    }
-                //                    if (j == 1)
-                //                    {
-                //                        this.Card2.Source = new BitmapImage(new Uri(card));
-                //                    }
-                //                    if (j == 2)
-                //                    {
-                //                        this.Card3.Source = new BitmapImage(new Uri(card));
-                //                    }
-                //                    if (j == 3)
-                //                    {
-                //                        this.Card4.Source = new BitmapImage(new Uri(card));
-                //                    }
-                //                    if (j == 4)
-                //                    {
-                //                        this.Card5.Source = new BitmapImage(new Uri(card));
-                //                    }
-                //                }
-                //            }
+                    if (_Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()).Count > 0)
+                    {
+                        var Board = _Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim());
+                        for (int j = 0; j < Board.Count(); j++)
+                        {
+                            string card = "";
+                            string ruta = "/Cartas";
+                            //string[] FolderList = System.IO.Directory.GetDirectories(new Uri("/Cartas", UriKind.Relative).AbsolutePath);
+                            //foreach (var Folder in FolderList)
+                            //{
+                            //    //if (Folder.ToUpper().Contains(Board[j].ToUpper()))
+                            //    //{
+                            //    //    CondicionHand = false;
 
-                //        }
-                //    }
-                //    else 
-                //    { 
-                //        _Jugador = item.ToString().Split(":")[1].Trim();
-                //    }
-                //}
-                //i++;
+                            //    //    card = Folder;
+                            //    //    if (j == 0)
+                            //    //    {
+                            //    //        this.Card1.Source = new BitmapImage(new Uri(card, UriKind.Relative));
+                            //    //    }
+                            //    //    if (j == 1)
+                            //    //    {
+                            //    //        this.Card2.Source = new BitmapImage(new Uri(card, UriKind.Relative));
+                            //    //    }
+                            //    //    if (j == 2)
+                            //    //    {
+                            //    //        this.Card3.Source = new BitmapImage(new Uri(card, UriKind.Relative));
+                            //    //    }
+                            //    //    if (j == 3)
+                            //    //    {
+                            //    //        this.Card4.Source = new BitmapImage(new Uri(card, UriKind.Relative));
+                            //    //    }
+                            //    //    if (j == 4)
+                            //    //    {
+                            //    //        this.Card5.Source = new BitmapImage(new Uri(card, UriKind.Relative));
+                            //    //    }
+                            //    //}
+                            //}
+
+                        }
+                    }
+                    else
+                    {
+                        _Jugador = item.ToString().Split(":")[1].Trim();
+                    }
+                }
+                i++;
 
             }
             if (CondicionHand)

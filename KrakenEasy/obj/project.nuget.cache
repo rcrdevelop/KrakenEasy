@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Z4vGljsnPMGGb5eHoovmYFtbfzpn03Lgd7CmCg3eGBrMZy5xNyG/TtbjSCfhC7SmawPW8b4xwNsspRtJTnd5Wg==",
+  "dgSpecHash": "o13+I1GkDgM+MMmonRFRFDC3hfghJTcvkiRCU34s9YKgdQv4nXfhDeJHuTjCPFAWRQuklIMkW//p5gazGD7Jxw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\contr\\Documents\\GitHub\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+  "projectFilePath": "C:\\Users\\contr\\source\\repos\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\contr\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
+    "C:\\Users\\contr\\.nuget\\packages\\grpc.core\\2.37.1\\grpc.core.2.37.1.nupkg.sha512",
+    "C:\\Users\\contr\\.nuget\\packages\\grpc.core.api\\2.37.1\\grpc.core.api.2.37.1.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\microsoft.expression.drawing\\3.0.0\\microsoft.expression.drawing.3.0.0.nupkg.sha512",
@@ -90,6 +92,7 @@
     "C:\\Users\\contr\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\system.management\\4.5.0\\system.management.4.5.0.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\system.management.automation\\6.2.2\\system.management.automation.6.2.2.nupkg.sha512",
+    "C:\\Users\\contr\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\system.net.http\\4.3.0\\system.net.http.4.3.0.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\contr\\.nuget\\packages\\system.net.sockets\\4.3.0\\system.net.sockets.4.3.0.nupkg.sha512",

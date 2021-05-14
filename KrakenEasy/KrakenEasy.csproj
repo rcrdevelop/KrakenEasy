@@ -34,6 +34,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="recursos\**" />
+    <EmbeddedResource Remove="recursos\**" />
+    <None Remove="recursos\**" />
+    <Page Remove="recursos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="icon-4399697_640.png" />
     <None Remove="pulpo.png" />
     <None Remove="Replayer\Baraja Dorso1.png" />
@@ -48,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.Core" Version="2.37.1" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.Expression.Drawing" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
@@ -85,6 +93,9 @@
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Replayer\Cartas\dorso1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

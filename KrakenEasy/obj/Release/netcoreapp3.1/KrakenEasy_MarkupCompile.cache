@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\
+C:\Users\contr\source\repos\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\
 KrakenEasy
 none
 false
 TRACE;RELEASE;NETCOREAPP;NETCOREAPP3_1;
-C:\Users\contr\Documents\GitHub\KrakenEasy\KrakenEasy\App.xaml
+C:\Users\contr\source\repos\KrakenEasy\KrakenEasy\App.xaml
 15475717638
 6-100814219
-43-153581161
-232-224435787
+44465999186
+234-1970512065
 HUDS\ContenedorHUD.xaml;HUDS\Controls\ProgressControl.xaml;HUDS\Controls\StatControl.xaml;HUDS\FullHUD.xaml;HUDS\HUDControler.xaml;HUDS\Progress.xaml;HUDS\ProgressKraken.xaml;MainWindow.xaml;Modals\Carpetas.xaml;Modals\HandsError.xaml;Replayer\Cards.xaml;Replayer\Etapas.xaml;Replayer\MainWindow.xaml;Servicios\Error.xaml;Settings.xaml;
 
 False

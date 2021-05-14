@@ -7,6 +7,9 @@ namespace KrakenEasy.Casinos
 {
         public class Winamax
         {
+            public static string _Ruta { get; set; }
+        public static bool Habilitado { get; set; }
+
             bool _HandRead = false;
             bool _PreFlop = false;
             bool _Flop = false;
@@ -41,7 +44,7 @@ namespace KrakenEasy.Casinos
         {
             return _Players_Info;
         }
-            public String Proceso()
+            public static String Proceso()
             {
                 String _Proceso = "Winamax";
                 return _Proceso;
@@ -51,14 +54,11 @@ namespace KrakenEasy.Casinos
                 String[] _Ventana = { "Hold", "Omaha" };
                 return _Ventana;
             }
-            public String Ruta()
-            {
-                MongoAccess _Access = new MongoAccess();
-                String _userName = (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1];
-                String _Ruta = _Access.Get_Ruta_Casino("WINAMAX");
-                return _Ruta;
-            }
-            public bool Identificador_HandID(string _Line)
+        public static string Id()
+        {
+            return "HandId";
+        }
+        public bool Identificador_HandID(string _Line)
             {
                 if (_Line.Contains("HandId".ToUpper()))
                 {

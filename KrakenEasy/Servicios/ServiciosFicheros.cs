@@ -9,7 +9,6 @@ using System.IO;
 using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
 using KrakenEasy.Hands;
-using System.Windows;
 
 namespace KrakenEasy.Servicios
 {
@@ -38,7 +37,7 @@ namespace KrakenEasy.Servicios
         public static Boolean Mostrar_HUDS(String Fichero)
         {
             MongoAccess _Access = new MongoAccess();
-            if (_Access.Get_Casino_Habilitado("WINAMAX") && Fichero.Contains("WINAMAX"))
+            if (Winamax.Habilitado && Fichero.Contains("WINAMAX"))
             {
                 DateTime dt = File.GetLastWriteTime(Fichero);
                 int _Hora_Fichero = dt.Hour * 100 + dt.Minute;
@@ -52,7 +51,7 @@ namespace KrakenEasy.Servicios
                     return false;
                 }
             }
-            if (_Access.Get_Casino_Habilitado("888POKER") && Fichero.Contains("888POKER"))
+            if (Poker888.Habilitado && Fichero.Contains("888POKER"))
             {
                 DateTime dt = File.GetLastWriteTime(Fichero);
                 int _Hora_Fichero = dt.Hour * 100 + dt.Minute;
@@ -66,7 +65,7 @@ namespace KrakenEasy.Servicios
                     return false;
                 }
             }
-            if (_Access.Get_Casino_Habilitado("POKERSTARS") && Fichero.Contains("POKERSTARS"))
+            if (PokerStars.Habilitado && Fichero.Contains("POKERSTARS"))
             {
                 DateTime dt = File.GetLastWriteTime(Fichero);
                 int _Hora_Fichero = dt.Hour * 100 + dt.Minute;
@@ -87,9 +86,6 @@ namespace KrakenEasy.Servicios
         {
             try
             {
-                Winamax _Winamax = new Winamax();
-                Poker888 _888Poker = new Poker888();
-                PokerStars _PokerStars = new PokerStars();
                 string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
                 string folderName = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents";
                 string folderWinamax = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
@@ -100,9 +96,9 @@ namespace KrakenEasy.Servicios
                     string pathString = System.IO.Path.Combine(folderName, "KrakenHands");
                     Directory.CreateDirectory(pathString);
                 }
-                string rootFolderPathWinamax = _Winamax.Ruta();
-                string rootFolderPath888Poker = _888Poker.Ruta();
-                string rootFolderPathPokerStars = _PokerStars.Ruta();
+                string rootFolderPathWinamax = Winamax._Ruta;
+                string rootFolderPath888Poker = Poker888._Ruta;
+                string rootFolderPathPokerStars = PokerStars._Ruta;
                 string destinationPathWinamax = folderWinamax;
                 string destinationPath888Poker = folder888Poker;
                 string destinationPathPokerStars = folderPokerStars;
@@ -110,40 +106,39 @@ namespace KrakenEasy.Servicios
                 {
 
                 
-                    string[] FolderList = Directory.GetDirectories(rootFolderPathWinamax);
-                    foreach (string Folder in FolderList)
+                string[] FolderList = Directory.GetDirectories(rootFolderPathWinamax);
+                foreach (string Folder in FolderList)
+                {
+                    string[] ReadFolder = Directory.GetFiles(Folder + "/history");
+                    foreach (string file in ReadFolder)
                     {
-                        string[] ReadFolder = Directory.GetFiles(Folder + "/history");
-                        foreach (string file in ReadFolder)
-                        {
-                            string fileToMove = file;
-                            string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
-                            File.Copy(fileToMove, moveTo, true);
-                           // Registros_Data.Set_Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
-                        }
+                        string fileToMove = file;
+                        string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
+                        File.Copy(fileToMove, moveTo, true);
+                        Registros_Data._Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
                     }
                 }
+                }
                 catch(Exception ex) {
-                    Window window = new Window();
-                    window.Content = ex.Message;
-                    window.Show();
+ 
                 }
                 try
                 {
 
                     string[]  FolderList = System.IO.Directory.GetDirectories(rootFolderPath888Poker);
-                    foreach (string Folder in FolderList)
+                foreach (string Folder in FolderList)
+                {
+                    string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+                    foreach (string file in ReadFolder)
                     {
-                        string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
-                        foreach (string file in ReadFolder)
-                        {
-                            string fileToMove = file;
-                            string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
-                            File.Copy(fileToMove, moveTo, true);
-                          //  Registros_Data.Set_Last_Hand(System.IO.Path.GetFileName(file).Split(" ")[1]);
-                        }
+                        string fileToMove = file;
+                        string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
+                        File.Copy(fileToMove, moveTo, true);
+                        MongoAccess _Access = new MongoAccess();
+                        Registros_Data._Last_Hand(System.IO.Path.GetFileName(file).Split(" ")[1]);
                     }
                 }
+            }
                 catch(Exception ex) {
 
                 }
@@ -151,18 +146,19 @@ namespace KrakenEasy.Servicios
                 {
 
                 
-                    string[]  FolderList = System.IO.Directory.GetDirectories(rootFolderPathPokerStars);
-                    foreach (string Folder in FolderList)
+                string[]  FolderList = System.IO.Directory.GetDirectories(rootFolderPathPokerStars);
+                foreach (string Folder in FolderList)
+                {
+                    string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+                    foreach (string file in ReadFolder)
                     {
-                        string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
-                        foreach (string file in ReadFolder)
-                        {
-                            string fileToMove = file;
-                            string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
-                            File.Copy(fileToMove, moveTo, true);
-                           // Registros_Data.Set_Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
+                        string fileToMove = file;
+                        string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
+                        File.Copy(fileToMove, moveTo, true);
+                        MongoAccess _Access = new MongoAccess();
+                        Registros_Data._Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
                         }
-                    }
+                }
                 }
                 catch (Exception ex)
                 {

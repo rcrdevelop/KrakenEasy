@@ -63,16 +63,10 @@ namespace KrakenEasy.HUDS
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.DragMove();
-            }
-            
+            this.DragMove();
         }
         public void Hilo()
         {
-            Propiedades.Opacity = new double();
-            Propiedades.Size = new double();
             Thread _Hilo = new Thread(Focus_Window);
             _Hilo.Start();
         }
