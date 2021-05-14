@@ -41,11 +41,13 @@ Como su nombre lo indica en un reproductor de manos que permite al espectador me
 
 
 ### Flujo de trabajo
-
+   
    1. Al iniciar Kraken se inicializa la base de datos al igual que los variables BSON.
    2. El Work Services es iniciado esperando alguna mesa que se encuentra almacenada como fichero en la carpeta KrakenHands que es creada cuando es iniciado dicho servicio, se copian todos los archivos de los casinos que contienen las manos de las mesas jugadas.
    3. Cuando se identifica la condicion para que los HUDS aparezcan se consulta la ultima mano jugada de la base de datos y son ubicados los jugadores que se deben analizar para poder mostrar las estadisticas.
    4. Los HUDS desaparecen en cuanto la mesa lo hace, si el casino o el programa se detiene sucede lo mismo.
+
+   Nota: para verificar si se registra informacion en la base de datos utilice MongoCompass, la conexion es la default, con darle al boton "connect" sera mas que suficiente para entrar.
 
 ## Setup Desarrollo
 
