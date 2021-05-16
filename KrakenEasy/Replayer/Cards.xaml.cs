@@ -30,31 +30,33 @@ namespace KrakenEasy.Replayer
         {
             var CurrentDirectory = Environment.CurrentDirectory;
             var path = CurrentDirectory;
-                    if (Registros_Data.Hole_Cards)
-                    {
+            var CardDorso = new BitmapImage(new Uri(path + "/Replayer/Cartas/Baraja Dorso2.png"));
+            var Card_Right = new BitmapImage(new Uri(path + "/Replayer/Cartas/TC.png"));
+            var Card_Left = new BitmapImage(new Uri(path + "/Replayer/Cartas/2H.png"));
+            Thread thread = new Thread(() => { 
+                while (true) {
+            
+                        if (!Registros_Data.Hole_Cards)
+                        {
 
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            try
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
-   
-                                this.Card_Left.Source = new BitmapImage(new Uri(path+ "/Replayer/Cartas/Baraja Dorso2.png"));
-                                this.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/Baraja Dorso2.png"));
-                            }
-                            catch {
-                                throw;
-                            }
-                        });
-                    }
-                    else
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
+                                    this.Card_Left.Source = CardDorso;
+                                    this.Card_Right.Source = CardDorso;
+                            });
+                        }
+                        else
                         {
-                            this.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/Papel 10c.png", UriKind.Relative));
-                            this.Card_Left.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/Papel 2h.png", UriKind.Relative));
-                        });
-                    }
-          
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                this.Card_Right.Source = Card_Right;
+                                this.Card_Left.Source = Card_Left;
+                            });
+                        }
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                }
+            });
+            thread.Start();
         }
     }
 }

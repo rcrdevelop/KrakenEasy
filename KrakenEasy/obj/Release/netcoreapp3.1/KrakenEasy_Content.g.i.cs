@@ -11,6 +11,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("snappy32.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("snappy64.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libzstd.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("replayer/cartas/10c.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("snappy32.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("snappy64.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libzstd.dll")]

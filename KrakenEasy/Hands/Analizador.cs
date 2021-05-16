@@ -5,6 +5,8 @@ using System.IO;
 using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
 using MongoDB.Bson;
+using System.Text.RegularExpressions;
+
 namespace KrakenEasy.Hands
 {
     public class Analizador
@@ -105,7 +107,7 @@ namespace KrakenEasy.Hands
             }
             catch (Exception ex)
             {
-                
+                throw;   
             }
         }
         public void Extraer_Etapas_Winamax(List<string> _Hand)
@@ -145,11 +147,11 @@ namespace KrakenEasy.Hands
             {
                 if (_Winamax.Identificador_HandID(linea))
                 {
-                    _Hand_ID = linea;
+                    _Hand_ID = linea.Split("#")[1].Split(" ")[0];
                 }
                 if (_Winamax.Identificador_Mesa(linea))
                 {
-                    _Mesa = linea;
+                    _Mesa = linea.Split("'")[1].Split("'")[0];
                 }
                 if (_Winamax.Identificador_Button(linea))
                 {
@@ -448,7 +450,7 @@ namespace KrakenEasy.Hands
                 {
                     if (linea.Contains("board".ToUpper()))
                     {
-                        _Cards.Add(linea);
+                        _Cards.Add(linea.Split(": [")[1].Split("]")[0]);
                     }
                     if (linea.Contains("show".ToUpper()))
                     {
@@ -608,6 +610,7 @@ namespace KrakenEasy.Hands
         }
         public void Extraer_Etapas_888Poker(List<string> _Hand)
         {
+            string Cards = "";
             bool _Blinds_Line = false;
             bool _Pre_Line = false;
             bool _Flop_Line = false;
@@ -643,11 +646,11 @@ namespace KrakenEasy.Hands
             {
                 if (_888Poker.Identificador_HandID(linea))
                 {
-                    _Hand_ID = "888POKER "+ linea;
+                    _Hand_ID = "888POKER "+ linea.Split(": ")[1];
                 }
                 if (_888Poker.Identificador_Mesa(linea))
                 {
-                    _Mesa = linea;
+                    _Mesa = linea.Split(" ")[1].Split("(")[0];
                 }
                 if (_888Poker.Identificador_Button(linea))
                 {
@@ -947,14 +950,17 @@ namespace KrakenEasy.Hands
             }
             void Almacenar_Cards()
             {
-                string Cards = "";
+                
                 foreach (string linea in _Hand)
                 {
+                    
                     if (linea.ToUpper().Contains("Dealing river".ToUpper()) || linea.ToUpper().Contains("Dealing flop".ToUpper()) || linea.ToUpper().Contains("Dealing turn".ToUpper()))
                     {
-                        Cards = Cards + linea.Split("** [")[1].Split(" ]")[0];
+                        Cards += linea.Split("** [")[1].Split(" ]")[0];
                     }
                 }
+                
+                _Cards.Add(Cards.Replace(",", ""));
             }
             void Set_Data()
             {
@@ -1136,11 +1142,12 @@ namespace KrakenEasy.Hands
             {
                 if (_PokerStars.Identificador_HandID(linea))
                 {
-                    _Hand_ID = linea;
+                    _Hand_ID = linea.Split("#")[1].Split(":")[0];
                 }
                 if (_PokerStars.Identificador_Mesa(linea))
                 {
-                    _Mesa = linea;
+                    
+                    _Mesa = linea.Split(" ")[1].Replace("'","");
                 }
                 if (_PokerStars.Identificador_Button(linea))
                 {
@@ -1445,7 +1452,7 @@ namespace KrakenEasy.Hands
                 {
                     if (linea.Contains("board".ToUpper()))
                     {
-                        _Cards.Add(linea);
+                        _Cards.Add(linea.Split(" [")[1].Split("]")[0]);
                     }
                     if (linea.Contains("show".ToUpper()))
                     {
