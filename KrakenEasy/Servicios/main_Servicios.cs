@@ -40,7 +40,7 @@ namespace KrakenEasy.Servicios
                 }
                 catch (Exception ex)
                 {
-                    throw;
+
                 }
                 await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
             }

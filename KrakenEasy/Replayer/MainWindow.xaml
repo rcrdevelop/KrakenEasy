@@ -94,7 +94,7 @@
 
 
             </Grid>
-            <Grid Name="Ïnfo_Players"  Background="Black" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="1012.214" Margin="-5.398,164.334,-5.27,0" Grid.RowSpan="2" RenderTransformOrigin="0.502,0.496">
+            <Grid Background="Black" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="1012.214" Margin="-5.398,164.334,-5.27,0" Grid.RowSpan="2" RenderTransformOrigin="0.502,0.496">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />

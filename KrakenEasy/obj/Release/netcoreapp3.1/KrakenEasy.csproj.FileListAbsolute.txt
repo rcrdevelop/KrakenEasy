@@ -5,6 +5,58 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Baraja Dorso2.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Baraja Dorso3.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\dorso1.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 10c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 10d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 10h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 10s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 2c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 2d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 2h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 2s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 3c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 3d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 3h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 3s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 4c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 4d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 4h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 4s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 5c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 5d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 5h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 5s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 6c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 6d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 6h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 6s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 7c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 7d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 7h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 7s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 8c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 8d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 8h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 8s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 9c.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 9d.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 9h.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel 9s.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Ac.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Ad.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Ah.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel As.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Jc.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Jd.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Jh.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Js.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Kd.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Kh.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Ks.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Qc.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Qd.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Qh.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\Papel Qs.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\PapelKc.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\KrakenEasy.deps.json
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\KrakenEasy.runtimeconfig.json
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\KrakenEasy.runtimeconfig.dev.json
@@ -207,55 +259,3 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.dll
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.pdb
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.genruntimeconfig.cache
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\3C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\3D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\3H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\3S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\4C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\4D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\4H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\4S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\5C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\5D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\5H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\5S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\6C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\6D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\6H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\6S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\7C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\7D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\7H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\7S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\8C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\8D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\8H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\8S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\9C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\9D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\9H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\9S.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\AC.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\AD.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\AH.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\AS.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\JC.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\JD.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\JH.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\JS.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\KC.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\KD.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\KH.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\KS.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QC.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QD.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QH.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QS.png

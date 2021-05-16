@@ -348,50 +348,11 @@ namespace KrakenEasy.Replayer
             {
                 if (ID_HAND.SelectedIndex == i)
                 {
-                    Label _Label1 = new Label();
-                    Label _Label2 = new Label();
-                    Label _Label3 = new Label();
-                    Label _Label4 = new Label();
-                    Label _Label5 = new Label();
-                    Grid _Grid = new Grid();
-                    var o = 0;
-                    var CurrentDirectory = Environment.CurrentDirectory;
-                    var path = CurrentDirectory;
-                    foreach (var item2 in _Access.Get_Cards_Hands_Board(item.ToString()))
+                    Label _Label = new Label();
+                    foreach (var item2 in _Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()))
                     {
-                        _Label1 = new Label();
-
-                            _Label1.Content = item2;
-
-                        if (o == 1)
-                        {
-                            this.Card1.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 +".png"));
-                        }
-                        if (o == 2)
-                        {
-                            this.Card2.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
-                        }
-                        if (o == 3)
-                        {
-                            this.Card3.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
-                        }
-                        if (o == 4)
-                        {
-                            this.Card4.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
-                        }
-                        if (o == 5)
-                        {
-                            this.Card5.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
-                        }
-                        _Grid.RowDefinitions.Add(new RowDefinition());
-                        Grid.SetRow(_Label1, o);
-                        _Grid.Children.Add(_Label1);
-                        o++;
+                        _Label.Content = item2;
                     }
-                    Window _Window = new Window();
-                    _Window.Content = _Grid;
-                    _Window.Show();
-                    
 
                     if (_Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()).Count > 0)
                     {
@@ -457,31 +418,6 @@ namespace KrakenEasy.Replayer
         {
             MongoAccess _Access = new MongoAccess();
             _Access.Set_Hole_Cards();
-        }
-        private void Players_Insert() 
-        {
-            var CardsSB = "";
-            var CurrentDirectory = Environment.CurrentDirectory;
-            var path = CurrentDirectory;
-            var CardDorso = new BitmapImage(new Uri(path + "/Replayer/Cartas/Baraja Dorso2.png"));
-            var Card_Right = new BitmapImage(new Uri(path + "/Replayer/Cartas"));
-            var Card_Left = new BitmapImage(new Uri(path + "/Replayer/Cartas/2H.png"));
-            Cards _Card = new Cards();
-            for (var count = 0; count <= 8; count++) 
-            {
-                this.Ïnfo_Players.Children.Add(_Card);
-                _Card.Card_Left.Source = Card_Left;
-                _Card.Card_Left.Source = Card_Right;
-                Grid.SetRow(_Card, count);
-                Grid.SetColumn(_Card, count);
-            }
-            for (var count = 0; count <= 2; count++)
-            {
-                Grid _Grid = new Grid();
-                Grid.SetRow(_Card, count);
-                Grid.SetColumn(_Card, count);
-            }
-
         }
     }
 }

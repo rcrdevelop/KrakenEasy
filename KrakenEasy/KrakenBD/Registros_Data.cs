@@ -8,10 +8,8 @@ using System.Windows;
 
 namespace KrakenEasy.KrakenBD
 {
-    public static class Registros_Data
+    public class Registros_Data
     {
-
-
         public static bool Hole_Cards { get; set; }
         public static void Ventanas(string[] _Mesa)
         {
@@ -86,7 +84,7 @@ namespace KrakenEasy.KrakenBD
         }
         public static string _Last_Hand(string _Id_Mesa)
         {
-            DateTime dt = DateTime.Now;
+            var dt = DateTime.Now;
             long _Hora_Actual = dt.Year * 1000000000000 + dt.Month * 1000000 + dt.Day * 10000 + dt.Hour * 100 + dt.Minute;
             var Folder = @"C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
             string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
