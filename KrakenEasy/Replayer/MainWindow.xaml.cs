@@ -54,13 +54,15 @@ namespace KrakenEasy.Replayer
             {
                 Label item = new Label();
                 item.Content = Name;
-
+                item.FontSize = 9;
+                item.Foreground = Brushes.Black;
+                item.MinWidth = 120; 
                 if (_Access.Get_Hands(Name) < 5)
                 {
-                    item.Foreground = Brushes.Red;
+                   
                 }
                 else {
-                    item.Foreground = Brushes.Black;
+                    
                 }
                 ID_HAND.Items.Add(item);
             }
@@ -77,6 +79,7 @@ namespace KrakenEasy.Replayer
                     {
                         Label item = new Label();
                         item.Content = Name;
+                        item.FontSize = 9;
                         ID_HAND.Items.Add(item);
                     }
                 }
