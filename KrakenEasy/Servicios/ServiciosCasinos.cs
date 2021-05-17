@@ -26,39 +26,52 @@ namespace KrakenEasy.Servicios
                     if (KrakenEasy.HUDS.Propiedades.SystemActive)
                     {
                         Actualizar_Casino_Status();
-                        //try
-                        //{
-                        //    AnalizarMesaWinamax("C:/Users/"+ (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
-                        //}
-                        //catch (Exception ex)
-                        //{
+                        
+                        try
+                        {
+                            if (KrakenEasy.Casinos.Winamax.Habilitado)
+                            {
+                                AnalizarMesaWinamax("C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
 
 
-                        //}
-                        //try
-                        //{
-                        //    AnalizarMesa888Poker("C:/Users/"+ (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
-                        //}
-                        //catch (Exception ex)
-                        //{
+                        }
+                        try
+                        {
+                            if (KrakenEasy.Casinos.Winamax.Habilitado)
+                            {
+                                AnalizarMesa888Poker("C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
 
 
 
-                        //}
-                        //try
-                        //{
-                        //    AnalizarMesaPokerStars("C:/Users/"+ (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
-                        //}
-                        //catch (Exception ex)
-                        //{
+                        }
+                        try
+                        {
+                            if (KrakenEasy.Casinos.Winamax.Habilitado)
+                            {
+                                AnalizarMesaPokerStars("C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
 
 
 
-                        //}
-                    }
+                        }
+                }
                 }
                 catch(Exception ex) {
-                    throw;
+                    
                 }
             }
         public static void AnalizarMesaWinamax(String _Ruta)

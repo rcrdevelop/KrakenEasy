@@ -32,6 +32,9 @@ namespace KrakenEasy
             KrakenEasy.Casinos.Winamax._Ruta = this.Casino_Winamax.Text;
             KrakenEasy.Casinos.Poker888._Ruta = this.Casino_888Poker.Text;
             KrakenEasy.Casinos.PokerStars._Ruta = this.Casino_PokerStars.Text;
+            KrakenEasy.Casinos.Winamax.Habilitado = this.Winamax_Status.IsChecked.Value;
+            KrakenEasy.Casinos.Poker888.Habilitado = this.Poker888_Status.IsChecked.Value;
+            KrakenEasy.Casinos.PokerStars.Habilitado = this.PokerStars_Status.IsChecked.Value;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

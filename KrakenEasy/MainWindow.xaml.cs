@@ -54,12 +54,17 @@ namespace KrakenEasy
             }
             else
             {
+
                 Propiedades.SystemActive = false;
 
                 _Hilo_HUDS.Interrupt();
                 this.HUD.Content = "Iniciar Kraken";
                 Detener_Servicio();
             }
+        }
+        public static void Detener_Sistema() 
+        {
+
         }
         //Iniciar RePlayer
         private void Replayer_Click(object sender, RoutedEventArgs e)

@@ -78,10 +78,12 @@ namespace KrakenEasy.Hands
             string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
 
             string[] ReadFolder = System.IO.Directory.GetFiles(folder);
-            foreach (var file in ReadFolder)
-            {
-                Analizador _Analizador = new Analizador();
-                _Analizador.Recorrer_Fichero(Path.GetFullPath(file));
+            if (Casinos.Poker888.Habilitado || Casinos.Winamax.Habilitado || Casinos.PokerStars.Habilitado) {
+                foreach (var file in ReadFolder)
+                {
+                    Analizador _Analizador = new Analizador();
+                    _Analizador.Recorrer_Fichero(Path.GetFullPath(file));
+                }
             }
         }
     }

@@ -718,7 +718,7 @@ namespace KrakenEasy.KrakenBD
             var filter = Builders<BsonDocument>.Filter.Eq("_id", _Hand_ID);
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
-            if (_Collection.Find(filter).CountDocuments() == 0)
+            if (_Collection.Find(new BsonDocument("_id", new Regex(_Hand_ID))).CountDocuments() == 0)
             {
 
                 BsonArray _Bson_BTN = new BsonArray();
@@ -822,7 +822,7 @@ namespace KrakenEasy.KrakenBD
                     _Bson_Players.Add(item);
                 }
 
-                BsonDocument _Hand = new BsonDocument( new BsonElement("_id", (BsonValue)_Hand_ID));
+                BsonDocument _Hand = new BsonDocument( new BsonElement("_id",(BsonValue)_Hand_ID));
                 _Hand.Add(new BsonElement("Casino", "WINAMAX"));
                 _Hand.Add(new BsonElement("Mesa", (BsonValue)_Mesa));
                 _Hand.Add(new BsonElement("Players", _Bson_Players));
@@ -880,7 +880,7 @@ namespace KrakenEasy.KrakenBD
                                     List<string> _Players)
         {
             MongoAccess _Access = new MongoAccess();
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", _Hand_ID);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", _Hand_ID.Trim());
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
             if (_Collection.Find(filter).CountDocuments() == 0)
@@ -987,7 +987,7 @@ namespace KrakenEasy.KrakenBD
                     _Bson_Players.Add(item);
                 }
 
-                BsonDocument _Hand = new BsonDocument( new BsonElement("_id", (BsonValue)_Hand_ID.Replace("888POKER", "")));
+                BsonDocument _Hand = new BsonDocument( new BsonElement("_id", (BsonValue)_Hand_ID.Replace("888POKER", "").Trim()));
                 _Hand.Add(new BsonElement("Casino", "888Poker"));
                 _Hand.Add(new BsonElement("Mesa", _Mesa.Split("'")[0]));
                 _Hand.Add(new BsonElement("Players", _Bson_Players));
@@ -1008,10 +1008,7 @@ namespace KrakenEasy.KrakenBD
                 _Hand.Add(new BsonElement("River", _Bson_River));
                 _Hand.Add(new BsonElement("Summary", _Bson_Summary));
                 _Hand.Add(new BsonElement("Blinds", _Bson_Blinds));
-                string[] Update_Ventana = new string[3];
-                Update_Ventana[0] = _Mesa.Split("'")[0];
-                Update_Ventana[1] = "Hand";
-                Update_Ventana[2] = _Hand_ID;
+
                 try
                 {
                     _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").InsertOne(_Hand);
@@ -1048,7 +1045,7 @@ namespace KrakenEasy.KrakenBD
             var filter = Builders<BsonDocument>.Filter.Eq("_id", _Hand_ID);
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
-            if (_Collection.Find(filter).CountDocuments() == 0)
+            if (_Collection.Find(new BsonDocument("_id", new Regex(_Hand_ID))).CountDocuments() == 0)
             {
 
                 BsonArray _Bson_BTN = new BsonArray();
@@ -1176,7 +1173,9 @@ namespace KrakenEasy.KrakenBD
                 _Hand.Add(new BsonElement("Blinds", _Bson_Blinds));
                 try
                 {
-                    _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").InsertOne(_Hand);
+
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").InsertOne(_Hand);
+                    
                 }
                 catch (Exception)
                 {

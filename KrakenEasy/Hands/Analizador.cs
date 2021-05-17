@@ -27,7 +27,7 @@ namespace KrakenEasy.Hands
                         string linea = lector.ReadLine().ToUpper();
                         if (!String.IsNullOrEmpty(linea))
                         {
-                            if (fichero.ToUpper().Contains("Winamax".ToUpper()) && (!(fichero.ToUpper().Contains("dat".ToUpper()))))
+                            if (fichero.ToUpper().Contains("Winamax".ToUpper()) && (!(fichero.ToUpper().Contains("dat".ToUpper()))) && Casinos.Winamax.Habilitado)
                             {
                                 _Hand.Add(linea);
                                 Winamax _Winamax = new Winamax();
@@ -51,7 +51,7 @@ namespace KrakenEasy.Hands
                                 }
                                 _Condicion_Primera_Linea = false;
                             }
-                            if (fichero.ToUpper().Contains("888".ToUpper()) && (!(fichero.ToUpper().Contains("dat".ToUpper()))))
+                            if (fichero.ToUpper().Contains("888".ToUpper()) && (!(fichero.ToUpper().Contains("dat".ToUpper()))) && Casinos.Poker888.Habilitado)
                             {
                                 _Hand.Add(linea);
                                 Poker888 _888Poker = new Poker888();
@@ -76,7 +76,7 @@ namespace KrakenEasy.Hands
                                 }
                                 _Condicion_Primera_Linea = false;
                             }
-                            if (fichero.ToUpper().Contains("PokerStars".ToUpper()) && (!(fichero.ToUpper().Contains("dat".ToUpper()))))
+                            if (fichero.ToUpper().Contains("PokerStars".ToUpper()) && (!(fichero.ToUpper().Contains("dat".ToUpper()))) && Casinos.PokerStars.Habilitado)
                             {
                                 _Hand.Add(linea);
                                 PokerStars _PokerStars = new PokerStars();

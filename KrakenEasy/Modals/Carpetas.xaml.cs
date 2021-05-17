@@ -8,7 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Threading;
 
 namespace KrakenEasy.Modals
 {
@@ -17,17 +17,21 @@ namespace KrakenEasy.Modals
     /// </summary>
     public partial class Carpetas : Window
     {
+        static bool Closed = false; 
         public Carpetas(string Casino)
         {
             InitializeComponent();
-            if (Casino == "KrakenHands")
-            {
-                this.Valor.Text = "Carpeta KrakenHands no se ha encontrado, inicia KrakenEasy para generarla.";
-            }
-            else 
-            { 
-               this.Valor.Text = "Carpeta " + Casino + " no se ha podido encontrar por favor actualice la ruta del mismo";
-            }
+            Application.Current.Dispatcher.Invoke(() => { 
+                if (Casino == "KrakenHands")
+                {
+                    this.Valor.Text = "Carpeta KrakenHands no se ha encontrado, inicia KrakenEasy para generarla.";
+                }
+                else 
+                { 
+                   this.Valor.Text = "Carpeta " + Casino + " no se ha podido encontrar por favor actualice la ruta del mismo";
+                }
+
+            });
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

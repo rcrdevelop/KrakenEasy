@@ -79,6 +79,9 @@ namespace KrakenEasy.KrakenBD
             Winamax._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/Winamax Poker/accounts/";
             Poker888._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/888poker/HandHistory/";
             PokerStars._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/AppData/Local/PokerStars/HandHistory/";
+            Winamax.Habilitado = false;
+            Poker888.Habilitado = false;
+            PokerStars.Habilitado = false;
             KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
             Casinos.Mesas.Abiertas = new BsonArray();
             Casinos.Mesas.HUDS_Abiertos = new BsonArray();

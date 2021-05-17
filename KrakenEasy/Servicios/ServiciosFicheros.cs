@@ -17,8 +17,7 @@ namespace KrakenEasy.Servicios
 
         public static void main()
         {
-                try
-                {
+
                     MongoAccess _Access = new MongoAccess();
                     if (KrakenEasy.HUDS.Propiedades.SystemActive)
                     {
@@ -27,12 +26,6 @@ namespace KrakenEasy.Servicios
                         _Ficheros.Recorrer_Registros();
                     }
                     //_Access.Hands();
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                 }
-            
             }
 
 
@@ -107,66 +100,76 @@ namespace KrakenEasy.Servicios
                 try
                 {
 
-                
-                string[] FolderList = Directory.GetDirectories(rootFolderPathWinamax);
-                foreach (string Folder in FolderList)
-                {
-                    string[] ReadFolder = Directory.GetFiles(Folder + "/history");
-                    foreach (string file in ReadFolder)
+                    if (KrakenEasy.Casinos.Winamax.Habilitado)
                     {
-                        string fileToMove = file;
-                        string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
-                        File.Copy(fileToMove, moveTo, true);
-                    }
-                }
-                }
-                catch(Exception ex) {
-                    throw;
-                }
-                try
-                {
-
-                    string[]  FolderList = System.IO.Directory.GetDirectories(rootFolderPath888Poker);
-                foreach (string Folder in FolderList)
-                {
-                    string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
-                    foreach (string file in ReadFolder)
-                    {
-                        string fileToMove = file;
-                        string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
-                        File.Copy(fileToMove, moveTo, true);
-                        MongoAccess _Access = new MongoAccess();
-                    }
-                }
-            }
-                catch(Exception ex) {
-                    throw;
-                }
-                try
-                {
-
-                
-                string[]  FolderList = System.IO.Directory.GetDirectories(rootFolderPathPokerStars);
-                foreach (string Folder in FolderList)
-                {
-                    string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
-                    foreach (string file in ReadFolder)
-                    {
-                        string fileToMove = file;
-                        string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
-                        File.Copy(fileToMove, moveTo, true);
-                        MongoAccess _Access = new MongoAccess();
-                        //Registros_Data._Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
+                        string[] FolderList = Directory.GetDirectories(rootFolderPathWinamax);
+                        foreach (string Folder in FolderList)
+                        {
+                            string[] ReadFolder = Directory.GetFiles(Folder + "/history");
+                            foreach (string file in ReadFolder)
+                            {
+                                string fileToMove = file;
+                                string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
+                                File.Copy(fileToMove, moveTo, true);
+                            }
                         }
-                }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    App.Current.Dispatcher.Invoke(() => { 
+                        Modals.Carpetas _Ventana = new Modals.Carpetas("WINAMAX");
+                        _Ventana.ShowDialog();
+                    });
+                }
+                try
+                {
+                    if (KrakenEasy.Casinos.Poker888.Habilitado)
+                    {
+                        string[] FolderList = System.IO.Directory.GetDirectories(rootFolderPath888Poker);
+                        foreach (string Folder in FolderList)
+                        {
+                            string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+                            foreach (string file in ReadFolder)
+                            {
+                                string fileToMove = file;
+                                string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
+                                File.Copy(fileToMove, moveTo, true);
+                            }
+                        }
+                    }
+            }
+                catch(Exception ex) {
+                    Modals.Carpetas _Ventana = new Modals.Carpetas("888POKER");
+                    _Ventana.ShowDialog();
+                }
+                try
+                {
+
+                    if (KrakenEasy.Casinos.PokerStars.Habilitado)
+                    {
+                        string[] FolderList = System.IO.Directory.GetDirectories(rootFolderPathPokerStars);
+
+                        foreach (string Folder in FolderList)
+                        {
+                            string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+                            foreach (string file in ReadFolder)
+                            {
+                                string fileToMove = file;
+                                string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
+                                File.Copy(fileToMove, moveTo, true);
+                                //Registros_Data._Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Modals.Carpetas _Ventana = new Modals.Carpetas("POKERSTARS");
+                    _Ventana.ShowDialog();
                 }
             }
             catch (Exception ex) {
-                throw;
             }
 
         }
