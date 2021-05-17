@@ -29,5 +29,10 @@ namespace KrakenEasy.Modals
                this.Valor.Text = "Carpeta " + Casino + " no se ha podido encontrar por favor actualice la ruta del mismo";
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

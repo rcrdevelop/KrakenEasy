@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KrakenEasy.Modals"
         mc:Ignorable="d"
-        Title="Carpetas" Height="142" Width="652">
+        ResizeMode="NoResize"
+        Title="Carpetas" Height="150" Width="680">
     <Grid>
         <Label Content="Rutas de Carpetas" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top"/>
-        <TextBlock Name="Valor" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="95"/>
-        <Button Content="Cerrar" HorizontalAlignment="Left" Margin="571,93,0,0" VerticalAlignment="Top" Width="61"/>
+        <TextBlock MinWidth="450" Name="Valor" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="628"/>
+        <Button Content="Cerrar" Click="Button_Click" HorizontalAlignment="Right" Margin="0,0,22,15"  VerticalAlignment="Bottom" Width="61"/>
 
     </Grid>
 </Window>
