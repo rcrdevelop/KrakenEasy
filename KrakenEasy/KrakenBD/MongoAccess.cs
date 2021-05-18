@@ -46,23 +46,31 @@ namespace KrakenEasy.KrakenBD
             return Resultado;
         }
 
-        //public string[] Get_Cards_Player(string Player, string Id_Hand)
-        //{
-        //    MongoAccess _Access = new MongoAccess();
-        //    var _Session = _Access._Client.StartSession();
-
-        //    foreach (BsonDocument Hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", new Regex(Id_Hand))).ToList())
-        //    {
-        //        foreach (var Jugador in Hand.GetElement("Players").Value.AsBsonArray)
-        //        {
-        //            if (Jugador == Player) 
-        //            { 
-        //                _Resultado = Jugador.
-        //            }
-        //        }
-                
-        //    }
-        //}
+        public string[] Get_Cards_Player(string Player, string Id_Hand)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Resultado = new string[2];
+            foreach (BsonDocument Hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", new Regex(Id_Hand))).ToList())
+            {
+                foreach (var Jugador in Hand.GetElement("Players").Value.AsBsonArray)
+                {
+                    if (Jugador.AsString == Player)
+                    {
+                        foreach (var linea in Hand.GetElement(Jugador.AsString.Split("Position: ")[1]).Value.AsBsonArray)
+                        {
+                            if (linea.AsString.Contains("SHOWS"))
+                            {
+                                var cards = linea.AsString.Split("[")[1].Split("]")[0];
+                                _Resultado[0] = cards.Split(" ")[0];
+                                _Resultado[1] = cards.Split(" ")[1];
+                            }
+                        }
+                    }
+                }
+            }
+            return _Resultado;
+        }
         public bool Get_Hole_Cards()
         {
             MongoAccess _Access = new MongoAccess();

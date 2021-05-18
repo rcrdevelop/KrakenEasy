@@ -197,7 +197,7 @@ namespace KrakenEasy
             Application.Current.Dispatcher.Invoke(() =>
             {
                 ProgressKraken _KrakenHUD = new ProgressKraken(_Id_Jugador);
-                ContenedorHUD _HUD = new ContenedorHUD(_Id_Jugador, _Id_Ventana);
+                ContenedorHUD _HUD = new ContenedorHUD(_Id_Jugador, _Id_Ventana, false);
                 _HUD.Contenedor.Children.Add(_KrakenHUD);
                 _HUD.Show();
             });

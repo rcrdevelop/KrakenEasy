@@ -108,10 +108,6 @@ namespace KrakenEasy.Replayer
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MongoAccess _Access = new MongoAccess();
-            Progress _HUD = new Progress(Jugador);
-            Cards _Cards = new Cards();
-            Hilo();
         }
 
         private void HUD_Relative()
@@ -225,7 +221,7 @@ namespace KrakenEasy.Replayer
                     }
                     else
                     {
-                        _Jugador = item.ToString().Split(":")[1].Trim();
+                        _Jugador = item.ToString().Trim();
                     }
                 }
                 i++;
@@ -285,16 +281,25 @@ namespace KrakenEasy.Replayer
             this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
             this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
             this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            MongoAccess _Access = new MongoAccess();
-            foreach (var item in _Access.Get_Players(Id_Hand))
+            try
             {
-                string[] cards = new string[2];
-                cards[0] = item.Split("")[0];
-                cards[1] = item.Split("")[1];
-                Player_Cards(cards, item.Split(" ")[0], item.Split(" ")[0]);
-                Titulo_Info(item.Split(" ")[0], item.Split(" ")[0], item.Split(" ")[0]);
-                HUD_Info(item.Split(" ")[0], item.Split(" ")[0]);
-            } 
+
+                MongoAccess _Access = new MongoAccess();
+                foreach (var item in _Access.Get_Players(Id_Hand))
+                {
+                    var Jugador = item.Split(": ")[0].Split(" ")[0];
+                    var PosicionPoker = item.Split("Position: ")[1];
+                    var PosicionMesa = item.Split(": ")[1].Split(" ")[0];
+                    string[] cards = _Access.Get_Cards_Player(Jugador, Id_Hand);
+                    Player_Cards(cards, PosicionMesa, PosicionPoker);
+                    Titulo_Info(Jugador, PosicionMesa, PosicionPoker);
+                    HUD_Info(Jugador, PosicionPoker);
+                }
+            }
+            catch 
+            {
+                throw;
+            }
         }
         void Titulo_Info(string NombreJugador, string PosicionMesa, string PosicionPoker) 
         {
@@ -358,7 +363,6 @@ namespace KrakenEasy.Replayer
         }
         void Player_Cards(string[] Cartas, string PosicionMesa, string PosicionPoker)
         {
-            MongoAccess _Access = new MongoAccess();
             Cards cards = new Cards();
             cards.Card_Left.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[0] + ".png"));
             cards.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[1] + ".png"));
