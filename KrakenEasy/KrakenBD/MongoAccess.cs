@@ -24,7 +24,7 @@ namespace KrakenEasy.KrakenBD
                 _Client = new MongoClient("mongodb+srv://Kraken:HaMz4uGvG58BbhkP@cluster0.uo07x.mongodb.net/Kraken?retryWrites=true&w=majority");
                 _DataBase = _Client.GetDatabase("Kraken");
             }
-            else 
+            else
             {
                 _Client = new MongoClient();
                 _DataBase = _Client.GetDatabase("Kraken");
@@ -46,7 +46,23 @@ namespace KrakenEasy.KrakenBD
             return Resultado;
         }
 
+        //public string[] Get_Cards_Player(string Player, string Id_Hand)
+        //{
+        //    MongoAccess _Access = new MongoAccess();
+        //    var _Session = _Access._Client.StartSession();
 
+        //    foreach (BsonDocument Hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", new Regex(Id_Hand))).ToList())
+        //    {
+        //        foreach (var Jugador in Hand.GetElement("Players").Value.AsBsonArray)
+        //        {
+        //            if (Jugador == Player) 
+        //            { 
+        //                _Resultado = Jugador.
+        //            }
+        //        }
+                
+        //    }
+        //}
         public bool Get_Hole_Cards()
         {
             MongoAccess _Access = new MongoAccess();
@@ -64,7 +80,7 @@ namespace KrakenEasy.KrakenBD
         }
         public void Set_Hole_Cards()
         {
-            Registros_Data.Hole_Cards = false;
+            Registros_Data.Hole_Cards = !Registros_Data.Hole_Cards;
 
 
         }
@@ -365,33 +381,22 @@ namespace KrakenEasy.KrakenBD
             }
             return _Resultado;
         }
-        public List<string> Get_Players(string _Id_Ventana)
+        public List<string> Get_Players(string _Id_Hand)
         {
             
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken");
             List<string> _Resultado = new List<string>();
-            if (Mesas.Abiertas > 0)
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Hand);
+            foreach (var hand in _Collection.GetCollection<BsonDocument>("Hands").Find(filter).ToList())
             {
-                foreach (var Ventana in Mesas.Abiertas)
+                foreach (var Players in hand.GetElement("Players").Value.AsBsonArray)
                 {
-  
-                string _Id_Hand = Ventana.AsBsonDocument.GetElement("_Last_Hand").Value.AsString;
-                var filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Hand);
-                foreach (var hand in _Collection.GetCollection<BsonDocument>("Hands").Find(filter).ToList())
-                {
-                    foreach (var Players in hand.GetElement("Players").Value.AsBsonArray)
-                    {
-      
-                        _Resultado.Add(Players.AsString);
-                    } 
+                    _Resultado.Add(Players.AsString);
                 }
             }
-            }
-            return _Resultado;
-            
-
+            return _Resultado;     
         }
 
         public List<string> Ventanas_Winamax()

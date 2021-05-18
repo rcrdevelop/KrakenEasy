@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KrakenEasy.Replayer"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Background="Black"
+        Background="White"
         Title="Replayer" Height="Auto" Width="Auto">
     <Viewbox Width="Auto" Height="Auto">
         <Grid Background="Gray" Width="1007" Height="Auto">
@@ -79,74 +79,11 @@
                 <Image Name="Card3" Source="Cartas/Baraja Dorso1.png" Margin="452.79,12.037,432.434,40.13" />
                 <Image Name="Card4" Source="Cartas/Baraja Dorso1.png" Margin="539.931,12.037,345.293,40.13" />
                 <Image Name="Card5" Source="Cartas/Baraja Dorso1.png" Margin="627.24,14.037,257.984,38.13" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,737.446,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,696.946,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,453.974,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.517,494.942,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,656.404,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,575.664,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,131.517,615.754,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.517,534.924,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,132.017,410.974,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,131.849,370.099,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,131.928,287.606,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <local:Etapas BorderThickness="1.5" BorderBrush="White" Width="30" Height="30" Margin="0,131.849,329.271,0" VerticalAlignment="Top" HorizontalAlignment="Right" />
-
+                
 
             </Grid>
-            <Grid Name="Ïnfo_Players"  Background="Black" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="1012.214" Margin="-5.398,164.334,-5.27,0" Grid.RowSpan="2" RenderTransformOrigin="0.502,0.496">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="124*" />
-                    <RowDefinition Height="97*" />
-                    <RowDefinition Height="35*" />
-                </Grid.RowDefinitions>
-                <Rectangle Fill="Aqua" Grid.Row="2" Grid.Column="0" />
-                <Rectangle Fill="ForestGreen" Grid.Row="2" Grid.Column="1"/>
-                <Rectangle Fill="Orange" Grid.Row="2" Grid.Column="2"/>
-                <Rectangle Fill="Blue" Grid.Row="2" Grid.Column="3"/>
-                <Rectangle Fill="DarkCyan" Grid.Row="2" Grid.Column="4"/>
-                <Rectangle Fill="#FFE4D100" Grid.Row="2" Grid.Column="5"/>
-                <Rectangle Fill="DarkRed" Grid.Row="2" Grid.Column="6"/>
-                <Rectangle Fill="#FF580358" Grid.Row="2" Grid.Column="7"/>
-                <Rectangle Fill="Purple" Grid.Row="2" Grid.Column="8"/>
-                <Label Content="HJ (P7) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="8.114,5.873" Width="96.24" />
-                <Label Content="MP1 (P8) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="3.464,5.873" Width="105.54" />
-                <Label Content="UTG1 (P6) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="1.501,5.873" Width="109.467" />
-                <Label Content="BTN (P5) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="4.447,5.873,4.448,5.873" Width="103.573" />
-                <Label Content="CO (P4) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="6.717,5.873" Width="99.034" />
-                <Label Content="MP (P1) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="5" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="6.159,5.873" Width="100.15" />
-                <Label Content="UTG (P2) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="6" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="4.196,5.873" Width="104.077" />
-                <Label Content="BB (P3) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="7" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="7.715,5.873,7.716,5.873" Width="97.037" />
-                <Label Content="SB (P9) PlayerName" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="8" Grid.Row="2" Foreground="White" FontSize="10" Height="23.3" Margin="7.926,5.873" Width="96.616" />
-                <StackPanel Name="HJ_HUD" Width="Auto" Height="Auto" Grid.Column="0" Grid.Row="1" />
-                <StackPanel Name="MP1_HUD" Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="1" />
-                <StackPanel  Name="UTG1_HUD" Width="Auto" Height="Auto" Grid.Column="2" Grid.Row="1" />
-                <StackPanel  Name="BTN_HUD" Width="Auto" Height="Auto" Grid.Column="3" Grid.Row="1" />
-                <StackPanel  Name="CO_HUD" Width="Auto" Height="Auto" Grid.Column="4" Grid.Row="1" />
-                <StackPanel  Name="MP_HUD" Width="Auto" Height="Auto" Grid.Column="5" Grid.Row="1" />
-                <StackPanel  Name="UTG_HUD" Width="Auto" Height="Auto" Grid.Column="6" Grid.Row="1" />
-                <StackPanel  Name="BB_HUD" Width="Auto" Height="Auto" Grid.Column="7" Grid.Row="1" />
-                <StackPanel  Name="SB_HUD" Width="Auto" Height="Auto" Grid.Column="8" Grid.Row="1" />
-                <StackPanel Background="Gray" Name="HJ_Cards" Width="Auto" Height="Auto" Grid.Column="0" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="MP1_Cards" Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="UTG1_Cards" Width="Auto" Height="Auto" Grid.Column="2" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="BTN_Cards" Width="Auto" Height="Auto" Grid.Column="3" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="CO_Cards" Width="Auto" Height="Auto" Grid.Column="4" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="MP_Cards" Width="Auto" Height="Auto" Grid.Column="5" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="UTG_Cards" Width="Auto" Height="Auto" Grid.Column="6" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="BB_Cards" Width="Auto" Height="Auto" Grid.Column="7" Grid.Row="0" />
-                <StackPanel Background="Gray" Name="SB_Cards" Width="Auto" Height="Auto" Grid.Column="8" Grid.Row="0" />
+            <Grid x:Name="Ïnfo_Players"  Background="Black" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="1012.214" Margin="-5.398,164.334,-5.27,0" Grid.RowSpan="2" RenderTransformOrigin="0.502,0.496">
+
             </Grid>
         </Grid>
     </Viewbox>

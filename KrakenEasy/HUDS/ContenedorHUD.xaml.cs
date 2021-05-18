@@ -24,15 +24,20 @@ namespace KrakenEasy.HUDS
     {
         static string _Id_Ventana;
         static string _Id_Jugador;
-        public ContenedorHUD(string Id_Jugador, string Id_Ventana)
+        static bool _Replayer;
+        public ContenedorHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
         { 
             InitializeComponent();
             _Id_Jugador = Id_Jugador;
             _Id_Ventana = Id_Ventana;
+            _Replayer = Replayer;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            if (!_Replayer) 
+            { 
+                this.DragMove();
+            }
         }
         private void Opacidad()
         {
@@ -139,23 +144,23 @@ namespace KrakenEasy.HUDS
             try
             {
 
-            while (true)
-            {
-                Application.Current.Dispatcher.Invoke(new Action(() =>
+                while (true)
                 {
-                    if (this.WindowState == WindowState.Minimized)
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        this.Activate();
-                    }
-                    this.Topmost = true;
-                    this.Topmost = false;
-                    if (Casinos.Casinos.Winamax)                    {
-                        this.Close();
-                    }
+                        if (this.WindowState == WindowState.Minimized)
+                        {
+                            this.Activate();
+                        }
+                        this.Topmost = true;
+                        this.Topmost = false;
+                        if (Casinos.Casinos.Winamax)                    {
+                            this.Close();
+                        }
 
-                }));
-                Thread.Sleep(TimeSpan.FromSeconds(0.2));
-            }
+                    }));
+                    Thread.Sleep(TimeSpan.FromSeconds(0.2));
+                }
 
             }
             catch (Exception)
@@ -165,17 +170,21 @@ namespace KrakenEasy.HUDS
         }
         private void Hilo()
         {
-            Thread _HiloOpacidad = new Thread(Opacidad);
+            if (!_Replayer)
+            {
+                Thread _HiloSize = new Thread(Size);
+                _HiloSize.Start();
+
+                Thread _HiloStatus = new Thread(HUD_Status);
+                _HiloStatus.Start();
+
+                Thread _HiloOpacidad = new Thread(Opacidad);
+                _HiloOpacidad.Start();
+            }
+ 
+
             Thread _HiloData= new Thread(HUD_Data);
-            Thread _HiloSize = new Thread(Size);
-
-            Thread _HiloStatus = new Thread(HUD_Status);
             _HiloData.Start();
-            _HiloStatus.Start();
-            _HiloSize.Start();
-            _HiloOpacidad.Start();
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -49,9 +49,6 @@
     <None Remove="Replayer\play.png" />
     <None Remove="Replayer\rewind.png" />
     <None Remove="Replayer\stop.png" />
-    <Content Include="Replayer\Cartas\10C.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="pulpo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -416,6 +413,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Replayer\Cartas\QS.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Replayer\Cartas\TC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Replayer\Cartas\TD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Replayer\Cartas\TH.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Replayer\Cartas\TS.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

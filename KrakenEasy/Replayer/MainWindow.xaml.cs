@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KrakenEasy.HUDS;
 using KrakenEasy.KrakenBD;
+using MongoDB.Bson;
 namespace KrakenEasy.Replayer
 {
     /// <summary>
@@ -21,7 +22,19 @@ namespace KrakenEasy.Replayer
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public static string Jugador;
+        string path = Environment.CurrentDirectory;
+        // Distrubicion de datos del array [0] = NombreJugador, [1] = PosicionMesa, [2] = PosicionPoker, [3] = CardLeft, [4] = CardRight, [5] = Hero 
+        public static BsonDocument SB = new BsonDocument();
+        public static BsonDocument BB = new BsonDocument();
+        public static BsonDocument UTG = new BsonDocument();
+        public static BsonDocument UTG1 = new BsonDocument();
+        public static BsonDocument MP = new BsonDocument();
+        public static BsonDocument MP1 = new BsonDocument();
+        public static BsonDocument CO = new BsonDocument();
+        public static BsonDocument HJ = new BsonDocument();
+        public static BsonDocument BTN = new BsonDocument();
         public MainWindow()
         {
             try
@@ -32,7 +45,8 @@ namespace KrakenEasy.Replayer
             catch (Exception ex)
             {
 
-                Application.Current.Dispatcher.Invoke(() => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     Window _Error = new Window();
                     _Error.Width = 200;
                     _Error.Height = 150;
@@ -56,13 +70,14 @@ namespace KrakenEasy.Replayer
                 item.Content = Name;
                 item.FontSize = 9;
                 item.Foreground = Brushes.Black;
-                item.MinWidth = 120; 
+                item.MinWidth = 120;
                 if (_Access.Get_Hands(Name) < 5)
                 {
-                   
+
                 }
-                else {
-                    
+                else
+                {
+
                 }
                 ID_HAND.Items.Add(item);
             }
@@ -71,24 +86,24 @@ namespace KrakenEasy.Replayer
         private void Hands_ID(string Jugador)
         {
 
-                MongoAccess _Access = new MongoAccess();
-                if (_Access.Hands_ID(Jugador).Count > 5)
+            MongoAccess _Access = new MongoAccess();
+            if (_Access.Hands_ID(Jugador).Count > 5)
+            {
+                ID_HAND.Items.Clear();
+                foreach (var Name in _Access.Hands_ID(Jugador))
                 {
-                    ID_HAND.Items.Clear();
-                    foreach (var Name in _Access.Hands_ID(Jugador))
-                    {
-                        Label item = new Label();
-                        item.Content = Name;
-                        item.FontSize = 9;
-                        ID_HAND.Items.Add(item);
-                    }
+                    Label item = new Label();
+                    item.Content = Name;
+                    item.FontSize = 9;
+                    ID_HAND.Items.Add(item);
                 }
-                else
-                {
-                    Modals.HandsError _Error = new Modals.HandsError();
-                    _Error.Show();
-                }
-                
+            }
+            else
+            {
+                Modals.HandsError _Error = new Modals.HandsError();
+                _Error.Show();
+            }
+
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -96,40 +111,6 @@ namespace KrakenEasy.Replayer
             MongoAccess _Access = new MongoAccess();
             Progress _HUD = new Progress(Jugador);
             Cards _Cards = new Cards();
-            this.SB_HUD.Children.Add(_HUD);
-            this.SB_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.BB_HUD.Children.Add(_HUD);
-            this.BB_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.UTG_HUD.Children.Add(_HUD);
-            this.UTG_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.UTG1_HUD.Children.Add(_HUD);
-            this.UTG1_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.MP_HUD.Children.Add(_HUD);
-            this.MP_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.MP1_HUD.Children.Add(_HUD);
-            this.MP1_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.HJ_HUD.Children.Add(_HUD);
-            this.HJ_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.CO_HUD.Children.Add(_HUD);
-            this.CO_Cards.Children.Add(_Cards);
-            _HUD = new Progress(Jugador);
-            _Cards = new Cards();
-            this.BTN_HUD.Children.Add(_HUD);
-            this.BTN_Cards.Children.Add(_Cards);
             Hilo();
         }
 
@@ -149,169 +130,18 @@ namespace KrakenEasy.Replayer
                     {
                         Cards _Cards = new Cards();
                         Progress _HUD = new Progress(Jugador);
-                        this.SB_HUD.Children.Clear();
-                        this.SB_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.BB_HUD.Children.Clear();
-                        this.BB_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        _Cards = new Cards();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.UTG_HUD.Children.Clear();
-                        this.UTG_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.UTG1_HUD.Children.Clear();
-                        this.UTG1_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.MP_HUD.Children.Clear();
-                        this.MP_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.MP1_HUD.Children.Clear();
-                        this.MP1_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.HJ_HUD.Children.Clear();
-                        this.HJ_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.CO_HUD.Children.Clear();
-                        this.CO_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new Progress(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.BTN_HUD.Children.Clear();
-                        this.BTN_HUD.Children.Add(_HUD);
                     }
                     if ((_HUD == 1) && (_Change))
                     {
                         Cards _Cards = new Cards();
                         ProgressKraken _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.SB_HUD.Children.Clear();
-                        this.SB_HUD.Children.Add(_HUD);
-                        _HUD = new ProgressKraken(Jugador);
-                        _Cards = new Cards();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.BB_HUD.Children.Clear();
-                        this.BB_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.UTG_HUD.Children.Clear();
-                        this.UTG_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.UTG1_HUD.Children.Clear();
-                        this.UTG1_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.MP_HUD.Children.Clear();
-                        this.MP_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.MP1_HUD.Children.Clear();
-                        this.MP1_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.HJ_HUD.Children.Clear();
-                        this.HJ_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.CO_HUD.Children.Clear();
-                        this.CO_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new ProgressKraken(Jugador);
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.BTN_HUD.Children.Clear();
-                        this.BTN_HUD.Children.Add(_HUD);
+
                     }
                     if ((_HUD == 2) && (_Change))
                     {
                         Cards _Cards = new Cards();
                         FullHUD _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.SB_HUD.Children.Clear();
-                        this.SB_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.BB_HUD.Children.Clear();
-                        this.BB_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.UTG_HUD.Children.Clear();
-                        this.UTG_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.UTG1_HUD.Children.Clear();
-                        this.UTG1_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.MP_HUD.Children.Clear();
-                        this.MP_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.MP1_HUD.Children.Clear();
-                        this.MP1_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.HJ_HUD.Children.Clear();
-                        this.HJ_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.CO_HUD.Children.Clear();
-                        this.CO_HUD.Children.Add(_HUD);
-                        _Cards = new Cards();
-                        _HUD = new FullHUD();
-                        this.SB_Cards.Children.Clear();
-                        this.SB_Cards.Children.Add(_Cards);
-                        this.BTN_HUD.Children.Clear();
-                        this.BTN_HUD.Children.Add(_HUD);
+
                     }
                 }));
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
@@ -358,17 +188,15 @@ namespace KrakenEasy.Replayer
                     Label _Label5 = new Label();
                     Grid _Grid = new Grid();
                     var o = 0;
-                    var CurrentDirectory = Environment.CurrentDirectory;
-                    var path = CurrentDirectory;
                     foreach (var item2 in _Access.Get_Cards_Hands_Board(item.ToString()))
                     {
                         _Label1 = new Label();
 
-                            _Label1.Content = item2;
+                        _Label1.Content = item2;
 
                         if (o == 1)
                         {
-                            this.Card1.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 +".png"));
+                            this.Card1.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
                         }
                         if (o == 2)
                         {
@@ -391,50 +219,9 @@ namespace KrakenEasy.Replayer
                         _Grid.Children.Add(_Label1);
                         o++;
                     }
-                    Window _Window = new Window();
-                    _Window.Content = _Grid;
-                    _Window.Show();
+                    Info_Load((string)item);
+
                     
-
-                    if (_Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim()).Count > 0)
-                    {
-                        var Board = _Access.Get_Cards_Hands_Board(item.ToString().Split(":")[1].Trim());
-                        for (int j = 0; j < Board.Count(); j++)
-                        {
-                            string card = "";
-                            string ruta = "/Cartas";
-                            //string[] FolderList = System.IO.Directory.GetDirectories(new Uri("/Cartas", UriKind.Relative).AbsolutePath);
-                            //foreach (var Folder in FolderList)
-                            //{
-                            //    //if (Folder.ToUpper().Contains(Board[j].ToUpper()))
-                            //    //{
-                            //    //    CondicionHand = false;
-
-                            //    //    card = Folder;
-                            //    //    if (j == 0)
-                            //    //    {
-                            //    //        this.Card1.Source = new BitmapImage(new Uri(card, UriKind.Relative));
-                            //    //    }
-                            //    //    if (j == 1)
-                            //    //    {
-                            //    //        this.Card2.Source = new BitmapImage(new Uri(card, UriKind.Relative));
-                            //    //    }
-                            //    //    if (j == 2)
-                            //    //    {
-                            //    //        this.Card3.Source = new BitmapImage(new Uri(card, UriKind.Relative));
-                            //    //    }
-                            //    //    if (j == 3)
-                            //    //    {
-                            //    //        this.Card4.Source = new BitmapImage(new Uri(card, UriKind.Relative));
-                            //    //    }
-                            //    //    if (j == 4)
-                            //    //    {
-                            //    //        this.Card5.Source = new BitmapImage(new Uri(card, UriKind.Relative));
-                            //    //    }
-                            //    //}
-                            //}
-
-                        }
                     }
                     else
                     {
@@ -443,7 +230,6 @@ namespace KrakenEasy.Replayer
                 }
                 i++;
 
-            }
             if (CondicionHand)
             {
                 Hands_ID(_Jugador);
@@ -461,7 +247,7 @@ namespace KrakenEasy.Replayer
             MongoAccess _Access = new MongoAccess();
             _Access.Set_Hole_Cards();
         }
-        private void Players_Insert() 
+        private void Players_Insert()
         {
             var CardsSB = "";
             var CurrentDirectory = Environment.CurrentDirectory;
@@ -470,7 +256,7 @@ namespace KrakenEasy.Replayer
             var Card_Right = new BitmapImage(new Uri(path + "/Replayer/Cartas"));
             var Card_Left = new BitmapImage(new Uri(path + "/Replayer/Cartas/2H.png"));
             Cards _Card = new Cards();
-            for (var count = 0; count <= 8; count++) 
+            for (var count = 0; count <= 8; count++)
             {
                 this.Ïnfo_Players.Children.Add(_Card);
                 _Card.Card_Left.Source = Card_Left;
@@ -484,7 +270,153 @@ namespace KrakenEasy.Replayer
                 Grid.SetRow(_Card, count);
                 Grid.SetColumn(_Card, count);
             }
-
+        }
+        public void Info_Load(string Id_Hand)
+        {
+            this.Ïnfo_Players.RowDefinitions.Add(new RowDefinition());
+            this.Ïnfo_Players.RowDefinitions.Add(new RowDefinition());
+            this.Ïnfo_Players.RowDefinitions.Add(new RowDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
+            MongoAccess _Access = new MongoAccess();
+            foreach (var item in _Access.Get_Players(Id_Hand))
+            {
+                string[] cards = new string[2];
+                cards[0] = item.Split("")[0];
+                cards[1] = item.Split("")[1];
+                Player_Cards(cards, item.Split(" ")[0], item.Split(" ")[0]);
+                Titulo_Info(item.Split(" ")[0], item.Split(" ")[0], item.Split(" ")[0]);
+                HUD_Info(item.Split(" ")[0], item.Split(" ")[0]);
+            } 
+        }
+        void Titulo_Info(string NombreJugador, string PosicionMesa, string PosicionPoker) 
+        {
+            Label label = new Label();
+            label.Content = PosicionPoker + " " + PosicionMesa + " " + NombreJugador;
+            label.FontSize = 10;
+            label.HorizontalAlignment = HorizontalAlignment.Center;
+            label.Foreground = new SolidColorBrush(Colors.White);
+            Rectangle rectangle = new Rectangle();
+            rectangle.Fill = Color_Titulo();
+            Grid grid = new Grid();
+            Grid.SetColumn(grid, Seleccion_Posicion(PosicionPoker));
+            Grid.SetRow(grid, 2);
+            grid.Children.Add(label);
+            grid.Children.Add(rectangle);
+            this.Ïnfo_Players.Children.Add(grid);
+            
+            SolidColorBrush Color_Titulo() 
+            {
+                if (PosicionPoker == "SB")
+                {
+                    return new SolidColorBrush(Colors.White);
+                }
+                if (PosicionPoker == "BB")
+                {
+                    return new SolidColorBrush(Colors.OrangeRed);
+                }
+                if (PosicionPoker == "UTG")
+                {
+                    return new SolidColorBrush(Colors.DarkRed);
+                }
+                if (PosicionPoker == "UTG1")
+                {
+                    return new SolidColorBrush(Colors.DarkSlateGray);
+                }
+                if (PosicionPoker == "MP")
+                {
+                    return new SolidColorBrush(Colors.DarkCyan);
+                }
+                if (PosicionPoker == "MP1")
+                {
+                    return new SolidColorBrush(Colors.Blue);
+                }
+                if (PosicionPoker == "CO")
+                {
+                    return new SolidColorBrush(Colors.Orange);
+                }
+                if (PosicionPoker == "HJ")
+                {
+                    return new SolidColorBrush(Colors.ForestGreen);
+                }
+                if (PosicionPoker == "BTN")
+                {
+                    return new SolidColorBrush(Colors.Cyan);
+                }
+                else
+                {
+                    return new SolidColorBrush(Colors.White);
+                }
+            }
+        }
+        void Player_Cards(string[] Cartas, string PosicionMesa, string PosicionPoker)
+        {
+            MongoAccess _Access = new MongoAccess();
+            Cards cards = new Cards();
+            cards.Card_Left.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[0] + ".png"));
+            cards.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[1] + ".png"));
+            Grid grid = new Grid();
+            Grid.SetColumn(grid, Seleccion_Posicion(PosicionPoker));
+            Grid.SetRow(grid, 0);
+            this.Ïnfo_Players.Children.Add(grid);
+        }
+        void HUD_Info(string NombreJugador, string PosicionPoker)
+        {
+            ContenedorHUD contendor = new ContenedorHUD(NombreJugador, "", true);
+            Grid grid = new Grid();
+            Grid.SetColumn(grid,Seleccion_Posicion(PosicionPoker));
+            Grid.SetRow(grid, 1);
+            grid.Children.Add(contendor);
+            this.Ïnfo_Players.Children.Add(grid);
+        }
+        int Seleccion_Posicion(string PosicionPoker) 
+        {
+            if (PosicionPoker == "SB")
+            {
+                return 8;
+            }
+            if (PosicionPoker == "BB")
+            {
+                return 7;
+            }
+            if (PosicionPoker == "UTG")
+            {
+                return 6;
+            }
+            if (PosicionPoker == "UTG1")
+            {
+                return 5;
+            }
+            if (PosicionPoker == "MP")
+            {
+                return 4;
+            }
+            if (PosicionPoker == "MP1")
+            {
+                return 3;
+            }
+            if (PosicionPoker == "CO")
+            {
+                return 2;
+            }
+            if (PosicionPoker == "HJ")
+            {
+                return 1;
+            }
+            if (PosicionPoker == "BTN")
+            {
+                return 0;
+            }
+            else {
+                return -1;
+            }
         }
     }
 }

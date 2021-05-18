@@ -179,7 +179,6 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\Settings.g.cs
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\App.g.cs
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy_Content.g.cs
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy_MarkupCompile.cache
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy_MarkupCompile.lref
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\HUDS\ContenedorHUD.baml
@@ -207,10 +206,6 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.dll
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.pdb
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.genruntimeconfig.cache
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10C.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10D.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10H.png
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10S.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2C.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2D.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\2H.png
@@ -259,3 +254,7 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QD.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QH.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\QS.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TC.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TD.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TH.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TS.png
