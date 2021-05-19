@@ -51,11 +51,13 @@ namespace KrakenEasy.KrakenBD
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
             var _Resultado = new string[2];
+            _Resultado[0] = "dorso1";
+            _Resultado[1] = "dorso1";
             foreach (BsonDocument Hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", new Regex(Id_Hand))).ToList())
             {
                 foreach (var Jugador in Hand.GetElement("Players").Value.AsBsonArray)
                 {
-                    if (Jugador.AsString == Player)
+                    if (Jugador.AsString.Contains(Player))
                     {
                         foreach (var linea in Hand.GetElement(Jugador.AsString.Split("Position: ")[1]).Value.AsBsonArray)
                         {
@@ -101,18 +103,14 @@ namespace KrakenEasy.KrakenBD
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
             List<string> _Resultado = new List<string>();
-            foreach (var Cards in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", new Regex(ID_Hand))).ToList())
+            foreach (var Cards in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", new Regex(ID_Hand.Trim()))).ToList())
             {
                     foreach (var element in Cards.GetElement("Cards").Value.AsBsonArray)
                     {
-                        if (element.AsString.Contains("BOARD"))
-                        {
                             foreach (var item in element.AsString.Split(" "))
                             {
                                 _Resultado.Add(item);
                             }
-                            
-                        }
                     }
             }
             return _Resultado;
@@ -188,7 +186,7 @@ namespace KrakenEasy.KrakenBD
                     bool Condicion_Agregar = true;
                     foreach(var Jugador in _Resultado) 
                     {
-                        if (Jugador == item)
+                        if (Jugador.Contains(item.AsString.Split(":")[1].Split("(")[0]))
                         {
                             Condicion_Agregar = false;
                         }

@@ -6,6 +6,7 @@ using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
 using MongoDB.Bson;
 using System.Text.RegularExpressions;
+using Notification.Wpf;
 
 namespace KrakenEasy.Hands
 {
@@ -107,7 +108,13 @@ namespace KrakenEasy.Hands
             }
             catch (Exception ex)
             {
-                throw;   
+                var notificationManager = new NotificationManager();
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "KrakenEasy",
+                    Message = ex.Message,
+                    Type = NotificationType.Warning
+                });
             }
         }
         public void Extraer_Etapas_Winamax(List<string> _Hand)
@@ -451,17 +458,6 @@ namespace KrakenEasy.Hands
                     if (linea.Contains("board".ToUpper()))
                     {
                         _Cards.Add(linea.Split(": [")[1].Split("]")[0]);
-                    }
-                    if (linea.Contains("show".ToUpper()))
-                    {
-                        _Cards.Add(linea);
-                    }
-                }
-                foreach (var linea in _Blinds)
-                {
-                    if (linea.Contains("dealt to".ToUpper()))
-                    {
-                        _Cards.Add(linea);
                     }
                 }
             }
@@ -1454,18 +1450,8 @@ namespace KrakenEasy.Hands
                     {
                         _Cards.Add(linea.Split(" [")[1].Split("]")[0]);
                     }
-                    if (linea.Contains("show".ToUpper()))
-                    {
-                        _Cards.Add(linea);
-                    }
                 }
-                foreach (var linea in _Blinds)
-                {
-                    if (linea.Contains("dealt to".ToUpper()))
-                    {
-                        _Cards.Add(linea);
-                    }
-                }
+
             }
             void Set_Data()
             {

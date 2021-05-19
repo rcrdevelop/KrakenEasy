@@ -30,12 +30,6 @@
     <Compile Update="HUDS\ProgressKraken.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Modals\Carpetas.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Modals\HandsError.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Replayer\Cards.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -78,12 +72,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modals\Carpetas.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modals\HandsError.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Replayer\Cards.xaml">

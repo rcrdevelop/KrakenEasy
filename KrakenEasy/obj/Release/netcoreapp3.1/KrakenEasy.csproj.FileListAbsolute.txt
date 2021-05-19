@@ -258,3 +258,8 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TD.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TH.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\TS.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10D.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10H.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Replayer\Cartas\10S.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\netcoreapp3.1\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\netcoreapp3.1\KrakenEasy.csproj.ResolveComReference.cache

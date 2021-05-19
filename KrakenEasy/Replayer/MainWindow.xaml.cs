@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using KrakenEasy.HUDS;
 using KrakenEasy.KrakenBD;
 using MongoDB.Bson;
+using Notification.Wpf;
+
 namespace KrakenEasy.Replayer
 {
     /// <summary>
@@ -26,21 +28,12 @@ namespace KrakenEasy.Replayer
         public static string Jugador;
         string path = Environment.CurrentDirectory;
         // Distrubicion de datos del array [0] = NombreJugador, [1] = PosicionMesa, [2] = PosicionPoker, [3] = CardLeft, [4] = CardRight, [5] = Hero 
-        public static BsonDocument SB = new BsonDocument();
-        public static BsonDocument BB = new BsonDocument();
-        public static BsonDocument UTG = new BsonDocument();
-        public static BsonDocument UTG1 = new BsonDocument();
-        public static BsonDocument MP = new BsonDocument();
-        public static BsonDocument MP1 = new BsonDocument();
-        public static BsonDocument CO = new BsonDocument();
-        public static BsonDocument HJ = new BsonDocument();
-        public static BsonDocument BTN = new BsonDocument();
+
         public MainWindow()
         {
             try
             {
                 InitializeComponent();
-                Jugadores();
             }
             catch (Exception ex)
             {
@@ -71,13 +64,15 @@ namespace KrakenEasy.Replayer
                 item.FontSize = 9;
                 item.Foreground = Brushes.Black;
                 item.MinWidth = 120;
-                if (_Access.Get_Hands(Name) < 5)
+                item.MaxHeight = 50;
+                bool Condicion = _Access.Get_Hands(Name) < 5;
+                if (Condicion)
                 {
-
+                    item.Foreground = new SolidColorBrush(Colors.Red);
                 }
-                else
+                if(!Condicion)
                 {
-
+                    item.Foreground = new SolidColorBrush(Colors.Green);
                 }
                 ID_HAND.Items.Add(item);
             }
@@ -87,10 +82,11 @@ namespace KrakenEasy.Replayer
         {
 
             MongoAccess _Access = new MongoAccess();
-            if (_Access.Hands_ID(Jugador).Count > 5)
+            List<string> Hands = _Access.Hands_ID(Jugador);
+            if (Hands.Count > 5)
             {
                 ID_HAND.Items.Clear();
-                foreach (var Name in _Access.Hands_ID(Jugador))
+                foreach (string Name in Hands)
                 {
                     Label item = new Label();
                     item.Content = Name;
@@ -101,13 +97,14 @@ namespace KrakenEasy.Replayer
             else
             {
                 Modals.HandsError _Error = new Modals.HandsError();
-                _Error.Show();
+                _Error.Error();
             }
 
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Jugadores();
         }
 
         private void HUD_Relative()
@@ -151,7 +148,6 @@ namespace KrakenEasy.Replayer
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MongoAccess _Access = new MongoAccess();
             int _Condicion = Propiedades.Relative;
             if (_Condicion == 0)
             {
@@ -169,67 +165,60 @@ namespace KrakenEasy.Replayer
 
         private void ID_HAND_Selected(object sender, RoutedEventArgs e)
         {
-            MongoAccess _Access = new MongoAccess();
-            int i = 0;
-            string _Jugador = "";
-            bool CondicionHand = true;
-            foreach (var item in ID_HAND.Items)
+            if (ID_HAND.SelectedIndex >= 0)
             {
-                if (ID_HAND.SelectedIndex == i)
-                {
-                    Label _Label1 = new Label();
-                    Label _Label2 = new Label();
-                    Label _Label3 = new Label();
-                    Label _Label4 = new Label();
-                    Label _Label5 = new Label();
-                    Grid _Grid = new Grid();
+
+            int _ID = ID_HAND.SelectedIndex;
+            MongoAccess _Access = new MongoAccess();
+
+            string _Jugador = ID_HAND.Items[_ID].ToString().Split(":")[1].Trim();
+            bool CondicionHand = true;
+
                     var o = 0;
-                    foreach (var item2 in _Access.Get_Cards_Hands_Board(item.ToString()))
+
+                    foreach (var item2 in _Access.Get_Cards_Hands_Board(_Jugador))
                     {
-                        _Label1 = new Label();
-
-                        _Label1.Content = item2;
-
-                        if (o == 1)
+                        if (o == 0)
                         {
+                            
                             this.Card1.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
                         }
-                        if (o == 2)
+                        if (o == 1)
                         {
                             this.Card2.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
                         }
-                        if (o == 3)
+                        if (o == 2)
                         {
                             this.Card3.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
                         }
-                        if (o == 4)
+                        if (o == 3)
                         {
                             this.Card4.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
                         }
-                        if (o == 5)
+                        if (o == 4)
                         {
                             this.Card5.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + item2 + ".png"));
                         }
-                        _Grid.RowDefinitions.Add(new RowDefinition());
-                        Grid.SetRow(_Label1, o);
-                        _Grid.Children.Add(_Label1);
+
                         o++;
-                    }
-                    Info_Load((string)item);
+                        CondicionHand = false;
 
-                    
+
                     }
-                    else
-                    {
-                        _Jugador = item.ToString().Trim();
-                    }
+                if (!CondicionHand)
+                {
+                    Info_Load((string)_Jugador); ;
                 }
-                i++;
+                if (CondicionHand)
+                    {
+                        Hands_ID(_Jugador);
+                    }
 
-            if (CondicionHand)
-            {
-                Hands_ID(_Jugador);
+
             }
+
+
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -243,44 +232,8 @@ namespace KrakenEasy.Replayer
             MongoAccess _Access = new MongoAccess();
             _Access.Set_Hole_Cards();
         }
-        private void Players_Insert()
-        {
-            var CardsSB = "";
-            var CurrentDirectory = Environment.CurrentDirectory;
-            var path = CurrentDirectory;
-            var CardDorso = new BitmapImage(new Uri(path + "/Replayer/Cartas/Baraja Dorso2.png"));
-            var Card_Right = new BitmapImage(new Uri(path + "/Replayer/Cartas"));
-            var Card_Left = new BitmapImage(new Uri(path + "/Replayer/Cartas/2H.png"));
-            Cards _Card = new Cards();
-            for (var count = 0; count <= 8; count++)
-            {
-                this.Ïnfo_Players.Children.Add(_Card);
-                _Card.Card_Left.Source = Card_Left;
-                _Card.Card_Left.Source = Card_Right;
-                Grid.SetRow(_Card, count);
-                Grid.SetColumn(_Card, count);
-            }
-            for (var count = 0; count <= 2; count++)
-            {
-                Grid _Grid = new Grid();
-                Grid.SetRow(_Card, count);
-                Grid.SetColumn(_Card, count);
-            }
-        }
         public void Info_Load(string Id_Hand)
         {
-            this.Ïnfo_Players.RowDefinitions.Add(new RowDefinition());
-            this.Ïnfo_Players.RowDefinitions.Add(new RowDefinition());
-            this.Ïnfo_Players.RowDefinitions.Add(new RowDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
-            this.Ïnfo_Players.ColumnDefinitions.Add(new ColumnDefinition());
             try
             {
 
@@ -289,16 +242,29 @@ namespace KrakenEasy.Replayer
                 {
                     var Jugador = item.Split(": ")[0].Split(" ")[0];
                     var PosicionPoker = item.Split("Position: ")[1];
-                    var PosicionMesa = item.Split(": ")[1].Split(" ")[0];
+                    var PosicionMesa = item.Split("SEAT ")[1].Split(":")[0];
                     string[] cards = _Access.Get_Cards_Player(Jugador, Id_Hand);
                     Player_Cards(cards, PosicionMesa, PosicionPoker);
                     Titulo_Info(Jugador, PosicionMesa, PosicionPoker);
-                    HUD_Info(Jugador, PosicionPoker);
+                    //HUD_Info(Jugador, PosicionPoker);
                 }
+                var notificationManager = new NotificationManager();
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "KrakenEasy",
+                    Message = "Datos cargados correctamente.",
+                    Type = NotificationType.Success
+                });
             }
-            catch 
+            catch (Exception ex)
             {
-                throw;
+                var notificationManager = new NotificationManager();
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "KrakenEasy",
+                    Message = ex.Message,
+                    Type = NotificationType.Error
+                });
             }
         }
         void Titulo_Info(string NombreJugador, string PosicionMesa, string PosicionPoker) 
@@ -310,18 +276,18 @@ namespace KrakenEasy.Replayer
             label.Foreground = new SolidColorBrush(Colors.White);
             Rectangle rectangle = new Rectangle();
             rectangle.Fill = Color_Titulo();
-            Grid grid = new Grid();
-            Grid.SetColumn(grid, Seleccion_Posicion(PosicionPoker));
-            Grid.SetRow(grid, 2);
-            grid.Children.Add(label);
-            grid.Children.Add(rectangle);
-            this.Ïnfo_Players.Children.Add(grid);
-            
+            Grid.SetColumn(label, Seleccion_Posicion(PosicionPoker.Trim()));
+            Grid.SetRow(label, 2);
+            Grid.SetColumn(rectangle, Seleccion_Posicion(PosicionPoker.Trim()));
+            Grid.SetRow(rectangle, 2);
+            this.Ïnfo_Players.Children.Add(rectangle);
+            this.Ïnfo_Players.Children.Add(label);
+
             SolidColorBrush Color_Titulo() 
             {
                 if (PosicionPoker == "SB")
                 {
-                    return new SolidColorBrush(Colors.White);
+                    return new SolidColorBrush(Colors.Purple);
                 }
                 if (PosicionPoker == "BB")
                 {
@@ -364,12 +330,12 @@ namespace KrakenEasy.Replayer
         void Player_Cards(string[] Cartas, string PosicionMesa, string PosicionPoker)
         {
             Cards cards = new Cards();
+            cards.Width = 200;
             cards.Card_Left.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[0] + ".png"));
             cards.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[1] + ".png"));
-            Grid grid = new Grid();
-            Grid.SetColumn(grid, Seleccion_Posicion(PosicionPoker));
-            Grid.SetRow(grid, 0);
-            this.Ïnfo_Players.Children.Add(grid);
+            Grid.SetColumn(cards, Seleccion_Posicion(PosicionPoker));
+            Grid.SetRow(cards, 0);
+            this.Ïnfo_Players.Children.Add(cards);
         }
         void HUD_Info(string NombreJugador, string PosicionPoker)
         {
@@ -378,7 +344,9 @@ namespace KrakenEasy.Replayer
             Grid.SetColumn(grid,Seleccion_Posicion(PosicionPoker));
             Grid.SetRow(grid, 1);
             grid.Children.Add(contendor);
-            this.Ïnfo_Players.Children.Add(grid);
+            Window window = new Window();
+            window.Content = grid;
+            this.Ïnfo_Players.Children.Add(window);
         }
         int Seleccion_Posicion(string PosicionPoker) 
         {
@@ -419,7 +387,7 @@ namespace KrakenEasy.Replayer
                 return 0;
             }
             else {
-                return -1;
+                return 0;
             }
         }
     }

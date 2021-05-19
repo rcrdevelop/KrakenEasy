@@ -1,26 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Collections.ObjectModel;
-using System.Management.Automation;
 using KrakenEasy.KrakenBD;
 using KrakenEasy.Hands;
-using KrakenEasy.Replayer;
-using KrakenEasy.Servicios;
-using System.Windows.Threading;
-using System.IO;
 using KrakenEasy.HUDS;
-using MongoDB.Bson;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
+using ToastNotifications.Messages;
+using Notify;
+using Notification.Wpf;
 
 namespace KrakenEasy
 {
     //Ventana Principal
     public partial class MainWindow : Window
     {
+
+
+
         static Servicios.Servicios _Servicios = new Servicios.Servicios();
         public MainWindow()
         {
@@ -44,6 +43,14 @@ namespace KrakenEasy
                 this.HUD.Content = "Detener Kraken";
                 _Hilo_Servicio.Start();
                 _Hilo_HUDS.Start();
+                    var notificationManager = new NotificationManager();
+
+                    notificationManager.Show(new NotificationContent
+                    {
+                        Title = "KrakenEasy",
+                        Message = "Kraken iniciado... HUDS listos para mostrarse.",
+                        Type = NotificationType.Notification
+                    });
                 }
                 catch(Exception ex)
                 {
@@ -59,6 +66,14 @@ namespace KrakenEasy
 
                 _Hilo_HUDS.Interrupt();
                 this.HUD.Content = "Iniciar Kraken";
+                var notificationManager = new NotificationManager();
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "KrakenEasy",
+                    Message = "Kraken detenido.",
+                    Type = NotificationType.Notification
+                });
                 Detener_Servicio();
             }
         }

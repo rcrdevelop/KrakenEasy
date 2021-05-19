@@ -154,9 +154,6 @@ namespace KrakenEasy.HUDS
                         }
                         this.Topmost = true;
                         this.Topmost = false;
-                        if (Casinos.Casinos.Winamax)                    {
-                            this.Close();
-                        }
 
                     }));
                     Thread.Sleep(TimeSpan.FromSeconds(0.2));

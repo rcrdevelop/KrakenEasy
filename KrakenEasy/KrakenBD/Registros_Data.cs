@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using KrakenEasy.Casinos;
 using System.IO;
 using System.Windows;
+using Newtonsoft.Json;
 
 namespace KrakenEasy.KrakenBD
 {
@@ -76,16 +77,52 @@ namespace KrakenEasy.KrakenBD
 
         public static void InicializarRecursos()
         {
-            Winamax._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/Winamax Poker/accounts/";
-            Poker888._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/888poker/HandHistory/";
-            PokerStars._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/AppData/Local/PokerStars/HandHistory/";
-            Winamax.Habilitado = false;
-            Poker888.Habilitado = false;
-            PokerStars.Habilitado = false;
+
+            var path = Environment.CurrentDirectory+"/rutas.json";
+
+
+
+
+            if (File.Exists(path))
+            {
+                using (StreamReader jsonStream = File.OpenText(path))
+                {
+                    var json = jsonStream.ReadToEnd();
+                    Casinos.Casinos Casino = JsonConvert.DeserializeObject<Casinos.Casinos>(json);
+                    Winamax._Ruta = Casino.Winamax_Ruta;
+                    Poker888._Ruta = Casino.Poker888_Ruta;
+                    PokerStars._Ruta = Casino.PokerStars_Ruta;
+                    Winamax.Habilitado = Casino.Winamax_Habilitado;
+                    Poker888.Habilitado = Casino.Poker888_Habilitado;
+                    PokerStars.Habilitado = Casino.PokerStars_Habilitado;
+                }
+                
+            }
+            else 
+            {
+                Winamax._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/Winamax Poker/accounts/";
+                Poker888._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/888poker/HandHistory/";
+                PokerStars._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/AppData/Local/PokerStars/HandHistory/";
+                var Casino = new Casinos.Casinos
+                {
+                    Winamax_Ruta = Winamax._Ruta,
+                    Poker888_Ruta = Poker888._Ruta,
+                    PokerStars_Ruta = PokerStars._Ruta,
+                };
+                string json = JsonConvert.SerializeObject(Casino);
+                System.IO.File.WriteAllText(path, json);
+                Winamax.Habilitado = false;
+                Poker888.Habilitado = false;
+                PokerStars.Habilitado = false;
+            }
+            
+
             KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
             Casinos.Mesas.Abiertas = new BsonArray();
             Casinos.Mesas.HUDS_Abiertos = new BsonArray();
             Hole_Cards = true;
+ 
+  
         }
         public static string _Last_Hand(string _Id_Mesa)
         {

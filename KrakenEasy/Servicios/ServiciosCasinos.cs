@@ -25,7 +25,6 @@ namespace KrakenEasy.Servicios
                     MongoAccess _Access = new MongoAccess();
                     if (KrakenEasy.HUDS.Propiedades.SystemActive)
                     {
-                        Actualizar_Casino_Status();
                         
                         try
                         {
@@ -152,56 +151,7 @@ namespace KrakenEasy.Servicios
                 }
             }
         }
-        public static void Actualizar_Casino_Status()
-        {
-
-            foreach (Process ProcesoSystem in Process.GetProcesses())
-            {
-                if (ProcesoSystem.ProcessName.ToUpper().Contains(Winamax.Proceso().ToUpper()))
-                {
-
-                    //Procedimiento par);a casino activo
-                    KrakenEasy.Casinos.Casinos.Winamax = true;
-                }
-                else
-                {
-                    if (KrakenEasy.Casinos.Casinos.Winamax)
-                    {
-                        KrakenEasy.Casinos.Casinos.Winamax = false;
-                    }
-                }
-            }
-            foreach (Process ProcesoSystem in Process.GetProcesses())
-            {
-                if (ProcesoSystem.ProcessName.ToUpper().Contains(Poker888.Proceso().ToUpper()))
-                {
-                    //Procedimiento para casino activo
-                    KrakenEasy.Casinos.Casinos.Poker888 = true;
-                }
-                else
-                {
-                    if (KrakenEasy.Casinos.Casinos.Poker888)
-                    {
-                        KrakenEasy.Casinos.Casinos.Poker888 = false;
-                    }
-                }
-            }
-            foreach (Process ProcesoSystem in Process.GetProcesses())
-            {
-                if (ProcesoSystem.ProcessName.ToUpper().Contains(PokerStars.Proceso().ToUpper()))
-                {
-                    //Procedimiento para casino activo
-                    KrakenEasy.Casinos.Casinos.PokerStars = true;
-                }
-                else
-                {
-                    if (KrakenEasy.Casinos.Casinos.PokerStars)
-                    {
-                        KrakenEasy.Casinos.Casinos.PokerStars = false;
-                    }
-                }
-            }
-        }
+        
 
         
         public static List<IntPtr> Mesas_Winamax()

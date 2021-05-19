@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
+using Notification.Wpf;
+
 namespace KrakenEasy.Hands
 {
     public class Ficheros
@@ -65,12 +67,13 @@ namespace KrakenEasy.Hands
                         File.Copy(fileToMove, moveTo, true);
                     }
                 }
-            }
 
-            catch (Exception)
+            }
+            catch (Exception ex)
             {
-
+                
             }
+
 
         }
         public void Recorrer_Registros() 

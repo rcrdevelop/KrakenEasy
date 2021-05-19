@@ -9,7 +9,7 @@
         Background="White"
         Title="Replayer" Height="Auto" Width="Auto">
     <Viewbox Width="Auto" Height="Auto">
-        <Grid Background="Gray" Width="1007" Height="Auto">
+        <Grid Background="Gray" Width="Auto" Height="Auto">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -83,7 +83,22 @@
 
             </Grid>
             <Grid x:Name="Ïnfo_Players"  Background="Black" HorizontalAlignment="Left" Height="Auto"  VerticalAlignment="Top" Width="1012.214" Margin="-5.398,164.334,-5.27,0" Grid.RowSpan="2" RenderTransformOrigin="0.502,0.496">
-
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
             </Grid>
         </Grid>
     </Viewbox>

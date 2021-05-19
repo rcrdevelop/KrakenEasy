@@ -18,15 +18,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0-windows7.0": {
+            "targetAlias": "net5.0-windows",
             "projectReferences": {}
           }
         },
@@ -37,8 +37,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
           "dependencies": {
             "Grpc.Core": {
               "target": "Package",
@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
             "MongoDB.Bson": {
               "target": "Package",
               "version": "[2.12.2, )"
@@ -68,6 +72,22 @@
               "target": "Package",
               "version": "[2.12.2, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Notification.Wpf": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Notify": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "NotifyIconWpf": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "System.Management.Automation": {
               "target": "Package",
               "version": "[6.2.2, )"
@@ -75,6 +95,14 @@
             "System.ServiceProcess.ServiceController": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "ToastNotifications": {
+              "target": "Package",
+              "version": "[2.5.1, )"
+            },
+            "ToastNotifications.Messages": {
+              "target": "Package",
+              "version": "[2.5.1, )"
             }
           },
           "imports": [

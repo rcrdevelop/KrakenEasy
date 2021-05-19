@@ -117,10 +117,9 @@ namespace KrakenEasy.Servicios
                 }
                 catch (Exception ex)
                 {
-                    App.Current.Dispatcher.Invoke(() => { 
-                        Modals.Carpetas _Ventana = new Modals.Carpetas("WINAMAX");
-                        _Ventana.ShowDialog();
-                    });
+                    Modals.Carpetas carpeta = new Modals.Carpetas();
+
+                    carpeta.CarpetaDiagnostico("WINAMAX");
                 }
                 try
                 {
@@ -140,8 +139,9 @@ namespace KrakenEasy.Servicios
                     }
             }
                 catch(Exception ex) {
-                    Modals.Carpetas _Ventana = new Modals.Carpetas("888POKER");
-                    _Ventana.ShowDialog();
+                    Modals.Carpetas carpeta = new Modals.Carpetas();
+
+                    carpeta.CarpetaDiagnostico("888POKER");
                 }
                 try
                 {
@@ -165,8 +165,9 @@ namespace KrakenEasy.Servicios
                 }
                 catch (Exception ex)
                 {
-                    Modals.Carpetas _Ventana = new Modals.Carpetas("POKERSTARS");
-                    _Ventana.ShowDialog();
+                    Modals.Carpetas carpeta = new Modals.Carpetas();
+
+                    carpeta.CarpetaDiagnostico("POKERSTARS");
                 }
             }
             catch (Exception ex) {

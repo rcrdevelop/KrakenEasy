@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Version>1.7.0</Version>
@@ -10,8 +10,13 @@
     <Nullable>disable</Nullable>
     <SignAssembly>false</SignAssembly>
     <StartupObject></StartupObject>
+    <ApplicationIcon>pulpo.ico</ApplicationIcon>
   </PropertyGroup>
-
+ 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+  </PropertyGroup>
+ 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
     <DefineConstants></DefineConstants>
@@ -49,6 +54,12 @@
     <None Remove="Replayer\play.png" />
     <None Remove="Replayer\rewind.png" />
     <None Remove="Replayer\stop.png" />
+    <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
+    </COMReference>
     <None Include="pulpo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -60,11 +71,18 @@
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.Expression.Drawing" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
     <PackageReference Include="MongoDB.Bson" Version="2.12.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.12.2" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.12.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Notification.Wpf" Version="5.0.0" />
+    <PackageReference Include="Notify" Version="1.0.2" />
+    <PackageReference Include="NotifyIconWpf" Version="1.0.0" />
     <PackageReference Include="System.Management.Automation" Version="6.2.2" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="5.0.0" />
+    <PackageReference Include="ToastNotifications" Version="2.5.1" />
+    <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
   </ItemGroup>
 
   <ItemGroup>
