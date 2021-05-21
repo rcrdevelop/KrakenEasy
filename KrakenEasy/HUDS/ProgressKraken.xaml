@@ -60,7 +60,7 @@
                         Stretch="None"
                         Stroke="blue"
                         StartAngle="90"
-                        EndAngle="270" Canvas.Left="212.332" Canvas.Top="25"/>
+                        EndAngle="260" Canvas.Left="212.332" Canvas.Top="25"/>
                             <a:Arc 
                         x:Name="Fondo_VPIP_Negativo"
                         Height="382"
@@ -105,9 +105,9 @@
                 </Canvas>
             </StackPanel>
             <Grid Height="402">
-                <Label Name="BET3"  Content="15" HorizontalAlignment="Left" Margin="17.5,61,0,50" Background="{x:Null}" Foreground="White" Width="93" FontSize="72" FontFamily="Microsoft Sans Serif"/>
-                <Label Name="BET4" Content="28" HorizontalAlignment="Left" Margin="27.5,168,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF3C3C" Height="98" Width="117" FontSize="72" FontFamily="Microsoft Sans Serif"/>
-                <Label Name="BET5" Content="30,5" HorizontalAlignment="Left" Margin="24.5,283,0,-12" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFFEB4A" Height="98" Width="152" FontSize="72" FontFamily="Microsoft Sans Serif"/>
+                <Label Name="BET3" Content="0"  HorizontalAlignment="Left" Margin="32,83,0,232" Background="{x:Null}" Foreground="White" Width="118" FontSize="55" FontFamily="Microsoft Sans Serif"/>
+                <Label Name="BET4" Content="0"  HorizontalAlignment="Left" Margin="32,186,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF3C3C" Height="98" Width="118" FontSize="55" FontFamily="Microsoft Sans Serif"/>
+                <Label Name="BET5" Content="0" HorizontalAlignment="Left" Margin="32,289,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFFEB4A" Height="98" Width="118" FontSize="55" FontFamily="Microsoft Sans Serif"/>
             </Grid>
         </StackPanel>
     </Viewbox>

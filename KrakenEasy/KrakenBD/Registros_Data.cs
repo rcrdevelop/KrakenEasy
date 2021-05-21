@@ -120,6 +120,7 @@ namespace KrakenEasy.KrakenBD
             KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
             
             Hole_Cards = true;
+            HUDS.Propiedades.Relative = 1;
  
   
         }

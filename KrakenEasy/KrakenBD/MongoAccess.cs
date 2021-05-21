@@ -547,6 +547,14 @@ namespace KrakenEasy.KrakenBD
             var _Hand = _Collection.Find(new BsonDocument());
             return _Hand;
         }
+        public IFindFluent<BsonDocument, BsonDocument> Get_Hands_Jugador(string Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
+            var _Hand = _Collection.Find(new BsonDocument("Players",new Regex(Jugador)));
+            return _Hand;
+        }
         public void Obtener_Jugadores()
         {
             MongoAccess _Access = new MongoAccess();
@@ -596,61 +604,62 @@ namespace KrakenEasy.KrakenBD
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
-            foreach (var Document in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").Find(new BsonDocument(new BsonElement("_id", 0))).ToList())
+            var Hands = _Access.Get_Hand();
+            foreach (var Jugador in _Access.Get_Jugadores())
             {
-                foreach (var Jugador in Document.GetElement("Jugadores").Value.AsBsonArray)
+                foreach (var Hand in _Access.Get_Hands_Jugador(Jugador).ToList())
                 {
-                    foreach (var Hand in _Collection.Find(new BsonDocument("Players", new Regex(Jugador.AsString))).ToList())
+                    string _Posicion = "";
+                    foreach (var posicion in Hand.GetElement("Players").Value.AsBsonArray)
                     {
-                        string _Posicion = "";
-                        foreach (var posicion in Hand.GetElement("Players").Value.AsBsonArray)
+                        if (posicion.AsString.Contains(Jugador))
                         {
-                            if (posicion.AsString.Contains(Jugador.AsString))
+                            if (posicion.AsString.Contains("Position: SB / BTN"))
                             {
-                                if (posicion.AsString.Contains("Position: SB / BTN"))
-                                {
-                                    _Posicion = "SB";
-                                }
-                                else
-                                {
-                                    _Posicion = posicion.AsString.Split("Position: ")[1];
-                                }
+                                _Posicion = "SB";
+                            }
+                            else
+                            {
+                                _Posicion = posicion.AsString.Split("Position: ")[1];
+                            }
 
-                                foreach (var Accion in Hand.GetElement(_Posicion).Value.AsBsonArray)
+                            foreach (var Accion in Hand.GetElement(_Posicion).Value.AsBsonArray)
+                            {
+                                if (Accion.AsString.Contains("BET"))
                                 {
-                                    if (Accion.AsString.Contains("BET"))
-                                    {
-                                        _VPIP++;
-                                        _OVPIP++;
-                                    }
-                                    if (Accion.AsString.Contains("RAISES"))
-                                    {
-                                        _VPIP++;
-                                        _OVPIP++;
-                                        _OCC++;
-                                    }
-                                    if (Accion.AsString.Contains("CALL"))
-                                    {
-                                        _CC++;
-                                        _OCC++;
-                                        _OVPIP++;
-                                    }
-                                    if (Accion.AsString.Contains("FOLD"))
-                                    {
-                                        _OCC++;
-                                        _OVPIP++;
-                                    }
+                                    _VPIP++;
+                                    _OVPIP++;
+                                }
+                                if (Accion.AsString.Contains("RAISES"))
+                                {
+                                    _VPIP++;
+                                    _OVPIP++;
+                                    _OCC++;
+                                }
+                                if (Accion.AsString.Contains("CALL"))
+                                {
+                                    _CC++;
+                                    _OCC++;
+                                    _OVPIP++;
+                                }
+                                if (Accion.AsString.Contains("FOLD"))
+                                {
+                                    _OCC++;
+                                    _OVPIP++;
                                 }
                             }
                         }
                     }
-                    var _Filter = Builders<BsonDocument>.Filter.Eq("_id", Jugador.AsString);
-                    double Numero_Hands = _Collection.Find(new BsonDocument("Players", new Regex(Jugador.AsString))).CountDocuments();
-                    if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").Find(new BsonDocument("_id", new Regex(Jugador.AsString))).CountDocuments() < 1)
+                }
+                var _Filter = Builders<BsonDocument>.Filter.Eq("_id", Jugador);
+                double Numero_Hands = _Collection.Find(new BsonDocument("Players", new Regex(Jugador))).CountDocuments();
+                try
+                {
+                    if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").Find(new BsonDocument("_id", new Regex(Jugador))).CountDocuments() == 0)
                     {
 
                         BsonDocument _Data = new BsonDocument();
-                        _Data.Add(new BsonElement("_id", Jugador.AsString));
+                        _Data.Add(new BsonElement("_id", Jugador.Trim()));
                         _Data.Add(new BsonElement("Hands", Numero_Hands));
                         _Data.Add(new BsonElement("VPIP", VPIP(_VPIP, _OVPIP)));
                         _Data.Add(new BsonElement("CC", CC(_CC, _OCC)));
@@ -658,22 +667,26 @@ namespace KrakenEasy.KrakenBD
                     }
                     else
                     {
-                        var _Update = Builders<BsonDocument>.Update.Set("VPIP", VPIP(_VPIP, _OVPIP));
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").UpdateOne(_Filter, _Update);
-                        _Update = Builders<BsonDocument>.Update.Set("CC", CC(_CC, _OCC));
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").UpdateOne(_Filter, _Update);
-                        _Update = Builders<BsonDocument>.Update.Set("Hands", Numero_Hands);
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").UpdateOne(_Filter, _Update);
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").DeleteOne(_Filter);
+                        BsonDocument _Data = new BsonDocument();
+                        _Data.Add(new BsonElement("_id", Jugador.Trim()));
+                        _Data.Add(new BsonElement("Hands", Numero_Hands));
+                        _Data.Add(new BsonElement("VPIP", VPIP(_VPIP, _OVPIP)));
+                        _Data.Add(new BsonElement("CC", CC(_CC, _OCC)));
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").InsertOne(_Data);
 
 
                     }
-                    _VPIP = 0;
-                    _OVPIP = 0;
-                    _CC = 0;
-                    _OCC = 0;
                 }
-                
+                catch { 
+                }
+                _VPIP = 0;
+                _OVPIP = 0;
+                _CC = 0;
+                _OCC = 0;
             }
+            
+            
         }
         public double Get_VPIP(string Jugador)
         {
@@ -705,9 +718,15 @@ namespace KrakenEasy.KrakenBD
         {
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
-            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
             var _Filter = Builders<BsonDocument>.Filter.Eq("_id", Jugador);
-            return _Collection.Find(new BsonDocument("_id", new Regex(Jugador))).Count();
+            double _Resultado = 0;
+            foreach (var item in _Collection.Find(new BsonDocument("_id", new Regex(Jugador))).ToList())
+            {
+                _Resultado = item.GetElement("Hands").Value.AsDouble;
+            }
+
+            return _Resultado;
         }
         public static double VPIP(double VPIP, double OVPIP)
         {

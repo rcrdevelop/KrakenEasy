@@ -107,45 +107,9 @@ namespace KrakenEasy.Replayer
             Jugadores();
         }
 
-        private void HUD_Relative()
-        {
-            int _HUD = new int();
-            bool _Change = new bool();
-            MongoAccess _Access = new MongoAccess();
-            while (true)
-            {
-                Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    _HUD = Propiedades.Relative;
-                    _Change = Propiedades.Change;
 
-                    if ((_HUD == 0) && (_Change))
-                    {
-                        Cards _Cards = new Cards();
-                        Progress _HUD = new Progress(Jugador);
-                    }
-                    if ((_HUD == 1) && (_Change))
-                    {
-                        Cards _Cards = new Cards();
-                        ProgressKraken _HUD = new ProgressKraken(Jugador);
+        
 
-                    }
-                    if ((_HUD == 2) && (_Change))
-                    {
-                        Cards _Cards = new Cards();
-                        FullHUD _HUD = new FullHUD();
-
-                    }
-                }));
-                Thread.Sleep(TimeSpan.FromSeconds(0.5));
-            }
-        }
-        private void Hilo()
-        {
-            Thread _HiloHUD = new Thread(HUD_Relative);
-            _HiloHUD.Start();
-
-        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int _Condicion = Propiedades.Relative;

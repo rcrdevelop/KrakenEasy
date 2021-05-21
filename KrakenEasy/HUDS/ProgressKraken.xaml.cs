@@ -19,13 +19,12 @@ namespace KrakenEasy.HUDS
     /// </summary>
     public partial class ProgressKraken : UserControl
     {
-        string _Jugador = "";
-        public ProgressKraken(string Jugador)
+        static List<double> _STATS { get; set; }
+        public ProgressKraken(List<double> STATS)
         {
-            _Jugador = "UBET1967";
+            _STATS = STATS;
             InitializeComponent();
-            Thread _Data = new Thread(Data);
-            _Data.Start();
+            Data();
 
         }
         public void Data()
@@ -33,29 +32,43 @@ namespace KrakenEasy.HUDS
             MongoAccess _Access = new MongoAccess();
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (_Access.Get_VPIP("UBET1967") == 0)
+                for (var i = 0; i < _STATS.Count; i++ )
                 {
-                    this.VPIP_Positivo.EndAngle = 270;
-                }
-                else
-                {
-                    this.VPIP_Positivo.EndAngle = 270 + _Access.Get_VPIP(_Jugador) * 2 - 20;
-                }
-                if (_Access.Get_CC("UBET1967") == 0)
-                {
-                    this.Fondo_VPIP_Negativo.EndAngle = 270;
+                    if (i == 0) // VPIP 
+                    {
+                        if (_STATS[i] == 0)
+                        {
+                            this.VPIP_Positivo.StartAngle = 270;
+                        }
+                        else
+                        {
+                            this.VPIP_Positivo.StartAngle= 270 + _STATS[i] * 2 - 22;
+                        }
+                        
+                    }
+                    if (i == 1) // CC
+                    {
+                        if (_STATS[i] == 0)
+                        {
+                            this.Fondo_VPIP_Negativo.EndAngle = 270;
 
-                }
-                else
-                {
-                    this.Fondo_VPIP_Negativo.EndAngle = _Access.Get_CC("UBET1967") * 2 - 270 - 20;
+                        }
+                        else
+                        {
+                            this.Fondo_VPIP_Negativo.EndAngle = _STATS[i] * 2 - 270 - 10;
 
+                        }
+                    }
+                    if (i == 2) // BET3
+                    {
+                        this.BET3.Content = _STATS[i];
+                    }
+                    if (i == 3) // BET4
+                    {
+                        this.BET4.Content = _STATS[i];
+                    }
                 }
-
-                this.BET3.Content = _Access.Get_VPIP("UBET1967");
-                this.BET4.Content = _Access.Get_CC("UBET1967");
-            }
-            );
+            });
         }
     }
 }

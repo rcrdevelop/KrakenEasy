@@ -137,7 +137,7 @@
     <Grid Width="Auto" Height="Auto">
         <Viewbox Width="Auto" Height="Auto" VerticalAlignment="center" HorizontalAlignment="Center" Stretch="Fill">
             <Grid Height="148.274" Width="548.949" >
-                <ProgressBar x:Name="Positivo"  Margin="211.298,138.269,128.573,-122.006" Foreground="#FFF5FF14" BorderBrush="White" Style="{StaticResource ProgressBarStyleRounded}">
+                <ProgressBar x:Name="Negativo"  Margin="211.298,138.269,128.573,-122.006" Foreground="#FFF5FF14" BorderBrush="White" Style="{StaticResource ProgressBarStyleRounded}">
                     <ProgressBar.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -147,8 +147,8 @@
                         </TransformGroup>
                     </ProgressBar.RenderTransform>
                 </ProgressBar>
-                <ProgressBar  x:Name="Negativo"  Margin="211.416,6.268,10,10" Foreground="#FFF5FF14" BorderBrush="White" Style="{StaticResource ProgressBarRounded2}"/>
-                <TextBlock HorizontalAlignment="Left" Height="44.182" Margin="49.746,51.597,0,0" TextWrapping="Wrap" Text="STAT" VerticalAlignment="Top" Width="Auto" Foreground="White" FontSize="40" FontFamily="Microsoft Sans Serif"/>
+                <ProgressBar  x:Name="Positivo"  Margin="211.416,6.268,10,10" Foreground="#FFF5FF14" BorderBrush="White" Style="{StaticResource ProgressBarRounded2}"/>
+                <TextBlock Name="STAT_NAME" HorizontalAlignment="Left" Height="44.182" Margin="49.746,51.597,0,0" TextWrapping="Wrap" Text="STAT" VerticalAlignment="Top" Width="Auto" Foreground="White" FontSize="50" FontFamily="Microsoft Sans Serif"/>
             </Grid>
         </Viewbox>
     </Grid>

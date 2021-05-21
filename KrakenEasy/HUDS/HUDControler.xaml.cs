@@ -76,11 +76,11 @@ namespace KrakenEasy.HUDS
             Propiedades.Change = true;
             if (Propiedades.Relative == 0)
             {
-                Propiedades.Relative = 1;
+                Propiedades.Relative++;
             }
             if (Propiedades.Relative == 1)
             {
-                Propiedades.Relative = 2;
+                Propiedades.Relative++;
             }
             if (Propiedades.Relative == 2)
             {

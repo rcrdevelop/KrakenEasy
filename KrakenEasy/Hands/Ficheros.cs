@@ -136,6 +136,8 @@ namespace KrakenEasy.Hands
                                     Message = "Se ha detactado una mesa con nombre de '" + Nombre_File + "' del casino " + Casino,
                                     Type = NotificationType.Notification
                                 });
+                                    _Access.STATS();
+
                             }
                         
                         }

@@ -58,6 +58,7 @@ namespace KrakenEasy
                         Message = "Kraken iniciado... HUDS listos para mostrarse.",
                         Type = NotificationType.Notification
                     });
+                    //HUDS(" POKER0545 ", "");
                 }
                 catch(Exception ex)
                 {
@@ -146,21 +147,21 @@ namespace KrakenEasy
         private static void Monitor_HUDS()
         {
 
-
+            
             while (true)
             {
+                
                 Casinos.Mesas.Abiertas = Mesas_HUDS_Abiertos;
                 string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
 
                 string[] ReadFolder = System.IO.Directory.GetFiles(folder);
                 if (Casinos.Poker888.Habilitado || Casinos.Winamax.Habilitado || Casinos.PokerStars.Habilitado)
                 {
+                    List<string> Lista_Nueva = new List<string>(); 
                     foreach (var Mesa in Mesas_HUDS_Abiertos)
                     {
                         foreach (var file in ReadFolder)
                         {
-
-                            bool Remover = true;
                             string Nombre_File = " ";
                             if (file.Contains("WINAMAX"))
                             {
@@ -184,22 +185,20 @@ namespace KrakenEasy
                             }
                             if (Nombre_File.ToUpper().Trim() == Mesa.ToUpper().Trim())
                             {
-                                Remover = false;
-                            }
-                            if (Remover) 
-                            {
-                                Mesas_HUDS_Abiertos.Remove(Mesa);
+                                Lista_Nueva.Add(Nombre_File.Trim());
                             }
                             
                         }
                     }
+                   
                     foreach (var file in ReadFolder)
                     {   
                         
                         MongoAccess _Access = new MongoAccess();
   
                             bool Condicion_HUD_Abierto = false;
-                            foreach (var Mesa in Mesas_HUDS_Abiertos)
+                        List<string> Mesas_HUDS = Mesas_HUDS_Abiertos; 
+                            foreach (var Mesa in Mesas_HUDS)
                             {
                                 string Nombre_File = " ";
                                 if (file.Contains("WINAMAX"))
@@ -235,11 +234,13 @@ namespace KrakenEasy
                                 {
                                     Casino = "Winamax";
                                     Nombre_File = Path.GetFileName(file).Split("_")[1].Split("_")[0];
+                                    _Access.STATS();
                                 }
                                 else if (file.Contains("888POKER"))
                                 {
                                     Casino = "888Poker";
                                     Nombre_File = Path.GetFileName(file).Split(" ")[1].Split(" ")[0];
+                                    _Access.STATS();
                                 }
                                 else if (file.Contains("POKERSTARS"))
                                 {
@@ -249,6 +250,7 @@ namespace KrakenEasy
                                     {
                                         Nombre_File = Nombre_File.Replace("-", "");
                                     }
+                                    _Access.STATS();
                                 }
                                 bool MostrarHUD = true;
                                 foreach (var Jugador in _Access.Get_Players_Kraken(Nombre_File.ToUpper()))
@@ -346,7 +348,7 @@ namespace KrakenEasy
                 //    }
                 //}
                 //}
-                Thread.Sleep(TimeSpan.FromSeconds(1));
+                Thread.Sleep(TimeSpan.FromSeconds(0.5));
             }
         }
 
@@ -354,9 +356,7 @@ namespace KrakenEasy
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                ProgressKraken _KrakenHUD = new ProgressKraken(_Id_Jugador);
                 ContenedorHUD _HUD = new ContenedorHUD(_Id_Jugador, _Id_Ventana, false);
-                _HUD.Contenedor.Children.Add(_KrakenHUD);
                 _HUD.Show();
             });
         }

@@ -25,6 +25,7 @@ namespace KrakenEasy.HUDS
         static string _Id_Ventana;
         static string _Id_Jugador;
         static bool _Replayer;
+        static List<double> _STATS = new List<double>();
         public ContenedorHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
         { 
             InitializeComponent();
@@ -85,10 +86,11 @@ namespace KrakenEasy.HUDS
 
         }
 
-        private void HUD_Relative(string _Id_Jugador)
+        private void HUD_Relative(string _Id_Jugador, List<double> STATS)
         {
             int _HUD = new int();
-            bool _Change = new bool();
+            bool _Change = true;
+            Propiedades.Change = true;
             while (true)
             {
                 Application.Current.Dispatcher.Invoke(new Action(() =>
@@ -96,21 +98,21 @@ namespace KrakenEasy.HUDS
                     _HUD = Propiedades.Relative;
                     _Change = Propiedades.Change;
 
-                    if ((_HUD == 0) && (_Change))
+                    if ((Propiedades.Relative == 0) && (_Change))
                     {
-                        Progress _Progress = new Progress(_Id_Jugador);
+                        Progress _Progress = new Progress(_Id_Jugador, new List<double>(), 0);
                         this.Contenedor.Children.Clear();
                         this.Contenedor.Children.Add(_Progress);
                         Propiedades.Change = false;
                     }
-                    if ((_HUD == 1) && (_Change))
+                    if ((Propiedades.Relative == 1) && (_Change))
                     {
-                        ProgressKraken _Kraken = new ProgressKraken(_Id_Jugador);
+                        ProgressKraken _Kraken = new ProgressKraken(STATS);
                         this.Contenedor.Children.Clear();
                         this.Contenedor.Children.Add(_Kraken);
                         Propiedades.Change = false;
                     }
-                    if ((_HUD == 2) && (_Change))
+                    if ((Propiedades.Relative == 2) && (_Change))
                     {
                         FullHUD _Full = new FullHUD();
                         this.Contenedor.Children.Clear();
@@ -125,9 +127,44 @@ namespace KrakenEasy.HUDS
         {
                     Thread _HiloHUD = new Thread(
                         ()=> {
-                            HUD_Relative(_Id_Jugador);
+                            var STAT = new List<double>();
+                            while (true)
+                            {
+                                MongoAccess _Access = new MongoAccess();
+                                
+                                _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
+                                _STATS.Add(_Access.Get_CC(_Id_Jugador));
+                                _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
+                                _STATS.Add(_Access.Get_CC(_Id_Jugador));
+                                var NHands = _Access.Get_Hands(_Id_Jugador);
+                                if (!STAT.Equals(_STATS))
+                                {
+                                    if ((Propiedades.Relative == 1))
+                                    {
+                                        Application.Current.Dispatcher.Invoke(() =>
+                                        {
+                                            ProgressKraken _Kraken = new ProgressKraken(_STATS);
+                                            this.Contenedor.Children.Clear();
+                                            this.Contenedor.Children.Add(_Kraken);
+                                        });
+                                    }
+                                    if ((Propiedades.Relative == 0))
+                                    {
+                                        Application.Current.Dispatcher.Invoke(() =>
+                                        {
+                                            Progress _Progress = new Progress("", _STATS, NHands);
+                                            this.Contenedor.Children.Clear();
+                                            this.Contenedor.Children.Add(_Progress);
+                                        });
+                                    }
+                                }
+                                
+                                STAT = _STATS;
+                                _STATS = new List<double>();
+                                Thread.Sleep(TimeSpan.FromSeconds(1));
+                            }
                             });
-                    _HiloHUD.Start();
+                        _HiloHUD.Start();
                         Dispatcher.Invoke(new Action(() =>
                         {
                             this.Name_Jugador.Content = _Id_Jugador;
@@ -155,18 +192,18 @@ namespace KrakenEasy.HUDS
                         {
                             this.Close();
                         }
-                        foreach (var item in Casinos.Mesas.Abiertas)
-                        {
-                            bool Cerrar = true;
-                            if (_Id_Ventana == item)
-                            {
-                                Cerrar = false;
-                            }
-                            if (Cerrar)
-                            {
-                                this.Close();
-                            }
-                        }
+                        //foreach (var item in Casinos.Mesas.Abiertas)
+                        //{
+                        //    bool Cerrar = true;
+                        //    if (_Id_Ventana == item)
+                        //    {
+                        //        Cerrar = false;
+                        //    }
+                        //    if (Cerrar)
+                        //    {
+                        //        this.Close();
+                        //    }
+                        //}
 
                     }));
                     Thread.Sleep(TimeSpan.FromSeconds(0.2));

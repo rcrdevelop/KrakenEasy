@@ -18,9 +18,13 @@ namespace KrakenEasy.HUDS.Controls
     /// </summary>
     public partial class ProgressControl : UserControl
     {
-        public ProgressControl()
+        public ProgressControl(string Name, double valor)
         {
             InitializeComponent();
+            Application.Current.Dispatcher.Invoke(() => {
+                this.STAT_NAME.Text = Name;
+                this.Positivo.Value = valor;
+            });
         }
     }
 }
