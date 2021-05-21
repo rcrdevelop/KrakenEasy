@@ -14,66 +14,66 @@ namespace KrakenEasy.KrakenBD
 
 
         public static bool Hole_Cards { get; set; }
-        public static void Ventanas(string[] _Mesa)
-        {
-                if (Mesas.Abiertas.Count != 0)
-                {
-                Window _Window = new Window();
-                _Window.Width = 10;
-                _Window.Height = 10;
-                _Window.Show();
-                for (var i = 0; i >= Mesas.Abiertas.Count; i++)
-                    {
-                        if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Mesa[0])
-                        {
+        //public static void Ventanas(string[] _Mesa)
+        //{
+        //        if (Mesas.Abiertas.Count != 0)
+        //        {
+        //        Window _Window = new Window();
+        //        _Window.Width = 10;
+        //        _Window.Height = 10;
+        //        _Window.Show();
+        //        for (var i = 0; i >= Mesas.Abiertas.Count; i++)
+        //            {
+        //                if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Mesa[0])
+        //                {
                         
-                            BsonDocument _Data = new BsonDocument();
-                            _Data.Add(new BsonElement("_id", _Mesa[0]));
-                            _Data.Add(new BsonElement("Dimensiones", _Mesa[1]));
-                            _Data.Add(new BsonElement("Activa", _Mesa[2]));
-                            _Data.Add(new BsonElement("Mostrar", _Mesa[3]));
-                            _Data.Add(new BsonElement("Casino", _Mesa[4]));
-                            _Data.Add(new BsonElement("_Last_Hand", MongoAccess.Get_Last_Hand(_Mesa[0])));
-                            Mesas.Abiertas[i] = _Data;
+        //                    BsonDocument _Data = new BsonDocument();
+        //                    _Data.Add(new BsonElement("_id", _Mesa[0]));
+        //                    _Data.Add(new BsonElement("Dimensiones", _Mesa[1]));
+        //                    _Data.Add(new BsonElement("Activa", _Mesa[2]));
+        //                    _Data.Add(new BsonElement("Mostrar", _Mesa[3]));
+        //                    _Data.Add(new BsonElement("Casino", _Mesa[4]));
+        //                    _Data.Add(new BsonElement("_Last_Hand", MongoAccess.Get_Last_Hand(_Mesa[0])));
+        //                    Mesas.Abiertas[i] = _Data;
                             
                             
-                        }
-                    }
-                }
-                else
-                {
-                    BsonDocument _Datos = new BsonDocument();
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            BsonDocument _Datos = new BsonDocument();
 
-                    for (int i = 0; i < _Mesa.Length; i++)
-                    {
-                        string Element = _Mesa[i];
-                        if (i == 0)
-                        {
-                            _Datos.Add(new BsonElement("_id", Element));
-                        }
-                        if (i == 1)
-                        {
-                            _Datos.Add(new BsonElement("Dimensiones", Element));
-                        }
-                        if (i == 2)
-                        {
-                            _Datos.Add(new BsonElement("Activa", true));
-                        }
-                        if (i == 3)
-                        {
-                            _Datos.Add(new BsonElement("Mostrar", false));
-                        }
-                        if (i == 4)
-                        {
-                            _Datos.Add(new BsonElement("Casino", Element));
-                        }
-                    }
-                    Mesas.Abiertas.Add(_Datos);
+        //            for (int i = 0; i < _Mesa.Length; i++)
+        //            {
+        //                string Element = _Mesa[i];
+        //                if (i == 0)
+        //                {
+        //                    _Datos.Add(new BsonElement("_id", Element));
+        //                }
+        //                if (i == 1)
+        //                {
+        //                    _Datos.Add(new BsonElement("Dimensiones", Element));
+        //                }
+        //                if (i == 2)
+        //                {
+        //                    _Datos.Add(new BsonElement("Activa", true));
+        //                }
+        //                if (i == 3)
+        //                {
+        //                    _Datos.Add(new BsonElement("Mostrar", false));
+        //                }
+        //                if (i == 4)
+        //                {
+        //                    _Datos.Add(new BsonElement("Casino", Element));
+        //                }
+        //            }
+        //            Mesas.Abiertas.Add(_Datos);
 
-                //_Collection.GetCollection<BsonDocument>("Ventanas").InsertOne(_Datos);
-                //Set_Last_Hand(_Mesa[0]);
-            }
-            }
+        //        //_Collection.GetCollection<BsonDocument>("Ventanas").InsertOne(_Datos);
+        //        //Set_Last_Hand(_Mesa[0]);
+        //    }
+        //    }
 
         public static void InicializarRecursos()
         {
@@ -118,8 +118,7 @@ namespace KrakenEasy.KrakenBD
             
 
             KrakenEasy.HUDS.HUDS.Lista = new BsonArray();
-            Casinos.Mesas.Abiertas = new BsonArray();
-            Casinos.Mesas.HUDS_Abiertos = new BsonArray();
+            
             Hole_Cards = true;
  
   

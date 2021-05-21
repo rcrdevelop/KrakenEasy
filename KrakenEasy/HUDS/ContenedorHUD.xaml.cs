@@ -123,10 +123,6 @@ namespace KrakenEasy.HUDS
         }
         private void HUD_Data()
         {
-            BsonDocument _HUD = new BsonDocument();
-            _HUD.Add(new BsonElement("_id", _Id_Jugador));
-            _HUD.Add(new BsonElement("_Mesa", _Id_Ventana));
-            HUDS.Lista.Add(_HUD);
                     Thread _HiloHUD = new Thread(
                         ()=> {
                             HUD_Relative(_Id_Jugador);
@@ -135,6 +131,7 @@ namespace KrakenEasy.HUDS
                         Dispatcher.Invoke(new Action(() =>
                         {
                             this.Name_Jugador.Content = _Id_Jugador;
+                            this.Title = _Id_Jugador;
                     
                         }));
 
@@ -154,6 +151,22 @@ namespace KrakenEasy.HUDS
                         }
                         this.Topmost = true;
                         this.Topmost = false;
+                        if (!Propiedades.SystemActive)
+                        {
+                            this.Close();
+                        }
+                        foreach (var item in Casinos.Mesas.Abiertas)
+                        {
+                            bool Cerrar = true;
+                            if (_Id_Ventana == item)
+                            {
+                                Cerrar = false;
+                            }
+                            if (Cerrar)
+                            {
+                                this.Close();
+                            }
+                        }
 
                     }));
                     Thread.Sleep(TimeSpan.FromSeconds(0.2));

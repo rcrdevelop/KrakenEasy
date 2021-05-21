@@ -35,8 +35,8 @@
             <Label Content="Controlador de HUD" Margin="131,10,137.666,158.667" Foreground="White" />
             <Label Content="Opacidad" Margin="34,55,293,113.627" Foreground="White"/>
             <Label Content="Tamaño" Margin="180.296,54.667,164.907,113.748" Foreground="White"/>
-            <Slider Name="Opacidad"  Minimum="0" Maximum="1" TickFrequency="0.1" Margin="34,95.032,258.628,81.333" ValueChanged="Opacidad_ValueChanged"/>
-            <Slider Name="Size"  Margin="180.296,95.032,112.332,81.333" Minimum="0.4" Maximum="1.1" TickFrequency="0.05" ValueChanged="Size_ValueChanged"/>
+            <Slider Name="Opacidad" Value="0.5"  Minimum="0" Maximum="1" TickFrequency="0.1" Margin="34,95.032,258.628,81.333" ValueChanged="Opacidad_ValueChanged"/>
+            <Slider Name="Size" Value="0.8"  Margin="180.296,95.032,112.332,81.333" Minimum="0.4" Maximum="1.1" TickFrequency="0.05" ValueChanged="Size_ValueChanged"/>
             <Button Content="Cambiar HUD"  Margin="285,95,21,81.627" Click="Button_Click" />
         </Grid>
     </StackPanel>

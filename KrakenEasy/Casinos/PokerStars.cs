@@ -37,7 +37,7 @@ namespace KrakenEasy.Casinos
         }
         public bool Identificador_Mesa(String _Line)
         {
-            if (_Line.Contains("Table".ToUpper()))
+            if (_Line.Contains("Table '".ToUpper()))
             {
                 return true;
             }

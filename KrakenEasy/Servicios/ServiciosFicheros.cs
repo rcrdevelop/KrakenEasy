@@ -9,6 +9,7 @@ using System.IO;
 using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
 using KrakenEasy.Hands;
+using Notification.Wpf;
 
 namespace KrakenEasy.Servicios
 {
@@ -81,12 +82,18 @@ namespace KrakenEasy.Servicios
         {
             try
             {
-                string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
+                string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory";
+                string folderMesas = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
                 string folderName = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents";
-                string folderWinamax = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
-                string folder888Poker = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
-                string folderPokerStars = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
+                string folderWinamax = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
+                string folder888Poker = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
+                string folderPokerStars = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
                 if (!Directory.Exists(folder))
+                {
+                    string pathString = System.IO.Path.Combine(folderName, "KrakenHistory");
+                    Directory.CreateDirectory(pathString);
+                }
+                if (!Directory.Exists(folderMesas))
                 {
                     string pathString = System.IO.Path.Combine(folderName, "KrakenHands");
                     Directory.CreateDirectory(pathString);
@@ -108,9 +115,13 @@ namespace KrakenEasy.Servicios
                             string[] ReadFolder = Directory.GetFiles(Folder + "/history");
                             foreach (string file in ReadFolder)
                             {
-                                string fileToMove = file;
-                                string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
-                                File.Copy(fileToMove, moveTo, true);
+                                if (!file.Contains(".dat")) 
+                                {
+                                    string fileToMove = file;
+                                    string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
+                                    File.Copy(fileToMove, moveTo, true);
+                                }
+                                
                             }
                         }
                     }

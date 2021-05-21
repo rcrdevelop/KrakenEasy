@@ -12,6 +12,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using Notification.Wpf;
 
 namespace KrakenEasy.Servicios
 {
@@ -36,7 +37,13 @@ namespace KrakenEasy.Servicios
                         }
                         catch (Exception ex)
                         {
-
+                            var notificationManager = new NotificationManager();
+                            notificationManager.Show(new NotificationContent
+                            {
+                                Title = "KrakenEasy",
+                                Message = "Error " + ex.Message,
+                                Type = NotificationType.Error
+                            });
 
                         }
                         try
@@ -49,7 +56,13 @@ namespace KrakenEasy.Servicios
                         }
                         catch (Exception ex)
                         {
-
+                            var notificationManager = new NotificationManager();
+                            notificationManager.Show(new NotificationContent
+                            {
+                                Title = "KrakenEasy",
+                                Message = "Error " + ex.Message,
+                                Type = NotificationType.Notification
+                            });
 
 
                         }
@@ -65,12 +78,24 @@ namespace KrakenEasy.Servicios
                         {
 
 
-
+                                var notificationManager = new NotificationManager();
+                                notificationManager.Show(new NotificationContent
+                                {
+                                    Title = "KrakenEasy",
+                                    Message = "Error " + ex.Message,
+                                    Type = NotificationType.Notification
+                                });
+                            }
                         }
                 }
-                }
                 catch(Exception ex) {
-                    
+                    var notificationManager = new NotificationManager();
+                    notificationManager.Show(new NotificationContent
+                    {
+                        Title = "KrakenEasy",
+                        Message = "Error " + ex.Message,
+                        Type = NotificationType.Notification
+                    });
                 }
             }
         public static void AnalizarMesaWinamax(String _Ruta)
@@ -92,8 +117,8 @@ namespace KrakenEasy.Servicios
                             _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
                             _Data[2] = "true";
                             _Data[3] = "false";
-                            _Data[4] = "Winamax";
-                            _Access.Set_Mesas(_Data);
+                            _Data[4] = "WINAMAX";
+                            //_Access.Set_Mesas_Activas(_Data);
                         }
                     }
                 }
@@ -118,8 +143,8 @@ namespace KrakenEasy.Servicios
                             _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
                             _Data[2] = "true";
                             _Data[3] = "false";
-                            _Data[4] = "888Poker";
-                            _Access.Set_Mesas(_Data);
+                            _Data[4] = "888POKER";
+                            //_Access.Set_Mesas_Activas(_Data);
                         }
                     }
                 }
@@ -144,8 +169,8 @@ namespace KrakenEasy.Servicios
                             _Data[1] = rcWindow.Bottom.ToString() + " " + rcWindow.Left.ToString() + " " + rcWindow.Right.ToString() + " " + rcWindow.Top.ToString();
                             _Data[2] = "true";
                             _Data[3] = "false";
-                            _Data[4] = "PokerStars";
-                            _Access.Set_Mesas(_Data);
+                            _Data[4] = "POKERSTARS";
+                            //_Access.Set_Mesas_Activas(_Data);
                         }
                     }
                 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         MouseDown="Window_MouseDown"
         WindowStyle="None"
-        ShowInTaskbar="true"
+        ShowInTaskbar="False"
         AllowsTransparency="True"
         Loaded="Window_Loaded"
         Background="Black"

@@ -4,9 +4,8 @@ using System.Text;
 using MongoDB.Bson;
 namespace KrakenEasy.Casinos
 {
-    public class Mesas
+    public static class Mesas
     {
-        public static BsonArray Abiertas { get; set; }
-        public static BsonArray HUDS_Abiertos  { get; set; }
+        public static List<string> Abiertas { get; set; }
     }
 }

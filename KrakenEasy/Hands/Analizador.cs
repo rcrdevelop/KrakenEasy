@@ -111,10 +111,11 @@ namespace KrakenEasy.Hands
                 var notificationManager = new NotificationManager();
                 notificationManager.Show(new NotificationContent
                 {
-                    Title = "KrakenEasy",
+                    Title = "KrakenEasy - Proceso con fallas en analizador",
                     Message = ex.Message,
                     Type = NotificationType.Warning
                 });
+                throw;
             }
         }
         public void Extraer_Etapas_Winamax(List<string> _Hand)
@@ -1143,7 +1144,7 @@ namespace KrakenEasy.Hands
                 if (_PokerStars.Identificador_Mesa(linea))
                 {
                     
-                    _Mesa = linea.Split(" ")[1].Replace("'","");
+                    _Mesa = linea.Split("'")[1];
                 }
                 if (_PokerStars.Identificador_Button(linea))
                 {
@@ -1310,7 +1311,7 @@ namespace KrakenEasy.Hands
                 int _Resultado = 0;
                 foreach (var item in _Players)
                 {
-                    if (_Button.Split(" ")[1] == (item.Split(":")[0].Split(" ")[1]))
+                    if (_Button.Split("#")[1].Split(" ")[0] == (item.Split(":")[0].Split(" ")[1]))
                     {
                         return _Resultado;
                     }
@@ -1560,7 +1561,7 @@ namespace KrakenEasy.Hands
                 }
                 if (N_Players == 7)
                 {
-                    _Players_Type = new string[6];
+                    _Players_Type = new string[7];
                     _Players_Type[0] = "BTN";
                     _Players_Type[1] = "SB";
                     _Players_Type[2] = "BB";
@@ -1571,7 +1572,7 @@ namespace KrakenEasy.Hands
                 }
                 if (N_Players == 8)
                 {
-                    _Players_Type = new string[7];
+                    _Players_Type = new string[8];
                     _Players_Type[0] = "BTN";
                     _Players_Type[1] = "SB";
                     _Players_Type[2] = "BB";
@@ -1583,7 +1584,7 @@ namespace KrakenEasy.Hands
                 }
                 if (N_Players == 9)
                 {
-                    _Players_Type = new string[7];
+                    _Players_Type = new string[9];
                     _Players_Type[0] = "BTN";
                     _Players_Type[1] = "SB";
                     _Players_Type[2] = "BB";
