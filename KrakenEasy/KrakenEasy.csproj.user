@@ -30,6 +30,12 @@
     <Compile Update="HUDS\ProgressKraken.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="HUDS\PruebaHUD.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HUDS\PruebaHUDControler.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Replayer\Cards.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -69,6 +75,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="HUDS\ProgressKraken.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\PruebaHUD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HUDS\PruebaHUDControler.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

@@ -20,14 +20,14 @@ namespace KrakenEasy.HUDS
     /// <summary>
     /// Lógica de interacción para ContenedorHUD.xaml
     /// </summary>
-    public partial class ContenedorHUD : Window
+    public partial class PruebaHUD : Window
     {
         static string _Id_Ventana;
         static string _Id_Jugador;
         static bool _Replayer;
         static List<double> _STATS = new List<double>();
-        public ContenedorHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
-        { 
+        public PruebaHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
+        {
             InitializeComponent();
             _Id_Jugador = Id_Jugador;
             _Id_Ventana = Id_Ventana;
@@ -35,8 +35,8 @@ namespace KrakenEasy.HUDS
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (!_Replayer) 
-            { 
+            if (!_Replayer)
+            {
                 this.DragMove();
             }
         }
@@ -56,7 +56,7 @@ namespace KrakenEasy.HUDS
                 catch (Exception)
                 {
 
-                    
+
                 }
             }
 
@@ -77,8 +77,8 @@ namespace KrakenEasy.HUDS
                     Thread.Sleep(TimeSpan.FromSeconds(0.2));
                 }
             }
-           
-            
+
+
             catch (Exception)
             {
 
@@ -125,52 +125,54 @@ namespace KrakenEasy.HUDS
         }
         private void HUD_Data()
         {
-                    Thread _HiloHUD = new Thread(
-                        ()=> {
-                            var STAT = new List<double>();
-                            while (true)
-                            {
-                                MongoAccess _Access = new MongoAccess();
-                                
-                                _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
-                                _STATS.Add(_Access.Get_CC(_Id_Jugador));
-                                _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
-                                _STATS.Add(_Access.Get_CC(_Id_Jugador));
-                                var NHands = _Access.Get_Hands(_Id_Jugador);
-                                if (!STAT.Equals(_STATS))
-                                {
-                                    if ((Propiedades.Relative == 1))
-                                    {
-                                        Application.Current.Dispatcher.Invoke(() =>
-                                        {
-                                            ProgressKraken _Kraken = new ProgressKraken(_STATS);
-                                            this.Contenedor.Children.Clear();
-                                            this.Contenedor.Children.Add(_Kraken);
-                                        });
-                                    }
-                                    if ((Propiedades.Relative == 0))
-                                    {
-                                        Application.Current.Dispatcher.Invoke(() =>
-                                        {
-                                            Progress _Progress = new Progress("", _STATS, NHands);
-                                            this.Contenedor.Children.Clear();
-                                            this.Contenedor.Children.Add(_Progress);
-                                        });
-                                    }
-                                }
-                                
-                                STAT = _STATS;
-                                _STATS = new List<double>();
-                                Thread.Sleep(TimeSpan.FromSeconds(1));
-                            }
-                            });
-                        _HiloHUD.Start();
-                        Dispatcher.Invoke(new Action(() =>
+            Thread _HiloHUD = new Thread(
+                () => {
+                    var STAT = new List<double>();
+                    while (true)
+                    {
+                        MongoAccess _Access = new MongoAccess();
+
+                        _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
+                        _STATS.Add(_Access.Get_CC(_Id_Jugador));
+                        _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
+                        _STATS.Add(_Access.Get_CC(_Id_Jugador));
+                        _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
+                        _STATS.Add(_Access.Get_CC(_Id_Jugador));
+                        var NHands = _Access.Get_Hands(_Id_Jugador);
+                        if (!STAT.Equals(_STATS))
                         {
-                            this.Name_Jugador.Content = _Id_Jugador;
-                            this.Title = _Id_Jugador;
-                    
-                        }));
+                            if ((Propiedades.Relative == 1))
+                            {
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    ProgressKraken _Kraken = new ProgressKraken(_STATS);
+                                    this.Contenedor.Children.Clear();
+                                    this.Contenedor.Children.Add(_Kraken);
+                                });
+                            }
+                            if ((Propiedades.Relative == 0))
+                            {
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    Progress _Progress = new Progress("", _STATS, NHands);
+                                    this.Contenedor.Children.Clear();
+                                    this.Contenedor.Children.Add(_Progress);
+                                });
+                            }
+                        }
+
+                        STAT = _STATS;
+                        _STATS = new List<double>();
+                        Thread.Sleep(TimeSpan.FromSeconds(1));
+                    }
+                });
+            _HiloHUD.Start();
+            Dispatcher.Invoke(new Action(() =>
+            {
+                this.Name_Jugador.Content = _Id_Jugador;
+                this.Title = _Id_Jugador;
+
+            }));
 
         }
         private void HUD_Status()
@@ -188,7 +190,7 @@ namespace KrakenEasy.HUDS
                         }
                         this.Topmost = true;
                         this.Topmost = false;
-                        
+
                         if (!Propiedades.SystemActive)
                         {
                             this.Close();
@@ -229,14 +231,14 @@ namespace KrakenEasy.HUDS
                 Thread _HiloOpacidad = new Thread(Opacidad);
                 _HiloOpacidad.Start();
             }
- 
 
-            Thread _HiloData= new Thread(HUD_Data);
+
+            Thread _HiloData = new Thread(HUD_Data);
             _HiloData.Start();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {   
+        {
             Hilo();
         }
 

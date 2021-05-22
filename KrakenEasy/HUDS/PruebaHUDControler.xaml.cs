@@ -18,9 +18,9 @@ namespace KrakenEasy.HUDS
     /// <summary>
     /// Lógica de interacción para HUDControler.xaml
     /// </summary>
-    public partial class HUDControler : Window
+    public partial class PruebaHUDControler : Window
     {
-        public HUDControler()
+        public PruebaHUDControler()
         {
             InitializeComponent();
             Hilo();
@@ -35,8 +35,8 @@ namespace KrakenEasy.HUDS
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                            this.Topmost = false;
-                            this.Topmost = true;
+                        this.Topmost = false;
+                        this.Topmost = true;
                         if (!Propiedades.SystemActive)
                         {
                             this.Close();
@@ -87,6 +87,13 @@ namespace KrakenEasy.HUDS
             {
                 Propiedades.Relative = 0;
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Propiedades.SystemActive = false;
+            this.Close();
+
         }
     }
 }

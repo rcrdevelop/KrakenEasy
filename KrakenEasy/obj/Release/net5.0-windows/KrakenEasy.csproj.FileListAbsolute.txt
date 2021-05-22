@@ -259,3 +259,7 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windo
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windows\Notification.Wpf.dll
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windows\Notify.dll
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windows\NotifyIconWpf.dll
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUD.g.cs
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUDControler.g.cs
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUD.baml
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUDControler.baml

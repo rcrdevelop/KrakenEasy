@@ -121,5 +121,13 @@ namespace KrakenEasy
         {
             KrakenBD.Settings.MongoCloud = !HandsLocal_Status.IsChecked.Value; 
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            HUDS.PruebaHUDControler Controler_HUD = new HUDS.PruebaHUDControler();
+            Controler_HUD.Show();
+            HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("Prueba", "Mesa_Prueba", false);
+            HUD.Show();
+        }
     }
 }

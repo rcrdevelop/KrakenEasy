@@ -37,5 +37,6 @@
         <Label Content="Casinos Habilitados" Margin="38,20,748,445" />
         <CheckBox  Name="HandsLocal_Status"  IsChecked="True"  Margin="474,20,381,428" RenderTransformOrigin="18.462,4.521" Checked="HandsLocal" />
         <Label Content="Guardar Hands en Local" Margin="492,12,243,428" />
+        <Button Click="Button_Click_2" Content="Prueba de HUDs" HorizontalAlignment="Left" Height="48" Margin="728,276,0,0" VerticalAlignment="Top" Width="124"/>
     </Grid>
 </Window>

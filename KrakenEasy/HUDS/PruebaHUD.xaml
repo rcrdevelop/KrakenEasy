@@ -1,0 +1,31 @@
+﻿<Window x:Class="KrakenEasy.HUDS.PruebaHUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KrakenEasy.HUDS"
+        mc:Ignorable="d"
+        MouseDown="Window_MouseDown"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        AllowsTransparency="True"
+        Loaded="Window_Loaded"
+        Background="Black"
+        Name="Window"
+        Title="MainWindow" Height="Auto" MaxHeight="250" Width="Auto" MaxWidth="250">
+    <Viewbox>
+        <Grid Width="Auto" Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Height="Auto" VerticalAlignment="Center">
+                <Label Name="Name_Jugador" Foreground="White" FontSize="25" Content="Jugador" Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Border>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Name="Contenedor" Width="Auto" Height="Auto"/>
+        </Grid>
+    </Viewbox>
+</Window>
