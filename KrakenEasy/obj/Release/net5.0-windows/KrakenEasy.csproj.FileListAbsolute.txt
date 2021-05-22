@@ -263,3 +263,5 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windo
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUDControler.g.cs
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUD.baml
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\PruebaHUDControler.baml
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\STATSPruebaHUD.g.cs
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\STATSPruebaHUD.baml

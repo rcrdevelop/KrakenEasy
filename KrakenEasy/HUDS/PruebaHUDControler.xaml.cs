@@ -68,6 +68,8 @@ namespace KrakenEasy.HUDS
         }
         public void Hilo()
         {
+            MongoAccess _Access = new MongoAccess();
+            _Access.InicializarMain();
             Thread _Hilo = new Thread(Focus_Window);
             _Hilo.Start();
         }

@@ -126,7 +126,10 @@ namespace KrakenEasy
         {
             HUDS.PruebaHUDControler Controler_HUD = new HUDS.PruebaHUDControler();
             Controler_HUD.Show();
-            HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("Prueba", "Mesa_Prueba", false);
+            STATSPruebaHUD Interfaz = new STATSPruebaHUD();
+            Interfaz.Show();
+
+            HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("PRUEBA", "Mesa_Prueba", false);
             HUD.Show();
         }
     }

@@ -155,6 +155,14 @@ namespace KrakenEasy.KrakenBD
                     try
                     {
                         _Session.Client.GetDatabase("Kraken").CreateCollection("Jugadores");
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").InsertOne(new BsonDocument("_id", "PRUEBA"));
+                        _Access.Set_STAT_VPIP((double)0, "PRUEBA");
+                        _Access.Set_STAT_CC((double)0, "PRUEBA");
+                        _Access.Set_STAT_BET3((double)0, "PRUEBA");
+                        _Access.Set_STAT_PFR((double)0, "PRUEBA");
+                        _Access.Set_STAT_RB((double)0, "PRUEBA");
+                        _Access.Set_STAT_Limp((double)0, "PRUEBA");
+                        _Access.Set_STAT_Hand((double)0, "PRUEBA");
                         _Session.Client.GetDatabase("Kraken").CreateCollection("Replayer");
                         _Session.Client.GetDatabase("Kraken").CreateCollection("Hands");
                     }
@@ -173,7 +181,20 @@ namespace KrakenEasy.KrakenBD
             }
 
         }
-
+        public bool Jugador_STAT(string Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
+            if (_Collection.Find(new BsonDocument("_id", Jugador)).CountDocuments() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public List<string> Get_Jugadores()
         {
             MongoAccess _Access = new MongoAccess();
@@ -687,6 +708,69 @@ namespace KrakenEasy.KrakenBD
             }
             
             
+        }
+        public void Set_STAT_Hand(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("Hands", STAT);
+            _Collection.UpdateOne(_Filter, update);
+        }
+        public void Set_STAT_VPIP(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("VPIP", STAT);
+            _Collection.UpdateOne(_Filter, update);
+        }
+        public void Set_STAT_CC(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("CC", STAT);
+            _Collection.UpdateOne(_Filter, update);
+        }
+        public void Set_STAT_Limp(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("Limp", STAT);
+            _Collection.UpdateOne(_Filter, update);
+        }
+        public void Set_STAT_PFR(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("PFR", STAT);
+            _Collection.UpdateOne(_Filter, update);
+        }
+        public void Set_STAT_BET3(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("BET3", STAT);
+            _Collection.UpdateOne(_Filter, update);
+        }
+        public void Set_STAT_RB(double STAT, string _Id_Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            var _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Id_Jugador);
+            var update = Builders<BsonDocument>.Update.Set("RB", STAT);
+            _Collection.UpdateOne(_Filter, update);
         }
         public double Get_VPIP(string Jugador)
         {

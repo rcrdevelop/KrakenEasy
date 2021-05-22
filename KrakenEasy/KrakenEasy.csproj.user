@@ -54,6 +54,9 @@
     <Compile Update="Settings.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="STATSPruebaHUD.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="HUDS\ContenedorHUD.xaml">
@@ -99,6 +102,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="STATSPruebaHUD.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
