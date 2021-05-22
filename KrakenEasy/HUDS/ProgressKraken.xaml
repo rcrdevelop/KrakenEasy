@@ -98,7 +98,7 @@
                         </Canvas>
                         <Rectangle Width="300" Height="300" RadiusX="500" RadiusY="500" Canvas.Left="254.332" Canvas.Top="69">
                             <Rectangle.Fill>
-                                <ImageBrush x:Name="myImage" ImageSource="/pulpo.png"/>
+                                <ImageBrush x:Name="Badge" ImageSource="/pulpo.png"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </Canvas>
