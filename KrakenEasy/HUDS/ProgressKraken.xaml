@@ -60,7 +60,7 @@
                         Stretch="None"
                         Stroke="blue"
                         StartAngle="90"
-                        EndAngle="260" Canvas.Left="212.332" Canvas.Top="25"/>
+                        EndAngle="270" Canvas.Left="212.332" Canvas.Top="25"/>
                             <a:Arc 
                         x:Name="Fondo_VPIP_Negativo"
                         Height="382"

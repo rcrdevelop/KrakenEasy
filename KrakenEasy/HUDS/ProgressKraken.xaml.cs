@@ -38,11 +38,11 @@ namespace KrakenEasy.HUDS
                     {
                         if (_STATS[i] == 0)
                         {
-                            this.VPIP_Positivo.StartAngle = 270;
+                            this.VPIP_Positivo.EndAngle = 270;
                         }
                         else
                         {
-                            this.VPIP_Positivo.StartAngle= 270 + _STATS[i] * 2 - 22;
+                            this.VPIP_Positivo.EndAngle= 270 + _STATS[i] * 2 - 20;
                         }
                         
                     }
@@ -55,7 +55,7 @@ namespace KrakenEasy.HUDS
                         }
                         else
                         {
-                            this.Fondo_VPIP_Negativo.EndAngle = _STATS[i] * 2 - 270 - 10;
+                            this.Fondo_VPIP_Negativo.EndAngle = 270 + 20 - _STATS[i] * 2;
 
                         }
                     }
