@@ -296,12 +296,12 @@ namespace KrakenEasy
                                             MostrarHUD = false;
                                         }
                                     }
-                                HUDS(Jugador, Nombre_File);
-                                //if (MostrarHUD)
-                                //{
-                                //    HUDS(Jugador, Nombre_File);
-                                //    HUDS_Abiertos.Add(Jugador);
-                                //}
+                                //HUDS(Jugador, Nombre_File);
+                                if (MostrarHUD)
+                                {
+                                    HUDS(Jugador, Nombre_File);
+                                    HUDS_Abiertos.Add(Jugador);
+                                }
 
                             }
                                 NotificationManager notificationManager = new NotificationManager();
