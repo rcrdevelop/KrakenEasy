@@ -463,13 +463,7 @@ namespace KrakenEasy.KrakenBD
             List<string> _Resultado = new List<string>();
             var filter = Builders<BsonDocument>.Filter.Eq("Mesa", _Id_Mesa.Trim());
             var notificationManager = new NotificationManager();
-            notificationManager = new NotificationManager();
-            notificationManager.Show(new NotificationContent
-            {
-                Title = "KrakenEasy",
-                Message = "Leyendo datos de '" + _Id_Mesa + "'",
-                Type = NotificationType.Information
-            });
+
             foreach (var hands in _Collection.GetCollection<BsonDocument>("Hands").Find(filter).ToList())
             {
 
@@ -478,12 +472,18 @@ namespace KrakenEasy.KrakenBD
                
                 if (hands.GetElement("Date").Value.AsInt64 + 5 >= HoraActual) 
                 {
-
+                    
 
                     foreach (var Players in hands.GetElement("Players").Value.AsBsonArray)
                         {
-
-                            _Resultado.Add(Players.AsString.Split(": ")[1].Split(" ")[0]);
+                        notificationManager = new NotificationManager();
+                        notificationManager.Show(new NotificationContent
+                        {
+                            Title = "KrakenEasy",
+                            Message = "Leyendo datos de '" + _Id_Mesa + "'",
+                            Type = NotificationType.Information
+                        });
+                        _Resultado.Add(Players.AsString.Split(": ")[1].Split(" ")[0]);
                         }
 
 
@@ -626,6 +626,7 @@ namespace KrakenEasy.KrakenBD
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
             var Hands = _Access.Get_Hand();
+
             foreach (var Jugador in _Access.Get_Jugadores())
             {
                 foreach (var Hand in _Access.Get_Hands_Jugador(Jugador).ToList())
@@ -672,31 +673,28 @@ namespace KrakenEasy.KrakenBD
                         }
                     }
                 }
-                var _Filter = Builders<BsonDocument>.Filter.Eq("_id", Jugador);
+                var _Filter = Builders<BsonDocument>.Filter.Eq("_id", Jugador.Trim());
                 double Numero_Hands = _Collection.Find(new BsonDocument("Players", new Regex(Jugador))).CountDocuments();
                 try
                 {
-                    if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").Find(new BsonDocument("_id", new Regex(Jugador))).CountDocuments() == 0)
+                    if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").Find(_Filter).CountDocuments() == 0)
                     {
 
                         BsonDocument _Data = new BsonDocument();
                         _Data.Add(new BsonElement("_id", Jugador.Trim()));
                         _Data.Add(new BsonElement("Hands", Numero_Hands));
-                        _Data.Add(new BsonElement("VPIP", VPIP(_VPIP, _OVPIP)));
-                        _Data.Add(new BsonElement("CC", CC(_CC, _OCC)));
+                        _Data.Add(new BsonElement("VPIP", Registros_Data.VPIP(_VPIP, _OVPIP)));
+                        _Data.Add(new BsonElement("CC", Registros_Data.CC(_CC, _OCC)));
                         _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").InsertOne(_Data);
                     }
                     else
                     {
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").DeleteOne(_Filter);
-                        BsonDocument _Data = new BsonDocument();
-                        _Data.Add(new BsonElement("_id", Jugador.Trim()));
-                        _Data.Add(new BsonElement("Hands", Numero_Hands));
-                        _Data.Add(new BsonElement("VPIP", VPIP(_VPIP, _OVPIP)));
-                        _Data.Add(new BsonElement("CC", CC(_CC, _OCC)));
-                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").InsertOne(_Data);
-
-
+                        var update = Builders<BsonDocument>.Update.Set("Hands", Numero_Hands);
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").UpdateOne(_Filter, update);
+                        update = Builders<BsonDocument>.Update.Set("VPIP", Registros_Data.VPIP(_VPIP, _OVPIP));
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").UpdateOne(_Filter, update);
+                        update = Builders<BsonDocument>.Update.Set("CC", Registros_Data.CC(_CC, _OCC));
+                        _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").UpdateOne(_Filter, update);
                     }
                 }
                 catch { 
@@ -707,7 +705,46 @@ namespace KrakenEasy.KrakenBD
                 _OCC = 0;
             }
             
+            void Action_Raises(string linea)
+            { 
             
+            }
+            void Action_Fold(string linea) 
+            { 
+            
+            }
+            void Action_BET(string linea)
+            {
+
+            }
+            void Action_Check(string linea)
+            {
+
+            }
+            void Action_Call(string linea)
+            { 
+            
+            }
+            void Oportunidad_Raises(string linea)
+            {
+
+            }
+            void Oportunidad_Fold(string linea)
+            {
+
+            }
+            void Oportunidad_BET(string linea)
+            {
+
+            }
+            void Oportunidad_Check(string linea)
+            { 
+            
+            }
+            void Oportunidad_Call(string linea)
+            { 
+            
+            }
         }
         public void Set_STAT_Hand(double STAT, string _Id_Jugador)
         {
@@ -812,66 +849,7 @@ namespace KrakenEasy.KrakenBD
 
             return _Resultado;
         }
-        public static double VPIP(double VPIP, double OVPIP)
-        {
-            return VPIP / OVPIP * 100;
-        }
-        public static double CC(double CC, double OCC)
-        {
-            return CC / OCC * 100;
-        }
-        public static double BET3(double _3BET, double _O3BET)
-        {
-            return _3BET / _O3BET * 100;
-        }
-        public static double BET4(double _4BET, double _O4BET)
-        {
-            return _4BET / _O4BET * 100;
-        }
-        public static double BET5(double _5BET, double _O5BET)
-        {
-            return _5BET / _O5BET * 100;
-        }
-        public static double WSD(double _RaisesWinWSD, double _RaisesWSD)
-        {
-            return _RaisesWinWSD / _RaisesWSD * 100;
-        }
-        public static double WTSD(double Showdown, double Checks_Flop)
-        {
-            return Showdown / Checks_Flop * 100;
-        }
-        public static double Limp(double _ChecksBlinds, double _OChecksBlinds)
-        {
-            return _ChecksBlinds / _OChecksBlinds * 100;
-        }
-        public static double LimpR(double _RaisesBlinds, double _ORaisesBlinds)
-        {
-            return _RaisesBlinds / _ORaisesBlinds * 100;
-        }
-        public static double FCB(double _FCB, double _OFCB)
-        {
-            return _FCB / _OFCB * 100;
-        }
-        public static double TCB(double _TCB, double _OTCB)
-        {
-            return _TCB / _OTCB * 100;
-        }
-        public static double FoldFCB(double _FoldFCB, double _OFoldFCB)
-        {
-            return _FoldFCB / _OFoldFCB * 100;
-        }
-        public static double FoldTCB(double _FoldTCB, double _OFoldTCB)
-        {
-            return _FoldTCB / _OFoldTCB * 100;
-        }
-        public static double RB(double _RB, double _ORB)
-        {
-            return _RB / _ORB * 100;
-        }
-        public static double FDB(double _FDB, double _OFDB)
-        {
-            return _FDB / _OFDB * 100;
-        }
+        
 
         public void Set_Hand_Winamax(List<string> _BTN,
                                      List<string> _SB,

@@ -29,7 +29,8 @@ namespace KrakenEasy.HUDS
         public ContenedorHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
         { 
             InitializeComponent();
-            _Id_Jugador = Id_Jugador;
+            _Id_Jugador = "";
+            _Id_Jugador = Id_Jugador.Trim(); ;
             _Id_Ventana = Id_Ventana;
             _Replayer = Replayer;
         }
@@ -127,16 +128,17 @@ namespace KrakenEasy.HUDS
         {
                     Thread _HiloHUD = new Thread(
                         ()=> {
+                            var Jugador = _Id_Jugador;
                             var STAT = new List<double>();
                             while (true)
                             {
                                 MongoAccess _Access = new MongoAccess();
                                 
-                                _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
-                                _STATS.Add(_Access.Get_CC(_Id_Jugador));
-                                _STATS.Add(_Access.Get_VPIP(_Id_Jugador));
-                                _STATS.Add(_Access.Get_CC(_Id_Jugador));
-                                var NHands = _Access.Get_Hands(_Id_Jugador);
+                                _STATS.Add(_Access.Get_VPIP(Jugador));
+                                _STATS.Add(_Access.Get_CC(Jugador));
+                                _STATS.Add(_Access.Get_VPIP(Jugador));
+                                _STATS.Add(_Access.Get_CC(Jugador));
+                                var NHands = _Access.Get_Hands(Jugador);
                                 if (!STAT.Equals(_STATS))
                                 {
                                     if ((Propiedades.Relative == 1))
@@ -172,6 +174,39 @@ namespace KrakenEasy.HUDS
                     
                         }));
 
+        }
+        private void HUD_STATS()
+        {
+            MongoAccess _Access = new MongoAccess();
+            var Jugador = _Id_Jugador;
+            var STAT = new List<double>();
+
+            _STATS.Add(_Access.Get_VPIP(Jugador));
+            _STATS.Add(_Access.Get_CC(Jugador));
+            _STATS.Add(_Access.Get_VPIP(Jugador));
+            _STATS.Add(_Access.Get_CC(Jugador));
+            var NHands = _Access.Get_Hands(Jugador);
+            if (!STAT.Equals(_STATS))
+            {
+                if ((Propiedades.Relative == 1))
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ProgressKraken _Kraken = new ProgressKraken(_STATS);
+                        this.Contenedor.Children.Clear();
+                        this.Contenedor.Children.Add(_Kraken);
+                    });
+                }
+                if ((Propiedades.Relative == 0))
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Progress _Progress = new Progress("", _STATS, NHands);
+                        this.Contenedor.Children.Clear();
+                        this.Contenedor.Children.Add(_Progress);
+                    });
+                }
+            }
         }
         private void HUD_Status()
         {

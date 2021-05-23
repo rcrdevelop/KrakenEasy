@@ -13,6 +13,9 @@ using Notify;
 using Notification.Wpf;
 using System.IO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
 
 namespace KrakenEasy
 {
@@ -31,6 +34,37 @@ namespace KrakenEasy
             InitializeComponent();
             Registros_Data.InicializarRecursos();
             KrakenBD.Settings.Inicializar();
+            //string path = System.Environment.CurrentDirectory + "/prueba_-serializacion.json";
+            //BsonArray array = new BsonArray();
+            //array.Add("1");
+            //array.Add("2");
+            //array.Add("5");
+            //array.Add("7");
+            //array.Add("8");
+            //var stat = new Registros_Data.STATS
+            //{
+            //    _id = "Prueba",
+            //    STAT_Name = new MongoDB.Bson.BsonDocument(new BsonElement("_id", "prueba")),
+            //    Estructura = array,
+            //    Formula = new BsonDocument(new BsonElement("stat_formula", "prueba")),
+            //};
+            //Newtonsoft.Json.JsonConvert.SerializeObject(stat, Formatting.None);
+            //string json = JsonConvert.SerializeObject(stat);
+            //System.IO.File.WriteAllText(path, json);
+            //using (StreamReader jsonStream = File.OpenText(path))
+            //{
+            //    var json2 = jsonStream.ReadToEnd();
+            //    Registros_Data.STATS BsonVariable = JsonConvert.DeserializeObject<Registros_Data.STATS>(json2);
+            //    Application.Current.Dispatcher.Invoke(() =>
+            //    {
+            //        Window window = new Window();
+            //        window.Content = BsonVariable.Formula.AsString;
+            //        window.Show();
+            //    });
+
+            //}
+            //BsonDocument ms = new BsonDocument();
+            //BsonWriter writer = new BsonDocumentWriter(ms);
         }
         private void HUD_Click(object sender, RoutedEventArgs e)
         {
@@ -262,13 +296,14 @@ namespace KrakenEasy
                                             MostrarHUD = false;
                                         }
                                     }
-                                    if (MostrarHUD)
-                                    {
-                                        HUDS(Jugador, Nombre_File);
-                                        HUDS_Abiertos.Add(Jugador);
-                                    }
-                                    
-                                }
+                                HUDS(Jugador, Nombre_File);
+                                //if (MostrarHUD)
+                                //{
+                                //    HUDS(Jugador, Nombre_File);
+                                //    HUDS_Abiertos.Add(Jugador);
+                                //}
+
+                            }
                                 NotificationManager notificationManager = new NotificationManager();
                                 notificationManager.Show(new NotificationContent
                                 {

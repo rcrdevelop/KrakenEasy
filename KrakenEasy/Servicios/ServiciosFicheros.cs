@@ -115,7 +115,7 @@ namespace KrakenEasy.Servicios
                             string[] ReadFolder = Directory.GetFiles(Folder + "/history");
                             foreach (string file in ReadFolder)
                             {
-                                if (!file.Contains(".dat")) 
+                                if (file.Contains(".txt")) 
                                 {
                                     string fileToMove = file;
                                     string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
@@ -142,9 +142,12 @@ namespace KrakenEasy.Servicios
                             string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
                             foreach (string file in ReadFolder)
                             {
-                                string fileToMove = file;
-                                string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
-                                File.Copy(fileToMove, moveTo, true);
+                                if (file.Contains(".txt"))
+                                {
+                                    string fileToMove = file;
+                                    string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
+                                    File.Copy(fileToMove, moveTo, true);
+                                }
                             }
                         }
                     }
@@ -166,10 +169,12 @@ namespace KrakenEasy.Servicios
                             string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
                             foreach (string file in ReadFolder)
                             {
-                                string fileToMove = file;
-                                string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
-                                File.Copy(fileToMove, moveTo, true);
-                                //Registros_Data._Last_Hand(System.IO.Path.GetFileName(file).Split("_")[1]);
+                                if (file.Contains(".txt"))
+                                {
+                                    string fileToMove = file;
+                                    string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
+                                    File.Copy(fileToMove, moveTo, true);
+                                }
                             }
                         }
                     }

@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MongoDB.Bson;
 using KrakenEasy.Casinos;
 using System.IO;
 using System.Windows;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.IO;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization.Attributes;
+
 using Newtonsoft.Json;
 
 namespace KrakenEasy.KrakenBD
@@ -14,66 +19,7 @@ namespace KrakenEasy.KrakenBD
 
 
         public static bool Hole_Cards { get; set; }
-        //public static void Ventanas(string[] _Mesa)
-        //{
-        //        if (Mesas.Abiertas.Count != 0)
-        //        {
-        //        Window _Window = new Window();
-        //        _Window.Width = 10;
-        //        _Window.Height = 10;
-        //        _Window.Show();
-        //        for (var i = 0; i >= Mesas.Abiertas.Count; i++)
-        //            {
-        //                if (Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString == _Mesa[0])
-        //                {
-                        
-        //                    BsonDocument _Data = new BsonDocument();
-        //                    _Data.Add(new BsonElement("_id", _Mesa[0]));
-        //                    _Data.Add(new BsonElement("Dimensiones", _Mesa[1]));
-        //                    _Data.Add(new BsonElement("Activa", _Mesa[2]));
-        //                    _Data.Add(new BsonElement("Mostrar", _Mesa[3]));
-        //                    _Data.Add(new BsonElement("Casino", _Mesa[4]));
-        //                    _Data.Add(new BsonElement("_Last_Hand", MongoAccess.Get_Last_Hand(_Mesa[0])));
-        //                    Mesas.Abiertas[i] = _Data;
-                            
-                            
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            BsonDocument _Datos = new BsonDocument();
 
-        //            for (int i = 0; i < _Mesa.Length; i++)
-        //            {
-        //                string Element = _Mesa[i];
-        //                if (i == 0)
-        //                {
-        //                    _Datos.Add(new BsonElement("_id", Element));
-        //                }
-        //                if (i == 1)
-        //                {
-        //                    _Datos.Add(new BsonElement("Dimensiones", Element));
-        //                }
-        //                if (i == 2)
-        //                {
-        //                    _Datos.Add(new BsonElement("Activa", true));
-        //                }
-        //                if (i == 3)
-        //                {
-        //                    _Datos.Add(new BsonElement("Mostrar", false));
-        //                }
-        //                if (i == 4)
-        //                {
-        //                    _Datos.Add(new BsonElement("Casino", Element));
-        //                }
-        //            }
-        //            Mesas.Abiertas.Add(_Datos);
-
-        //        //_Collection.GetCollection<BsonDocument>("Ventanas").InsertOne(_Datos);
-        //        //Set_Last_Hand(_Mesa[0]);
-        //    }
-        //    }
 
         public static void InicializarRecursos()
         {
@@ -88,7 +34,7 @@ namespace KrakenEasy.KrakenBD
                 using (StreamReader jsonStream = File.OpenText(path))
                 {
                     var json = jsonStream.ReadToEnd();
-                    Casinos.Casinos Casino = JsonConvert.DeserializeObject<Casinos.Casinos>(json);
+                    Casinos.Casinos Casino = Newtonsoft.Json.JsonConvert.DeserializeObject<Casinos.Casinos>(json);
                     Winamax._Ruta = Casino.Winamax_Ruta;
                     Poker888._Ruta = Casino.Poker888_Ruta;
                     PokerStars._Ruta = Casino.PokerStars_Ruta;
@@ -109,7 +55,7 @@ namespace KrakenEasy.KrakenBD
                     Poker888_Ruta = Poker888._Ruta,
                     PokerStars_Ruta = PokerStars._Ruta,
                 };
-                string json = JsonConvert.SerializeObject(Casino);
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(Casino);
                 System.IO.File.WriteAllText(path, json);
                 Winamax.Habilitado = false;
                 Poker888.Habilitado = false;
@@ -124,95 +70,109 @@ namespace KrakenEasy.KrakenBD
  
   
         }
-        public static string _Last_Hand(string _Id_Mesa)
+        
+        public static double VPIP(double VPIP, double OVPIP)
         {
-            DateTime dt = DateTime.Now;
-            long _Hora_Actual = dt.Year * 1000000000000 + dt.Month * 1000000 + dt.Day * 10000 + dt.Hour * 100 + dt.Minute;
-            var Folder = @"C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
-            string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
-            var Resultado ="";
-            foreach (string file in ReadFolder)
-            {
-                if (System.IO.Path.GetFileName(file).Contains(_Id_Mesa))
-                {
-                    DateTime dtF = File.GetLastWriteTime(file);
-                    long _Hora_Fichero = dt.Year * 1000000000000 + dt.Month * 1000000 + dt.Day * 10000 + dt.Hour * 100 + dt.Minute;
-                    if (_Hora_Fichero >= _Hora_Actual - 1)
-                    {
-                        if (System.IO.Path.GetFileName(file).Contains("888Poker".ToUpper()))
-                        {
-                            if (System.IO.Path.GetFileName(file).Split(" ")[1] == _Id_Mesa.ToUpper())
-                            {
-                                using (StreamReader lector = new StreamReader(file))
-                                {
-                                    List<string> _Fichero = new List<string>();
-                                    bool _Inicializar = false;
-                                    bool _Condicion_Primera_Linea = true;
-                                    while (lector.Peek() > -1)
-                                    {
-                                        string linea = lector.ReadLine().ToUpper();
-                                        if (!String.IsNullOrEmpty(linea))
-                                        {
-                                            if (Poker888.Id().Contains(linea))
-                                            {
-                                                return linea.Split(" ")[0];
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (System.IO.Path.GetFileName(file).Contains("WINAMAX".ToUpper()))
-                        {
-                            if (System.IO.Path.GetFileName(file).Split("'")[1] == _Id_Mesa.ToUpper())
-                            {
-                                using (StreamReader lector = new StreamReader(file))
-                                {
-                                    List<string> _Fichero = new List<string>();
-                                    bool _Inicializar = false;
-                                    bool _Condicion_Primera_Linea = true;
-                                    while (lector.Peek() > -1)
-                                    {
-                                        string linea = lector.ReadLine().ToUpper();
-                                        if (!String.IsNullOrEmpty(linea))
-                                        {
-                                            if (Winamax.Id().Contains(linea))
-                                            {
-                                                return linea.Split(" ")[0];
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (System.IO.Path.GetFileName(file).Split("'")[1] == _Id_Mesa.ToUpper())
-                            {
-                                using (StreamReader lector = new StreamReader(file))
-                                {
-                                    List<string> _Fichero = new List<string>();
-                                    bool _Inicializar = false;
-                                    bool _Condicion_Primera_Linea = true;
-                                    while (lector.Peek() > -1)
-                                    {
-                                        string linea = lector.ReadLine().ToUpper();
-                                        if (!String.IsNullOrEmpty(linea))
-                                        {
-                                            if (PokerStars.Id().Contains(linea))
-                                            {
-                                                return linea.Split(" ")[0];
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return Resultado;
+            return VPIP / OVPIP * 100;
         }
+        public static double CC(double CC, double OCC)
+        {
+            return CC / OCC * 100;
+        }
+        public static double BET3(double _3BET, double _O3BET)
+        {
+            return _3BET / _O3BET * 100;
+        }
+        public static double BET4(double _4BET, double _O4BET)
+        {
+            return _4BET / _O4BET * 100;
+        }
+        public static double BET5(double _5BET, double _O5BET)
+        {
+            return _5BET / _O5BET * 100;
+        }
+        public static double WSD(double _RaisesWinWSD, double _RaisesWSD)
+        {
+            return _RaisesWinWSD / _RaisesWSD * 100;
+        }
+        public static double WTSD(double Showdown, double Checks_Flop)
+        {
+            return Showdown / Checks_Flop * 100;
+        }
+        public static double Limp(double _ChecksBlinds, double _OChecksBlinds)
+        {
+            return _ChecksBlinds / _OChecksBlinds * 100;
+        }
+        public static double LimpR(double _RaisesBlinds, double _ORaisesBlinds)
+        {
+            return _RaisesBlinds / _ORaisesBlinds * 100;
+        }
+        public static double FCB(double _FCB, double _OFCB)
+        {
+            return _FCB / _OFCB * 100;
+        }
+        public static double TCB(double _TCB, double _OTCB)
+        {
+            return _TCB / _OTCB * 100;
+        }
+        public static double FoldFCB(double _FoldFCB, double _OFoldFCB)
+        {
+            return _FoldFCB / _OFoldFCB * 100;
+        }
+        public static double FoldTCB(double _FoldTCB, double _OFoldTCB)
+        {
+            return _FoldTCB / _OFoldTCB * 100;
+        }
+        public static double RB(double _RB, double _ORB)
+        {
+            return _RB / _ORB * 100;
+        }
+        public static double FDB(double _FDB, double _OFDB)
+        {
+            return _FDB / _OFDB * 100;
+        }
+        public static void STAT(BsonDocument Datos)
+        {
+
+            //string json = MongoDB.Bson.IO.JsonConvert. SerializeObject(Casino);
+            //System.IO.File.WriteAllText(path, json);
+
+
+        }
+        [BsonIgnoreExtraElements]
+        public class RestaurantGradeDb
+        {
+            [BsonElement(elementName: "date")]
+            public DateTime InsertedUtc { get; set; }
+            [BsonElement(elementName: "grade")]
+            public string Grade { get; set; }
+            [BsonElement(elementName: "score")]
+            public object Score { get; set; }
+        }
+        [BsonIgnoreExtraElements]
+        public class STATS
+        {
+            [BsonElement(elementName: "_id")]
+            public string _id { get; set; }
+            [BsonElement(elementName: "Estructura")]
+            public BsonArray Estructura { get; set; }
+            [BsonElement(elementName: "STAT_Name")]
+            public BsonDocument STAT_Name { get; set; }
+            [BsonElement(elementName: "Formula")]
+            public BsonDocument Formula { get; set; }
+            //BsonDocument STAT_Name = new(
+            //  new BsonElement("Oportunidad_Action", new BsonArray()),
+            //  new BsonElement("Action", new BsonArray()),
+            //  new BsonElement("Formula_STAT", new BsonDocument(
+            //      new BsonElement("Variables", new BsonArray()),
+            //      new BsonElement("Formula", new BsonDocument(
+            //        new BsonElement("Orden", new BsonArray()),
+            //        new BsonElement("Operadores", new BsonArray())
+            //      ))
+            //  ))
+            //);
+        }
+
     }
 
 }
