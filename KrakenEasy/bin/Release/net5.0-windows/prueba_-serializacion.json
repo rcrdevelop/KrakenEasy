@@ -1,1 +1,1 @@
-{"_id":"Prueba","Estructura":["1","2","5","7","8"],"STAT_Name":[{"Name":"_id","Value":"prueba"}],"Formula":[{"Name":"stat_formula","Value":"prueba"}]}
+{"_id":"Prueba","Estructura":["1","2","5","7","8"],"STATS_List":[{"_id":"VPIP","Oportunida_Action":0.0,"Action":5.0,"Formula_STAT":75.0}]}

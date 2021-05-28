@@ -98,6 +98,27 @@ namespace KrakenEasy.Servicios
                     string pathString = System.IO.Path.Combine(folderName, "KrakenHands");
                     Directory.CreateDirectory(pathString);
                 }
+                if (!Directory.Exists(Environment.CurrentDirectory+"/Mesas/Winamax"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/Mesas/Winamax");
+                }
+                if (!Directory.Exists(Environment.CurrentDirectory + "/Mesas/888Poker"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/Mesas/PokerStars");
+                }
+                if (!Directory.Exists(Environment.CurrentDirectory + "/HUDS_Kraken/Winamax"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/HUDS_Kraken/Winamax");
+                }
+                if (!Directory.Exists(Environment.CurrentDirectory + "/HUDs_Kraken/888Poker"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/HUDS_Kraken/888Poker");
+                }
+                if (!Directory.Exists(Environment.CurrentDirectory + "/HUDS_Kraken/PokerStars"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/HUDS_Kraken/PokerStars");
+                }
+
                 string rootFolderPathWinamax = Winamax._Ruta;
                 string rootFolderPath888Poker = Poker888._Ruta;
                 string rootFolderPathPokerStars = PokerStars._Ruta;

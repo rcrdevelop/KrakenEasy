@@ -20,61 +20,72 @@ namespace KrakenEasy.HUDS
     /// </summary>
     public partial class Progress : UserControl
     {
-        static List<double> _STATS { get; set; }
-        public Progress(string Jugador, List<double> STATS, double Hands)
+        public Progress(HUDS_Kraken STATS)
         {
-            _STATS = STATS;
             InitializeComponent();
-            Data(Hands);
+            Data(STATS);
         }
-        public void Data(double Hands)
+        public void Data(HUDS_Kraken STATS)
         {
-            this.Hands.Content = Hands;
-            for(var i = 0; i < _STATS.Count; i++)
-            {
-                if (i == 0)
-                {
-                    var VPIP = new Controls.ProgressControl("VPIP", _STATS[i]);
+
+                    var VPIP = new Controls.ProgressControl("VPIP", STATS.VPIP);
                     Grid.SetColumn(VPIP, 0);
-                    Grid.SetRow(VPIP, 1);
+                    Grid.SetRow(VPIP, 0);
                     this.Contenedor.Children.Add(VPIP);
-                }
-                if (i == 1)
-                {
-                    var CC = new Controls.ProgressControl("CC", _STATS[i]);
+
+                    var CC = new Controls.ProgressControl("CC", STATS.CC);
                     Grid.SetColumn(CC, 0);
-                    Grid.SetRow(CC, 2);
+                    Grid.SetRow(CC, 1);
                     this.Contenedor.Children.Add(CC);
-                }
-                if (i == 2)
-                {
-                    var BET3 = new Controls.ProgressControl("3B", _STATS[i]);
+
+                    var BET3 = new Controls.ProgressControl("3B", STATS.BET3);
                     Grid.SetColumn(BET3, 0);
-                    Grid.SetRow(BET3, 3);
+                    Grid.SetRow(BET3, 2);
                     this.Contenedor.Children.Add(BET3);
-                }
-                if (i == 3)
-                {
-                    var PFR = new Controls.ProgressControl("PFR", _STATS[i]);
-                    Grid.SetColumn(PFR, 1);
-                    Grid.SetRow(PFR, 0);
-                    this.Contenedor.Children.Add(PFR);
-                }
-                if (i == 4)
-                {
-                    var RBET = new Controls.ProgressControl("RB", _STATS[i]);
-                    Grid.SetColumn(RBET, 1);
-                    Grid.SetRow(RBET, 1);
-                    this.Contenedor.Children.Add(RBET);
-                }
-                if (i == 5)
-                {
-                    var Limp = new Controls.ProgressControl("Limp", _STATS[i]);
+
+                    var FCB = new Controls.ProgressControl("FCB", STATS.FCB);
+                    Grid.SetColumn(FCB, 0);
+                    Grid.SetRow(FCB, 3);
+                    this.Contenedor.Children.Add(FCB);
+
+                    var TCB = new Controls.ProgressControl("TCB", STATS.TCB);
+                    Grid.SetColumn(TCB, 0);
+                    Grid.SetRow(TCB, 4);
+                    this.Contenedor.Children.Add(TCB);
+
+                    var FFCB = new Controls.ProgressControl("FFCB", STATS.FFCB);
+                    Grid.SetColumn(FFCB, 1);
+                    Grid.SetRow(FFCB, 0);
+                    this.Contenedor.Children.Add(FFCB);
+
+                    var FTCB = new Controls.ProgressControl("FTCB", STATS.FTCB);
+                    Grid.SetColumn(FTCB, 1);
+                    Grid.SetRow(FTCB, 1);
+                    this.Contenedor.Children.Add(FTCB);
+
+                    var Limp = new Controls.ProgressControl("Limp", STATS.Limp);
                     Grid.SetColumn(Limp, 1);
                     Grid.SetRow(Limp, 2);
                     this.Contenedor.Children.Add(Limp);
-                }
-            }
+
+                    var RB = new Controls.ProgressControl("RB", STATS.RB);
+                    Grid.SetColumn(RB, 1);
+                    Grid.SetRow(RB, 3);
+                    this.Contenedor.Children.Add(RB);
+
+                    var PFR = new Controls.ProgressControl("PFR", STATS.PFR);
+                    Grid.SetColumn(PFR, 1);
+                    Grid.SetRow(PFR, 4);
+                    this.Contenedor.Children.Add(PFR);
+
+                    this.WSD.Content = STATS.WSD + "%";
+
+                    this.WTSD.Content = STATS.WTSD + "%";
+
+                    this.Hands.Content = STATS.Hands;
+                
+
+            
         }
     }
 }

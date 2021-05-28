@@ -46,6 +46,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="HUDS\Artboard.png" />
+    <None Remove="HUDS\dark-red-vintage-pattern-wallpaper-60034.jpg" />
     <None Remove="icon-4399697_640.png" />
     <None Remove="pulpo.png" />
     <None Remove="Replayer\Baraja Dorso1.png" />
@@ -86,6 +88,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="HUDS\Artboard.png" />
+    <Resource Include="HUDS\dark-red-vintage-pattern-wallpaper-60034.jpg" />
     <Resource Include="icon-4399697_640.png" />
     <Resource Include="pulpo.png" />
     <Resource Include="Replayer\Cartas\Baraja Dorso1.png">

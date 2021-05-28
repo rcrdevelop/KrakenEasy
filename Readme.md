@@ -75,4 +75,19 @@ Aqui se almacenan temporalmente los ficheros de las mesas que estan activas, una
 - Procesador Intel Core i5 8265U. 
 - Tarjeta Nvidia GeForce MX 230. 
 - Disco de 512 gb SSD.
-- Windows 10 Home.
+- Windows 10 Home. 
+
+## Funciones del KrakenEasy.
+
+### Kraken
+- Lectura de ficheros de los siguientes casinos(en extension Española, cualquier otra extension no ha sido verificada):
+   - Winamax.
+   - 888Poker.
+   - PokerStars
+- Notifica cuando una mesa ha sido registrada en el sistema.
+- Muestra de HUDs con STATS de cada jugador pasada una mano de juego entre ellos(No es una lectura en tiempo real, se utilizan los ficheros del casino mas no se lee el comportamiento de los jugadores mientras la partida no se haya acabado).
+- Los HUDs siguen la mesa a las que ellos pertenecen, cuando arrastras un HUD esta función se deshabilita hasta que dejes de arrastrarlo, entonces los HUDs vuelven a seguir la mesa.
+- Los HUDs desaparecen si la mesa o el casino a los que pertenecen son cerrados.
+- Los HUDs pueden variar en transparencia y tamaño con un controlador único para todos ellos.
+- Existen 3 tipos de HUDS según el programa llevan el nombre de "Progress", "ProgressKraken" y "FULL HUD".
+- En las pruebas de diagnóstico del programa se encuentra un apartado para probar todas las funciones de los HUDs.

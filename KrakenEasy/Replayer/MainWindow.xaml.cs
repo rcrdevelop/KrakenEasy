@@ -34,6 +34,8 @@ namespace KrakenEasy.Replayer
             try
             {
                 InitializeComponent();
+                MongoAccess _Access = new MongoAccess();
+                _Access.STATS();
             }
             catch (Exception ex)
             {

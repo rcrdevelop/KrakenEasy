@@ -77,17 +77,13 @@ namespace KrakenEasy.HUDS
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Propiedades.Change = true;
-            if (Propiedades.Relative == 0)
-            {
-                Propiedades.Relative++;
-            }
-            if (Propiedades.Relative == 1)
-            {
-                Propiedades.Relative++;
-            }
             if (Propiedades.Relative == 2)
             {
                 Propiedades.Relative = 0;
+            }
+            else
+            {
+                Propiedades.Relative++;
             }
         }
 

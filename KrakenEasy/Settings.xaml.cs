@@ -129,6 +129,8 @@ namespace KrakenEasy
             STATSPruebaHUD Interfaz = new STATSPruebaHUD();
             Interfaz.Show();
 
+            HUDS.MesaPrueba Mesa = new HUDS.MesaPrueba();
+            Mesa.Show();
             HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("PRUEBA", "Mesa_Prueba", false);
             HUD.Show();
         }

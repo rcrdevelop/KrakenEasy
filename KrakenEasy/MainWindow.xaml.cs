@@ -28,47 +28,34 @@ namespace KrakenEasy
         static Servicios.Servicios _Servicios = new Servicios.Servicios();
         static List<string> Mesas_HUDS_Abiertos = new List<string>();
         static List<string> HUDS_Abiertos = new List<string>();
+        static string Casino_HUD = ""; 
 
         public MainWindow()
         {
             InitializeComponent();
             Registros_Data.InicializarRecursos();
             KrakenBD.Settings.Inicializar();
-            //string path = System.Environment.CurrentDirectory + "/prueba_-serializacion.json";
-            //BsonArray array = new BsonArray();
-            //array.Add("1");
-            //array.Add("2");
-            //array.Add("5");
-            //array.Add("7");
-            //array.Add("8");
-            //var stat = new Registros_Data.STATS
-            //{
-            //    _id = "Prueba",
-            //    STAT_Name = new MongoDB.Bson.BsonDocument(new BsonElement("_id", "prueba")),
-            //    Estructura = array,
-            //    Formula = new BsonDocument(new BsonElement("stat_formula", "prueba")),
-            //};
-            //Newtonsoft.Json.JsonConvert.SerializeObject(stat, Formatting.None);
-            //string json = JsonConvert.SerializeObject(stat);
-            //System.IO.File.WriteAllText(path, json);
-            //using (StreamReader jsonStream = File.OpenText(path))
-            //{
-            //    var json2 = jsonStream.ReadToEnd();
-            //    Registros_Data.STATS BsonVariable = JsonConvert.DeserializeObject<Registros_Data.STATS>(json2);
-            //    Application.Current.Dispatcher.Invoke(() =>
-            //    {
-            //        Window window = new Window();
-            //        window.Content = BsonVariable.Formula.AsString;
-            //        window.Show();
-            //    });
-
-            //}
-            //BsonDocument ms = new BsonDocument();
-            //BsonWriter writer = new BsonDocumentWriter(ms);
+           
         }
         private void HUD_Click(object sender, RoutedEventArgs e)
         {
             MongoAccess _Access = new MongoAccess();
+            //_Access.Set_VPIP("POKER0545");
+            //_Access.Set_CC("POKER0545");
+            //_Access.Set_BET3("POKER0545");
+            //_Access.Set_BET4("POKER0545");
+            //_Access.Set_BET5("POKER0545");
+            //_Access.Set_Limp("POKER0545");
+            //_Access.Set_RB("POKER0545");
+            //_Access.Set_PFR("POKER0545");
+            //_Access.Set_FCB("POKER0545");
+            //_Access.Set_FoldFCB("POKER0545");
+            //_Access.Set_TCB("POKER0545");
+            //_Access.Set_FoldTCB("POKER0545");
+            //_Access.Set_FoldBET3("POKER0545");
+            //_Access.Set_WSD("POKER0545");
+            //_Access.Set_WTSD("POKER0545");
+
             Thread _Hilo_Monitor = new Thread(Monitor_HUDS);
             Thread _Hilo_Servicio = new Thread(Iniciar_Servicio);
             Thread _Hilo_HUDS = new Thread(Iniciar_HUDS);
@@ -262,31 +249,28 @@ namespace KrakenEasy
                             }
                             if (!Condicion_HUD_Abierto) 
                             {
-                                string Casino = "";
                                 string Nombre_File = "";
                                 if (file.Contains("WINAMAX"))
                                 {
-                                    Casino = "Winamax";
                                     Nombre_File = Path.GetFileName(file).Split("_")[1].Split("_")[0];
-                                    _Access.STATS();
+                                    Casino_HUD = "Winamax";
                                 }
                                 else if (file.Contains("888POKER"))
                                 {
-                                    Casino = "888Poker";
                                     Nombre_File = Path.GetFileName(file).Split(" ")[1].Split(" ")[0];
-                                    _Access.STATS();
+                                    Casino_HUD = "888Poker";
                                 }
                                 else if (file.Contains("POKERSTARS"))
                                 {
-                                    Casino = "PokerStars";
                                     Nombre_File = Path.GetFileName(file).Split(" ")[1] + " " + Path.GetFileName(file).Split(" ")[2];
                                     if (Nombre_File.Contains("-"))
                                     {
                                         Nombre_File = Nombre_File.Replace("-", "");
                                     }
-                                    _Access.STATS();
+                                    Casino_HUD = "PokerStars";
                                 }
                                 bool MostrarHUD = true;
+                                bool ProcesoHUDListo = false;
                                 foreach (var Jugador in _Access.Get_Players_Kraken(Nombre_File.ToUpper()))
                                 {
                                     foreach (var HUD in HUDS_Abiertos)
@@ -296,105 +280,46 @@ namespace KrakenEasy
                                             MostrarHUD = false;
                                         }
                                     }
-                                //HUDS(Jugador, Nombre_File);
-                                if (MostrarHUD)
-                                {
-                                    HUDS(Jugador, Nombre_File);
-                                    HUDS_Abiertos.Add(Jugador);
-                                }
+                                    
+                                    if (MostrarHUD)
+                                    {
+                                        HUDS(Jugador, Nombre_File);
+                                        ProcesoHUDListo = true;
+                                        HUDS_Abiertos.Add(Jugador);
+                                    }
 
-                            }
-                                NotificationManager notificationManager = new NotificationManager();
-                                notificationManager.Show(new NotificationContent
+                                }
+                                if (ProcesoHUDListo)
                                 {
-                                    Title = "KrakenEasy",
-                                    Message = "Cargando HUDS para la mesa '" + Nombre_File + "'",
-                                    Type = NotificationType.Information
-                                });
+                                    NotificationManager notificationManager = new NotificationManager();
+                                    notificationManager.Show(new NotificationContent
+                                    {
+                                        Title = "KrakenEasy",
+                                        Message = "Cargando HUDS para la mesa '" + Nombre_File + "'",
+                                        Type = NotificationType.Information
+                                    });
+                                }
+  
+
                                 Mesas_HUDS_Abiertos.Add(Nombre_File);
                 
 
                         }
                     }
                 }
-                //bool Condicion_Mostrar = true;
-                //if (Mesas != null)
-                //{
-                //    MongoAccess _Access1 = new MongoAccess();
-                //    foreach (var item in Mesas)
-                //    {
-                //        Application.Current.Dispatcher.Invoke(() =>
-                //        {
-                //            var GetPlayers = _Access1.Get_Players(item.AsBsonDocument.GetElement("_id").Value.AsString.ToUpper());
-                //            foreach (var hud in HUD_List)
-                //            {
-                //                if (item.AsBsonDocument.GetElement("_id").Value.AsString == hud)
-                //                {
-                //                    Condicion_Mostrar = false;
-                //                }
-                //            }
-                //            if (Condicion_Mostrar)
-                //            {
-                //                foreach (string Player in GetPlayers)
-                //                {
-                //                    Thread _Hilo_Contenedor = new Thread(() => HUDS(Player.Split(" ")[2], item.AsBsonDocument.GetElement("_id").Value.AsString));
-                //                    _Hilo_Contenedor.Start();
-                //                }
-                //                Casinos.Mesas.HUDS_Abiertos.Add(item.AsBsonDocument.GetElement("_id").Value.AsString);
-                //            }
-
-                //        });
-                //    }
-                //for (int i = 0; i > Mesas; i++)
-                //{
-
-                //    if (Casinos.Mesas.Abiertas.Count > 0)
-                //    { 
-
-                //    MongoAccess _Access = new MongoAccess();
-
-                //        var GetPlayers = _Access.Get_Players(Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString);
-                //    List<string> Players = GetPlayers;
-
-                //    if (Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value.AsBoolean && !Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Ready").Value.AsBoolean)
-                //    {
-                //        foreach (string Player in Players)
-                //        {
-                //                Thread _Hilo_Contenedor = new Thread(() => HUDS(Player.Split(" ")[2], Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value.AsString));
-                //                _Hilo_Contenedor.Start();
-                //        }
-                //            BsonDocument _Data = new BsonDocument();
-                //            _Data.Add(new BsonElement("_id", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_id").Value));
-                //            _Data.Add(new BsonElement("Dimensiones", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Dimensiones").Value));
-                //            _Data.Add(new BsonElement("Activa", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Activa").Value));
-                //            _Data.Add(new BsonElement("Ready", true));
-                //            _Data.Add(new BsonElement("Casino", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("Casino").Value));
-                //            _Data.Add(new BsonElement("_Last_Hand", Casinos.Mesas.Abiertas[i].AsBsonDocument.GetElement("_Last_Hand").Value));
-
-
-                //            Casinos.Mesas.Abiertas[i] = _Data;
-                //    }
-
-                //        //for (int i = 0; i < Players.Count; i++)
-                //        //{
-                //        //    Thread _Hilo_Contenedor = new Thread(() => HUDS(Players[i], items[0]));
-                //        //    _Hilo_Contenedor.Start();
-                //        //}
-                //    }
-                //}
-                //}
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
+            }
+            void HUDS(string _Id_Jugador, string _Id_Ventana)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ContenedorHUD _HUD = new ContenedorHUD(_Id_Jugador, _Id_Ventana, false);
+                    _HUD.Show();
+                });
             }
         }
 
-        private static void HUDS(string _Id_Jugador, string _Id_Ventana)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                ContenedorHUD _HUD = new ContenedorHUD(_Id_Jugador, _Id_Ventana, false);
-                _HUD.Show();
-            });
-        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -14,5 +14,6 @@ namespace KrakenEasy.HUDS
         public static int Relative { get; set; }
         public static bool Change { get; set; }
         public static bool SystemActive { get; set; }
+        public static bool Actualizar { get; set; }
     }
 }

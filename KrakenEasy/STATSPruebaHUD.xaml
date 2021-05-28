@@ -5,22 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KrakenEasy"
         mc:Ignorable="d"
-        Title="STATSPruebaHUD" Height="409" Width="401">
-    <Grid Margin="0,0,0,1">
+        Title="STATSPruebaHUD" Height="786" Width="401">
+    <Grid Margin="0,0,0,47">
         <Label Content="STATS de Prueba" HorizontalAlignment="Left" Height="33" Margin="139,23,0,0" VerticalAlignment="Top" Width="105"/>
         <TextBox Name="VPIP" HorizontalAlignment="Left" Height="28" Margin="39,115,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
         <TextBox Name="BET3" HorizontalAlignment="Left" Height="28" Margin="39,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
-        <TextBox Name="Limp" HorizontalAlignment="Left" Height="28" Margin="270,188,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" TextChanged="TextBox_TextChanged"/>
+        <TextBox Name="PFR" HorizontalAlignment="Left" Height="28" Margin="270,188,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" TextChanged="TextBox_TextChanged"/>
         <TextBox Name="CC" HorizontalAlignment="Left" Height="28" Margin="270,115,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
-        <TextBox Name="PFR"  HorizontalAlignment="Left" Height="28" Margin="39,263,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <TextBox Name="BET4"  HorizontalAlignment="Left" Height="28" Margin="39,263,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
         <TextBox Name="RB" HorizontalAlignment="Left" Height="28" Margin="270,263,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
         <Label Content="VPIP" HorizontalAlignment="Left" Height="33" Margin="33,82,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="CC" HorizontalAlignment="Left" Height="33" Margin="264,82,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="PFR" HorizontalAlignment="Left" Height="33" Margin="264,155,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="3BET" HorizontalAlignment="Left" Height="33" Margin="33,155,0,0" VerticalAlignment="Top" Width="105"/>
-        <Label Content="Limp" HorizontalAlignment="Left" Height="33" Margin="33,230,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="4BET" HorizontalAlignment="Left" Height="33" Margin="33,230,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="RB" HorizontalAlignment="Left" Height="33" Margin="266,230,0,0" VerticalAlignment="Top" Width="93"/>
-        <Button Click="Button_Click" Content="Aplicar STATS" HorizontalAlignment="Left" Margin="144,346,0,10" Width="106"/>
+        <Button Click="Button_Click" Content="Aplicar STATS" HorizontalAlignment="Center" Margin="0,665,0,10" Width="106" RenderTransformOrigin="0.467,0.04"/>
+        <TextBox x:Name="BET5"  HorizontalAlignment="Left" Height="28" Margin="39,334,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="5BET" HorizontalAlignment="Left" Height="33" Margin="33,301,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="FBET3"  HorizontalAlignment="Left" Height="28" Margin="39,395,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="Fold3BET" HorizontalAlignment="Left" Height="33" Margin="33,362,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="WSD"  HorizontalAlignment="Left" Height="28" Margin="39,461,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="WSD" HorizontalAlignment="Left" Height="33" Margin="33,428,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="FCB" HorizontalAlignment="Left" Height="28" Margin="272,334,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="FCB" HorizontalAlignment="Left" Height="33" Margin="268,301,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="TCB" HorizontalAlignment="Left" Height="28" Margin="272,400,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="TCB" HorizontalAlignment="Left" Height="33" Margin="268,367,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="FTCB" HorizontalAlignment="Left" Height="28" Margin="273,461,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="FoldTCB" HorizontalAlignment="Left" Height="33" Margin="269,428,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="WTSD"  HorizontalAlignment="Left" Height="28" Margin="39,527,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="WTSD" HorizontalAlignment="Left" Height="33" Margin="33,494,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="FFCB" HorizontalAlignment="Left" Height="28" Margin="273,526,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="FoldFCB" HorizontalAlignment="Left" Height="33" Margin="269,493,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="Hands"  HorizontalAlignment="Left" Height="28" Margin="39,592,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="Hands" HorizontalAlignment="Left" Height="33" Margin="33,559,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="Limp" HorizontalAlignment="Left" Height="28" Margin="274,587,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"/>
+        <Label Content="Limp" HorizontalAlignment="Left" Height="33" Margin="270,554,0,0" VerticalAlignment="Top" Width="93"/>
 
     </Grid>
 </Window>

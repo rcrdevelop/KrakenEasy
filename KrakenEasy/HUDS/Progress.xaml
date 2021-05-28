@@ -20,6 +20,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="6" Grid.ColumnSpan="2" Height="Auto" Width="Auto" Margin="0,0,0,-63" Grid.RowSpan="2">
@@ -32,14 +33,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Border Margin="5,5,5,5" BorderBrush="White" BorderThickness="1" CornerRadius="5" Width="Auto" Grid.Row="8" Height="Auto" Background="Black" Grid.Column="0">
                         </Border>
@@ -48,11 +41,11 @@
                         <Border Margin="5,5,5,5" BorderBrush="White" BorderThickness="1" CornerRadius="5" Width="Auto" Grid.Row="8" Height="Auto" Background="Black" Grid.Column="2">
                         </Border>
                         <Label Name="Hands" Width="Auto" Height="Auto" Grid.Column="0" Grid.Row="8"  Content="365" Foreground="green" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Label Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="8"  Content="12%" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Label Width="Auto" Height="Auto" Grid.Column="2" Grid.Row="8"  Content="35%" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Label Width="Auto" Height="Auto" Grid.Column="0" Grid.Row="7"  Content="H." Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Label Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="7"  Content="WSD" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Label Width="Auto" Height="Auto" Grid.Column="2" Grid.Row="7"  Content="W$SD" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Name="WSD"  Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="8"  Content="12%" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Name="WTSD" Width="Auto" Height="Auto" Grid.Column="2" Grid.Row="8"  Content="35%" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Width="Auto" Height="Auto" Grid.Column="0" Grid.Row="0"  Content="H." Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="0"  Content="WSD" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Width="Auto" Height="Auto" Grid.Column="2" Grid.Row="0"  Content="W$SD" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
             </Grid>

@@ -19,90 +19,81 @@ namespace KrakenEasy.HUDS
     /// </summary>
     public partial class ProgressKraken : UserControl
     {
-        static List<double> _STATS { get; set; }
-        public ProgressKraken(List<double> STATS)
+        public ProgressKraken(HUDS_Kraken STATS)
         {
-            _STATS = STATS;
             InitializeComponent();
-            Data();
+            Data(STATS);
 
         }
-        public void Data()
+        void Data(HUDS_Kraken STATS)
         {
             var path = Environment.CurrentDirectory;
             MongoAccess _Access = new MongoAccess();
             Application.Current.Dispatcher.Invoke(() =>
             {
-                for (var i = 0; i < _STATS.Count; i++ )
-                {
-                    if (i == 0) // VPIP 
-                    {
-                        if (_STATS[i] == 0)
+                
+
+                        if (STATS.VPIP == 0)
                         {
                             this.VPIP_Positivo.EndAngle = 270;
                         }
-                        else
+                        else if (STATS.VPIP >= 10)
                         {
-                            this.VPIP_Positivo.EndAngle= 270 + _STATS[i] * 2 - 20;
+                            this.VPIP_Positivo.EndAngle= 270 + STATS.VPIP * 2 - 20;
                         }
-                        if (_STATS[i] >= 0 && _STATS[i] < 10)
+                        if (STATS.VPIP >= 0 && STATS.VPIP < 10)
                         {
+                            this.VPIP_Positivo.EndAngle = 270 + STATS.VPIP * 1.5;
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/SeaHorse.png"));
                         }
-                        if (_STATS[i] >= 10 && _STATS[i] < 20)
+                        if (STATS.VPIP >= 10 && STATS.VPIP < 20)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/Erizo.png"));
                         }
-                        if (_STATS[i] >= 20 && _STATS[i] < 30)
+                        if (STATS.VPIP >= 20 && STATS.VPIP < 30)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/Raspa.png"));
                         }
-                        if (_STATS[i] >= 30 && _STATS[i] < 40)
+                        if (STATS.VPIP >= 30 && STATS.VPIP < 40)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/Whale.png"));
                         }
-                        if (_STATS[i] >= 40 && _STATS[i] < 50)
+                        if (STATS.VPIP >= 40 && STATS.VPIP < 50)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/Erizo.png"));
                         }
-                        if (_STATS[i] >= 50 && _STATS[i] < 60)
+                        if (STATS.VPIP >= 50 && STATS.VPIP < 60)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/Worm.png"));
                         }
-                        if (_STATS[i] >= 60 && _STATS[i] < 75)
+                        if (STATS.VPIP >= 60 && STATS.VPIP < 75)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/Shark.png"));
                         }
-                        if (_STATS[i] >= 75)
+                        if (STATS.VPIP >= 75)
                         {
                             this.Badge.ImageSource = new BitmapImage(new Uri(path + "/HUDS/Badges/pulpo.png"));
                         }
 
 
-
-                    }
-                    if (i == 1) // CC
-                    {
-                        if (_STATS[i] == 0)
+                        if (STATS.CC == 0)
                         {
                             this.Fondo_VPIP_Negativo.EndAngle = 270;
 
                         }
                         else
                         {
-                            this.Fondo_VPIP_Negativo.EndAngle = 270 + 20 - _STATS[i] * 2;
+                            this.Fondo_VPIP_Negativo.EndAngle = 270 + 20 - STATS.CC * 2;
 
                         }
-                    }
-                    if (i == 2) // BET3
-                    {
-                        this.BET3.Content = _STATS[i];
-                    }
-                    if (i == 3) // BET4
-                    {
-                        this.BET4.Content = _STATS[i];
-                    }
-                }
+
+
+                        this.BET3.Content = STATS.BET3;
+
+                        this.BET4.Content = STATS.BET4;
+
+                        this.BET5.Content = STATS.BET5;
+                    
             });
         }
     }

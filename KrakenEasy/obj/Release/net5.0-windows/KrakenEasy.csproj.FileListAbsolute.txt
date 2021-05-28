@@ -1,4 +1,3 @@
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\KrakenEasy.csprojAssemblyReference.cache
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\KrakenEasy.csproj.ResolveComReference.cache
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\ContenedorHUD.g.cs
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\Controls\ProgressControl.g.cs
@@ -273,3 +272,6 @@ C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windo
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windows\HUDS\Badges\Shark.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windows\HUDS\Badges\Whale.png
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\bin\Release\net5.0-windows\HUDS\Badges\Worm.png
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\KrakenEasy.csprojAssemblyReference.cache
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\MesaPrueba.g.cs
+C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\HUDS\MesaPrueba.baml
