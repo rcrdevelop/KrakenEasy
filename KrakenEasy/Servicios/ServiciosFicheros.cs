@@ -140,7 +140,14 @@ namespace KrakenEasy.Servicios
                                 {
                                     string fileToMove = file;
                                     string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
-                                    File.Copy(fileToMove, moveTo, true);
+                                    var Time = File.GetLastAccessTime(file);
+                                    var TimeFile = Time.Year * 10000 + Time.Month * 10 + Time.Day * 10 + Time.Hour * 10 + Time.Minute * 10 + Time.Second * 10;
+                                    Time = DateTime.Now;
+                                    var TimeActual = Time.Year * 10000 + Time.Month * 10 + Time.Day * 10 + Time.Hour * 10 + Time.Minute * 10 + Time.Second * 10;
+                                    
+                                    if (!(TimeFile == TimeActual)) { 
+                                        File.Copy(fileToMove, moveTo, true);
+                                    }
                                 }
                                 
                             }

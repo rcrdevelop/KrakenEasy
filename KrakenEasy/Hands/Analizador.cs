@@ -115,7 +115,6 @@ namespace KrakenEasy.Hands
                     Message = ex.Message,
                     Type = NotificationType.Warning
                 });
-                throw;
             }
         }
         public void Extraer_Etapas_Winamax(List<string> _Hand)

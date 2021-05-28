@@ -12,9 +12,9 @@ TRACE;RELEASE;NET;NET5_0;NETCOREAPP
 C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\App.xaml
 17-889619776
 6-100814219
-52-430886566
+53-1293722303
 2541576756810
 HUDS\ContenedorHUD.xaml;HUDS\Controls\ProgressControl.xaml;HUDS\Controls\StatControl.xaml;HUDS\FullHUD.xaml;HUDS\HUDControler.xaml;HUDS\MesaPrueba.xaml;HUDS\Progress.xaml;HUDS\ProgressKraken.xaml;HUDS\PruebaHUD.xaml;HUDS\PruebaHUDControler.xaml;MainWindow.xaml;Replayer\Cards.xaml;Replayer\Etapas.xaml;Replayer\MainWindow.xaml;Servicios\Error.xaml;Settings.xaml;STATSPruebaHUD.xaml;
 
-True
+False
 

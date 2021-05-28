@@ -211,43 +211,12 @@ namespace KrakenEasy
                             
                         }
                     }
-                   
+
                     foreach (var file in ReadFolder)
                     {   
                         
-                        MongoAccess _Access = new MongoAccess();
-  
-                            bool Condicion_HUD_Abierto = false;
-                        List<string> Mesas_HUDS = Mesas_HUDS_Abiertos; 
-                            foreach (var Mesa in Mesas_HUDS)
-                            {
-                                string Nombre_File = " ";
-                                if (file.Contains("WINAMAX"))
-                                {
-
-                                    Nombre_File = Path.GetFileName(file).Split("_")[1].Split("_")[0];
-                                }
-                                else if (file.Contains("888POKER"))
-                                {
-
-                                    Nombre_File = Path.GetFileName(file).Split(" ")[1];
-                                }
-                                else if (file.Contains("POKERSTARS"))
-                                {
-
-                                    Nombre_File = Path.GetFileName(file).Split(" ")[1] + " " + Path.GetFileName(file).Split(" ")[2];
-                                    if (Nombre_File.Contains("-")) 
-                                    {
-                                        Nombre_File = Nombre_File.Replace("-", "");
-                                    }
-
-                                }
-                                if (Mesa == Nombre_File) 
-                                {
-                                    Condicion_HUD_Abierto = true;
-                                }                                
-                            }
-                            if (!Condicion_HUD_Abierto) 
+                        
+                            if (!HUD_Duplicado(file)) 
                             {
                                 string Nombre_File = "";
                                 if (file.Contains("WINAMAX"))
@@ -269,26 +238,9 @@ namespace KrakenEasy
                                     }
                                     Casino_HUD = "PokerStars";
                                 }
-                                bool MostrarHUD = true;
                                 bool ProcesoHUDListo = false;
-                                foreach (var Jugador in _Access.Get_Players_Kraken(Nombre_File.ToUpper()))
-                                {
-                                    foreach (var HUD in HUDS_Abiertos)
-                                    {
-                                        if (HUD.Trim() == Jugador.Trim())
-                                        {
-                                            MostrarHUD = false;
-                                        }
-                                    }
-                                    
-                                    if (MostrarHUD)
-                                    {
-                                        HUDS(Jugador, Nombre_File);
-                                        ProcesoHUDListo = true;
-                                        HUDS_Abiertos.Add(Jugador);
-                                    }
-
-                                }
+                                Abrir_HUDS(Nombre_File);
+                                
                                 if (ProcesoHUDListo)
                                 {
                                     NotificationManager notificationManager = new NotificationManager();
@@ -316,6 +268,64 @@ namespace KrakenEasy
                     ContenedorHUD _HUD = new ContenedorHUD(_Id_Jugador, _Id_Ventana, false);
                     _HUD.Show();
                 });
+            }
+            bool HUD_Duplicado(string file)
+            {
+                List<string> Mesas_HUDS = Mesas_HUDS_Abiertos;
+                bool Condicion_HUD_Abierto = false;
+                foreach (var Mesa in Mesas_HUDS)
+                {
+                    string Nombre_File = " ";
+                    if (file.Contains("WINAMAX"))
+                    {
+
+                        Nombre_File = Path.GetFileName(file).Split("_")[1].Split("_")[0];
+                    }
+                    else if (file.Contains("888POKER"))
+                    {
+
+                        Nombre_File = Path.GetFileName(file).Split(" ")[1];
+                    }
+                    else if (file.Contains("POKERSTARS"))
+                    {
+
+                        Nombre_File = Path.GetFileName(file).Split(" ")[1] + " " + Path.GetFileName(file).Split(" ")[2];
+                        if (Nombre_File.Contains("-"))
+                        {
+                            Nombre_File = Nombre_File.Replace("-", "");
+                        }
+
+                    }
+                    if (Mesa == Nombre_File)
+                    {
+                        Condicion_HUD_Abierto = true;
+                    }
+                }
+                return Condicion_HUD_Abierto;
+            }
+            bool Mostrar_HUD(string Jugador)
+            {
+                foreach (var HUD in HUDS_Abiertos)
+                {
+                    if (HUD.Trim() == Jugador.Trim())
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            void Abrir_HUDS(string Nombre_File)
+            {
+                MongoAccess _Access = new MongoAccess();
+                foreach (var Jugador in _Access.Get_Players_Kraken(Nombre_File.ToUpper()))
+                {
+                    if (Mostrar_HUD(Jugador))
+                    {
+                        HUDS(Jugador, Nombre_File);
+                        HUDS_Abiertos.Add(Jugador);
+                    }
+
+                }
             }
         }
 
