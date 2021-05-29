@@ -27,9 +27,7 @@ namespace KrakenEasy.Servicios
                 try
                 {
                     _logger.LogInformation("Worker running at: {time} Estatus Kraken", DateTimeOffset.Now);
-                    MongoAccess _Access = new MongoAccess();
-                    _Access.Obtener_Jugadores();
-                    _Access.STATS();
+
                 }
                 catch (Exception)
                 {

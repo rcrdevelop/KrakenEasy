@@ -130,16 +130,13 @@ namespace KrakenEasy.HUDS
                             WTSD = _Access.Get_WTSD(_Id_Jugador),
                             Hands = _Access.Get_Hands(_Id_Jugador)
                         };
-                        string json = Newtonsoft.Json.JsonConvert.SerializeObject(STATS_Kraken);
-                        System.IO.File.WriteAllText(path, json);
+
                         Referencia = STATS_Kraken;
                         var NHands = _Access.Get_Hands(_Id_Jugador);
                         if (STATS_Kraken.Equals(Referencia))
                         {
-                            using(StreamReader jsonStream = File.OpenText(path))
-                            {
-                                var json2 = jsonStream.ReadToEnd();
-                                HUDS_Kraken HUD_JSON = JsonConvert.DeserializeObject<HUDS_Kraken>(json2);
+
+                                
                                 Application.Current.Dispatcher.Invoke(() =>
                                 {
                                     Propiedades.Actualizar = false;
@@ -147,7 +144,7 @@ namespace KrakenEasy.HUDS
                                     {
                                         Application.Current.Dispatcher.Invoke(() =>
                                         {
-                                            ProgressKraken _Kraken = new ProgressKraken(HUD_JSON);
+                                            ProgressKraken _Kraken = new ProgressKraken(STATS_Kraken);
                                             this.Contenedor.Children.Clear();
                                             this.Contenedor.Children.Add(_Kraken);
                                         });
@@ -156,7 +153,7 @@ namespace KrakenEasy.HUDS
                                     {
                                         Application.Current.Dispatcher.Invoke(() =>
                                         {
-                                            Progress _Progress = new Progress(HUD_JSON);
+                                            Progress _Progress = new Progress(STATS_Kraken);
                                             this.Contenedor.Children.Clear();
                                             this.Contenedor.Children.Add(_Progress);
                                         });
@@ -165,7 +162,7 @@ namespace KrakenEasy.HUDS
                                     {
                                         Application.Current.Dispatcher.Invoke(() =>
                                         {
-                                            FullHUD _HUD = new FullHUD(HUD_JSON, _Id_Ventana);
+                                            FullHUD _HUD = new FullHUD(STATS_Kraken, _Id_Ventana);
                                             this.Contenedor.Children.Clear();
                                             this.Contenedor.Children.Add(_HUD);
                                         });
@@ -173,8 +170,6 @@ namespace KrakenEasy.HUDS
                                 });
 
                             }
-                            
-                        }
 
                         Referencia = STATS_Kraken;
                         

@@ -19,11 +19,12 @@ using MongoDB.Bson.IO;
 
 namespace KrakenEasy
 {
+
     //Ventana Principal
     public partial class MainWindow : Window
     {
 
-
+        static string path = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
 
         static Servicios.Servicios _Servicios = new Servicios.Servicios();
         static List<string> Mesas_HUDS_Abiertos = new List<string>();
@@ -160,6 +161,8 @@ namespace KrakenEasy
             {
                 HUDControler _Controler = new HUDControler();
                 _Controler.Show();
+                MongoAccess _Access = new MongoAccess();
+                _Access.Obtener_Jugadores();
                 //Thread _Hilo_Monito_HUDS = new Thread(Monitor_HUDS);
                 //_Hilo_Monito_HUDS.Start();
             });
@@ -239,7 +242,7 @@ namespace KrakenEasy
                                     Casino_HUD = "PokerStars";
                                 }
                                 bool ProcesoHUDListo = false;
-                                Abrir_HUDS(Nombre_File);
+                                Abrir_HUDS(file);
                                 
                                 if (ProcesoHUDListo)
                                 {
@@ -253,7 +256,7 @@ namespace KrakenEasy
                                 }
   
 
-                                Mesas_HUDS_Abiertos.Add(Nombre_File);
+                                Mesas_HUDS_Abiertos.Add(Path.GetFileName(file));
                 
 
                         }
@@ -275,57 +278,54 @@ namespace KrakenEasy
                 bool Condicion_HUD_Abierto = false;
                 foreach (var Mesa in Mesas_HUDS)
                 {
-                    string Nombre_File = " ";
-                    if (file.Contains("WINAMAX"))
-                    {
+                    //string Nombre_File = " ";
+                    //if (file.Contains("WINAMAX"))
+                    //{
 
-                        Nombre_File = Path.GetFileName(file).Split("_")[1].Split("_")[0];
-                    }
-                    else if (file.Contains("888POKER"))
-                    {
+                    //    Nombre_File = Path.GetFileName(file).Split("_")[1].Split("_")[0];
+                    //}
+                    //else if (file.Contains("888POKER"))
+                    //{
 
-                        Nombre_File = Path.GetFileName(file).Split(" ")[1];
-                    }
-                    else if (file.Contains("POKERSTARS"))
-                    {
+                    //    Nombre_File = Path.GetFileName(file).Split(" ")[1];
+                    //}
+                    //else if (file.Contains("POKERSTARS"))
+                    //{
 
-                        Nombre_File = Path.GetFileName(file).Split(" ")[1] + " " + Path.GetFileName(file).Split(" ")[2];
-                        if (Nombre_File.Contains("-"))
-                        {
-                            Nombre_File = Nombre_File.Replace("-", "");
-                        }
+                    //    Nombre_File = Path.GetFileName(file).Split(" ")[1] + " " + Path.GetFileName(file).Split(" ")[2];
+                    //    if (Nombre_File.Contains("-"))
+                    //    {
+                    //        Nombre_File = Nombre_File.Replace("-", "");
+                    //    }
 
-                    }
-                    if (Mesa == Nombre_File)
+                    //}
+                    if (Mesa == Path.GetFileName(file))
                     {
                         Condicion_HUD_Abierto = true;
                     }
                 }
                 return Condicion_HUD_Abierto;
             }
-            bool Mostrar_HUD(string Jugador)
-            {
-                foreach (var HUD in HUDS_Abiertos)
-                {
-                    if (HUD.Trim() == Jugador.Trim())
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
+
             void Abrir_HUDS(string Nombre_File)
             {
-                MongoAccess _Access = new MongoAccess();
-                foreach (var Jugador in _Access.Get_Players_Kraken(Nombre_File.ToUpper()))
+
+                using (StreamReader jsonStream = File.OpenText(Nombre_File))
                 {
-                    if (Mostrar_HUD(Jugador))
+                    var json = jsonStream.ReadToEnd();
+                    Mesa HUD_JSON = Newtonsoft.Json.JsonConvert.DeserializeObject<Mesa>(json);
+                    MongoAccess _Access = new MongoAccess();
+                    foreach (var Jugador in HUD_JSON.Jugadores)
+                    {
+                        _Access.STATS(Jugador);
+                    }
+                    foreach (var Jugador in HUD_JSON.Jugadores)
                     {
                         HUDS(Jugador, Nombre_File);
-                        HUDS_Abiertos.Add(Jugador);
-                    }
 
+                    }
                 }
+  
             }
         }
 

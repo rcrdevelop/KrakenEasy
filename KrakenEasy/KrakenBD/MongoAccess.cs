@@ -325,7 +325,7 @@ namespace KrakenEasy.KrakenBD
             {
                 foreach (var Players in hand.GetElement("Players").Value.AsBsonArray)
                 {
-                    _Resultado.Add(Players.AsString);
+                    _Resultado.Add(Players.AsString.Split(": ")[1].Split(" ")[0]);
                 }
             }
             return _Resultado;     
@@ -457,45 +457,48 @@ namespace KrakenEasy.KrakenBD
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
+            List<string> Jugadores = new List<string>();
             foreach (var Hand in _Access.Get_Hand().ToList())
             {
                 foreach (var Jugador in Hand.GetElement("Players").Value.AsBsonArray)
                 {
+                    
                     bool registrar = true;
-                    foreach (var Lista in Lista_Jugadores)
+                    
+                    foreach (var _Jugador in Jugadores)
                     {
-                        if (Lista == Jugador.AsString.Split(" ")[2])
+                        if (_Jugador == Jugador.AsString.Split(": ")[1].Split(" ")[0])
                         {
                             registrar = false;
                         }
                     }
                     if (registrar)
                     {
-                        Lista_Jugadores.Add(Jugador.AsString.Split(" ")[2]);
+                        _Access.STATS(Jugador.AsString.Split(": ")[1].Split(" ")[0]);
+                        Jugadores.Add(Jugador.AsString.Split(": ")[1].Split(" ")[0]);
                     }
                 }
             }
-            BsonArray Jugadores_Kraken = new BsonArray();
-            foreach (var Jugador in Lista_Jugadores)
-            {
-                Jugadores_Kraken.Add(Jugador);
-            }
-            if (_Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").Find(new BsonDocument(new BsonElement("_id", 0))).CountDocuments() == 0)
-            {
-                _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").InsertOne(new BsonDocument(new BsonElement("_id", 0), new BsonElement("Jugadores", Jugadores_Kraken)));
-            }
-            else 
-            {
-                _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").DeleteOne(new BsonDocument(new BsonElement("_id", 0)));
-
-                _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores").InsertOne(new BsonDocument(new BsonElement("_id", 0), new BsonElement("Jugadores", Jugadores_Kraken)));
-            }
-
         }
-        public void STATS()
+        public void STATS(string Jugador)
         {
-            
-            
+            MongoAccess _Access = new MongoAccess();
+            _Access.Set_BET3(Jugador);
+            _Access.Set_BET4(Jugador);
+            _Access.Set_BET5(Jugador);
+            _Access.Set_VPIP(Jugador);
+            _Access.Set_FoldBET3(Jugador);
+            _Access.Set_FCB(Jugador);
+            _Access.Set_FoldFCB(Jugador);
+            _Access.Set_TCB(Jugador);
+            _Access.Set_FoldTCB(Jugador);
+            _Access.Set_CC(Jugador);
+            _Access.Set_Limp(Jugador);
+            _Access.Set_PFR(Jugador);
+            _Access.Set_RB(Jugador);
+            _Access.Set_WTSD(Jugador);
+            _Access.Set_WSD(Jugador);
+            _Access.Set_Hands(Jugador);
         }
         public void Set_STAT_Hand(double STAT, string _Id_Jugador)
         {
@@ -1137,8 +1140,6 @@ namespace KrakenEasy.KrakenBD
                         BET++;
                         if (linea.AsString.Contains(_Jugador) && BET == 3)
                         {
-                            Window window = new Window();
-                            window.Show();
                             Action++;
                             condicion = true;
                         }
@@ -1217,6 +1218,7 @@ namespace KrakenEasy.KrakenBD
                         if (linea.AsString.Contains(_Jugador) && BET == 4)
                         {
                             Action++;
+                            Oportunity++;
                             condicion = true;
                         }
 
@@ -1871,6 +1873,10 @@ namespace KrakenEasy.KrakenBD
 
             }
             WTSD = ShowDown / Action_Calls * 100;
+            if (Action_Calls == 0)
+            {
+                WTSD = 0;
+            }
             var update = Builders<BsonDocument>.Update.Set("WTSD", WTSD);
             bool Nuevo_Jugador = true;
             _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Jugador);
@@ -1916,6 +1922,10 @@ namespace KrakenEasy.KrakenBD
 
             }
             WSD = Win / ShowDown * 100;
+            if (ShowDown == 0)
+            {
+                WSD = 0;
+            }
             var update = Builders<BsonDocument>.Update.Set("WSD", WSD);
             bool Nuevo_Jugador = true;
             _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Jugador);
@@ -1931,6 +1941,36 @@ namespace KrakenEasy.KrakenBD
                 BsonElement wsd = new BsonElement("WSD", WSD);
                 stat.Add(jugador);
                 stat.Add(wsd);
+                _CollectionSTAT.InsertOne(stat);
+            }
+        }
+        public void Set_Hands(string _Jugador)
+        {
+            MongoAccess _Access = new MongoAccess();
+            var _Session = _Access._Client.StartSession();
+            var _Filter = Builders<BsonDocument>.Filter.Eq("Players", _Jugador);
+            var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument(new BsonElement("Players", new Regex(_Jugador))));
+            var _CollectionSTAT = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Jugadores");
+            double n = 0;
+            foreach (var Hand in _Collection.ToList())
+            {
+                n++;
+            }
+            var update = Builders<BsonDocument>.Update.Set("Hands", n);
+            bool Nuevo_Jugador = true;
+            _Filter = Builders<BsonDocument>.Filter.Eq("_id", _Jugador);
+            foreach (var Jugador in _CollectionSTAT.Find(_Filter).ToList())
+            {
+                _CollectionSTAT.UpdateOne(_Filter, update);
+                Nuevo_Jugador = false;
+            }
+            if (Nuevo_Jugador)
+            {
+                BsonDocument stat = new BsonDocument();
+                BsonElement jugador = new BsonElement("_id", _Jugador);
+                BsonElement hands = new BsonElement("Hands", n);
+                stat.Add(jugador);
+                stat.Add(hands);
                 _CollectionSTAT.InsertOne(stat);
             }
         }

@@ -111,7 +111,7 @@ namespace KrakenEasy.Hands
                         var HoraFichero = Time.Year * 10000000000 + Time.Month * 1000000 + Time.Day * 10000 + Time.Hour * 100 + Time.Minute;
                         Time = DateTime.Now;
                         var HoraActual = Time.Year * 10000000000 + Time.Month * 1000000 + Time.Day * 10000 + Time.Hour * 100 + Time.Minute;
-                        if (HoraActual <= HoraFichero + 1)
+                        if (HoraActual == HoraFichero)
                         {
                             string Casino = " ";
                             var moveTo = folderMesas + System.IO.Path.GetFileName(file);
