@@ -5,17 +5,11 @@ using System.Windows;
 using KrakenEasy.KrakenBD;
 using KrakenEasy.Hands;
 using KrakenEasy.HUDS;
-using ToastNotifications;
-using ToastNotifications.Lifetime;
-using ToastNotifications.Position;
-using ToastNotifications.Messages;
-using Notify;
 using Notification.Wpf;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
 
 namespace KrakenEasy
 {
@@ -134,8 +128,8 @@ namespace KrakenEasy
         //Llevar ficheros a KrakenHands manualmente
         private void Importar_Hands(object sender, RoutedEventArgs e)
         {
-            main_Manejeador_Manos _Hands = new main_Manejeador_Manos();
-            _Hands.Iniciar();
+            ImportarHands Importar = new ImportarHands();
+            Importar.Show();
         }
         private static void Detener_Servicio()
         {
@@ -162,7 +156,9 @@ namespace KrakenEasy
                 HUDControler _Controler = new HUDControler();
                 _Controler.Show();
                 MongoAccess _Access = new MongoAccess();
-                _Access.Obtener_Jugadores();
+                Thread hilo = new Thread(() => { _Access.Obtener_Jugadores(); });
+                hilo.Start();
+
                 //Thread _Hilo_Monito_HUDS = new Thread(Monitor_HUDS);
                 //_Hilo_Monito_HUDS.Start();
             });

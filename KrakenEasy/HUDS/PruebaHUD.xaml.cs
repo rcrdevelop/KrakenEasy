@@ -27,6 +27,7 @@ namespace KrakenEasy.HUDS
         static string _Id_Ventana;
         static string _Id_Jugador;
         static bool _Replayer;
+        static bool _Click = false;
         static List<double> _STATS = new List<double>();
         public PruebaHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
         {
@@ -39,6 +40,7 @@ namespace KrakenEasy.HUDS
         {
             if (!_Replayer)
             {
+                _Click = true;
                 this.DragMove();
             }
         }
@@ -198,6 +200,20 @@ namespace KrakenEasy.HUDS
                         {
                             this.Activate();
                         }
+                        if (!_Click)
+                        { 
+                            Win32 win32 = new Win32();
+                            foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
+                            {
+                                foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
+                                {
+                                    RECT dimensiones = new RECT();
+                                    Win32.GetWindowRect(ventana, out dimensiones);
+                                    Win32.MoveWindow(HUD, dimensiones.Left, dimensiones.Top,(int)this.Window.Width, (int)this.Window.Height , true);
+                                }
+                            }
+                        }
+
                         this.Topmost = true;
                         this.Topmost = false;
 
@@ -252,5 +268,9 @@ namespace KrakenEasy.HUDS
             Hilo();
         }
 
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _Click = false;
+        }
     }
 }

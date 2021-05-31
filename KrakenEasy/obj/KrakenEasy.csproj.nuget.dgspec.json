@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {}
+    "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {}
   },
   "projects": {
-    "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {
+    "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj": {
       "version": "1.7.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+        "projectUniqueName": "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
         "projectName": "KrakenEasy",
-        "projectPath": "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+        "projectPath": "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
         "packagesPath": "C:\\Users\\contr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\obj\\",
+        "outputPath": "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\contr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -80,14 +80,6 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Notify": {
-              "target": "Package",
-              "version": "[1.0.2, )"
-            },
-            "NotifyIconWpf": {
-              "target": "Package",
-              "version": "[1.0.0, )"
-            },
             "System.Management.Automation": {
               "target": "Package",
               "version": "[6.2.2, )"
@@ -123,7 +115,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

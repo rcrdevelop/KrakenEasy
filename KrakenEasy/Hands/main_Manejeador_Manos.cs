@@ -1,5 +1,5 @@
 ﻿using Notification.Wpf;
-using System;
+using System.Windows;
 
 namespace KrakenEasy.Hands
 {
@@ -7,15 +7,9 @@ namespace KrakenEasy.Hands
     {
         public void Iniciar()
         {
-            Ficheros _Ficheros = new Ficheros();
-            _Ficheros.ImportarHands();
-            var notificationManager = new NotificationManager();
-            notificationManager.Show(new NotificationContent
-            {
-                Title = "KrakenEasy",
-                Message = "Manos importadas correctamente",
-                Type = NotificationType.Success
-            });
+            Window interfaz = new Window();
+            
+            
         }
     }
 }

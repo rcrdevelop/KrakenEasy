@@ -467,18 +467,26 @@ namespace KrakenEasy.KrakenBD
                     
                     foreach (var _Jugador in Jugadores)
                     {
-                        if (_Jugador == Jugador.AsString.Split(": ")[1].Split(" ")[0])
+                        if (Jugador.AsString.Contains(_Jugador))
                         {
                             registrar = false;
                         }
                     }
                     if (registrar)
                     {
-                        _Access.STATS(Jugador.AsString.Split(": ")[1].Split(" ")[0]);
+                        Thread hilo = new Thread(() => { _Access.STATS(Jugador.AsString.Split(": ")[1].Split(" ")[0]); });
+                        hilo.Start();
                         Jugadores.Add(Jugador.AsString.Split(": ")[1].Split(" ")[0]);
                     }
                 }
             }
+            var notificationManager = new NotificationManager();
+            notificationManager.Show(new NotificationContent
+            {
+                Title = "KrakenEasy",
+                Message = "Estadisticas actualizadas",
+                Type = NotificationType.Information
+            });
         }
         public void STATS(string Jugador)
         {
@@ -2187,20 +2195,15 @@ namespace KrakenEasy.KrakenBD
                 _Hand.Add(new BsonElement("River", _Bson_River));
                 _Hand.Add(new BsonElement("Summary", _Bson_Summary));
                 _Hand.Add(new BsonElement("Blinds", _Bson_Blinds));
-                
-                string[] Update_Ventana = new string[3];
-                Update_Ventana[0] = _Mesa.Split("'")[0];
-                Update_Ventana[1] = "HAND";
-                Update_Ventana[2] = _Hand_ID;
-                try
+
+                bool condicion = false;
+                foreach (var hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", _Hand_ID)).ToList())
+                {
+                    condicion = true;
+                }
+                if (!condicion)
                 {
                     _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").InsertOne(_Hand);
-                    HUDS.Propiedades.Actualizar = true;
-                }
-                catch (Exception)
-                {
-
-                    throw;
                 }
             }
         }
@@ -2226,7 +2229,7 @@ namespace KrakenEasy.KrakenBD
                                     List<string> _Players)
         {
             MongoAccess _Access = new MongoAccess();
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", _Hand_ID.Trim());
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", _Hand_ID);
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands");
             if (_Collection.Find(filter).CountDocuments() == 0)
@@ -2333,7 +2336,7 @@ namespace KrakenEasy.KrakenBD
                     _Bson_Players.Add(item);
                 }
 
-                BsonDocument _Hand = new BsonDocument( new BsonElement("_id", (BsonValue)_Hand_ID.Replace("888POKER", "").Trim()));
+                BsonDocument _Hand = new BsonDocument( new BsonElement("_id", _Hand_ID));
                 var Time = DateTime.Now;
                 var HoraActual = Time.Year * 10000000000 + Time.Month * 1000000 + Time.Day * 10000 + Time.Hour * 100 + Time.Minute;
                 _Hand.Add(new BsonElement("Date", HoraActual));
@@ -2358,15 +2361,14 @@ namespace KrakenEasy.KrakenBD
                 _Hand.Add(new BsonElement("Summary", _Bson_Summary));
                 _Hand.Add(new BsonElement("Blinds", _Bson_Blinds));
 
-                try
+                bool condicion = false;
+                foreach (var hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", _Hand_ID)).ToList())
+                {
+                    condicion = true;
+                }
+                if (!condicion)
                 {
                     _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").InsertOne(_Hand);
-                    HUDS.Propiedades.Actualizar = true;
-                }
-                catch (Exception)
-                {
-
-                    
                 }
             }
         }
@@ -2526,9 +2528,16 @@ namespace KrakenEasy.KrakenBD
                 _Hand.Add(new BsonElement("Blinds", _Bson_Blinds));
                 try
                 {
-
+                    bool condicion = false;
+                    foreach ( var hand in _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").Find(new BsonDocument("_id", _Hand_ID)).ToList())
+                    {
+                        condicion = true;
+                    }
+                    if (!condicion)
+                    {
                         _Session.Client.GetDatabase("Kraken").GetCollection<BsonDocument>("Hands").InsertOne(_Hand);
-                        HUDS.Propiedades.Actualizar = true;
+                    }
+                        
                     
                 }
                 catch (Exception)

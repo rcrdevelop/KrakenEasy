@@ -692,7 +692,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/2.0.0": {
+      "Microsoft.NETCore.Targets/1.1.0": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -890,60 +890,6 @@
           }
         }
       },
-      "Microsoft.WindowsDesktop.App/3.0.0-alpha-27128-4": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.0.0",
-          "Microsoft.NETCore.Targets": "2.0.0"
-        },
-        "compile": {
-          "ref/netcoreapp3.0/Accessibility.dll": {},
-          "ref/netcoreapp3.0/Microsoft.Win32.Registry.dll": {},
-          "ref/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": {},
-          "ref/netcoreapp3.0/PresentationCore-CommonResources.dll": {},
-          "ref/netcoreapp3.0/PresentationCore.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.Aero.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.Aero2.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.AeroLite.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.Classic.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.Luna.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.Royale.dll": {},
-          "ref/netcoreapp3.0/PresentationFramework.dll": {},
-          "ref/netcoreapp3.0/PresentationUI.dll": {},
-          "ref/netcoreapp3.0/ReachFramework.dll": {},
-          "ref/netcoreapp3.0/System.CodeDom.dll": {},
-          "ref/netcoreapp3.0/System.Configuration.ConfigurationManager.dll": {},
-          "ref/netcoreapp3.0/System.Design.dll": {},
-          "ref/netcoreapp3.0/System.Drawing.Common.dll": {},
-          "ref/netcoreapp3.0/System.Drawing.Design.Primitives.dll": {},
-          "ref/netcoreapp3.0/System.Drawing.Design.dll": {},
-          "ref/netcoreapp3.0/System.Media.SoundPlayer.dll": {},
-          "ref/netcoreapp3.0/System.Printing.dll": {},
-          "ref/netcoreapp3.0/System.Security.AccessControl.dll": {},
-          "ref/netcoreapp3.0/System.Security.Cryptography.Cng.dll": {},
-          "ref/netcoreapp3.0/System.Security.Cryptography.Pkcs.dll": {},
-          "ref/netcoreapp3.0/System.Security.Cryptography.ProtectedData.dll": {},
-          "ref/netcoreapp3.0/System.Security.Cryptography.Xml.dll": {},
-          "ref/netcoreapp3.0/System.Security.Permissions.dll": {},
-          "ref/netcoreapp3.0/System.Security.Principal.Windows.dll": {},
-          "ref/netcoreapp3.0/System.Windows.Controls.Ribbon.dll": {},
-          "ref/netcoreapp3.0/System.Windows.Forms.Design.Editors.dll": {},
-          "ref/netcoreapp3.0/System.Windows.Forms.Design.dll": {},
-          "ref/netcoreapp3.0/System.Windows.Forms.dll": {},
-          "ref/netcoreapp3.0/System.Windows.Input.Manipulations.dll": {},
-          "ref/netcoreapp3.0/System.Windows.Presentation.dll": {},
-          "ref/netcoreapp3.0/System.Xaml.dll": {},
-          "ref/netcoreapp3.0/UIAutomationClient.dll": {},
-          "ref/netcoreapp3.0/UIAutomationClientSideProviders.dll": {},
-          "ref/netcoreapp3.0/UIAutomationProvider.dll": {},
-          "ref/netcoreapp3.0/UIAutomationTypes.dll": {},
-          "ref/netcoreapp3.0/WindowsBase.dll": {},
-          "ref/netcoreapp3.0/WindowsFormsIntegration.dll": {}
-        },
-        "build": {
-          "build/netcoreapp3.0/_._": {}
-        }
-      },
       "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
         "type": "package",
         "compile": {
@@ -1139,27 +1085,6 @@
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
         ]
-      },
-      "Notify/1.0.2": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Notify.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Notify.dll": {}
-        }
-      },
-      "NotifyIconWpf/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.WindowsDesktop.App": "3.0.0-alpha-27128-4"
-        },
-        "compile": {
-          "lib/netcoreapp3.0/NotifyIconWpf.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/NotifyIconWpf.dll": {}
-        }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
@@ -3553,21 +3478,19 @@
         "version.txt"
       ]
     },
-    "Microsoft.NETCore.Targets/2.0.0": {
-      "sha512": "odP/tJj1z6GylFpNo7pMtbd/xQgTC3Ex2If63dRTL38bBNMwsBnJ+RceUIyHdRBC0oik/3NehYT+oECwBhIM3Q==",
+    "Microsoft.NETCore.Targets/1.1.0": {
+      "sha512": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "type": "package",
-      "path": "microsoft.netcore.targets/2.0.0",
+      "path": "microsoft.netcore.targets/1.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.targets.2.0.0.nupkg.sha512",
+        "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "runtime.json"
       ]
     },
     "Microsoft.PowerShell.CoreCLR.Eventing/6.2.2": {
@@ -3784,100 +3707,6 @@
         "version.txt"
       ]
     },
-    "Microsoft.WindowsDesktop.App/3.0.0-alpha-27128-4": {
-      "sha512": "7PHuXgMY3wvuOtpFXhUUySkYLV3e7Y7EBYxBlGAnk/1thvwFOO+Y0wuKGkzp8m1C/Fq87j3hmeYW+QwuIKemAA==",
-      "type": "package",
-      "path": "microsoft.windowsdesktop.app/3.0.0-alpha-27128-4",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "build/netcoreapp3.0/Microsoft.WindowsDesktop.App.targets",
-        "build/netcoreapp3.0/ref-mscorlib/System.ComponentModel.dll",
-        "build/netcoreapp3.0/ref-mscorlib/System.ComponentModel.pdb",
-        "build/netcoreapp3.0/ref-mscorlib/System.Runtime.CompilerServices.VisualC.dll",
-        "build/netcoreapp3.0/ref-mscorlib/System.Runtime.CompilerServices.VisualC.pdb",
-        "build/netcoreapp3.0/ref-mscorlib/System.Runtime.dll",
-        "build/netcoreapp3.0/ref-mscorlib/System.Runtime.pdb",
-        "build/netcoreapp3.0/ref-mscorlib/mscorlib.dll",
-        "build/netcoreapp3.0/ref-mscorlib/mscorlib.pdb",
-        "microsoft.windowsdesktop.app.3.0.0-alpha-27128-4.nupkg.sha512",
-        "microsoft.windowsdesktop.app.nuspec",
-        "ref/netcoreapp3.0/Accessibility.dll",
-        "ref/netcoreapp3.0/Microsoft.Win32.Registry.dll",
-        "ref/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll",
-        "ref/netcoreapp3.0/PresentationCore-CommonResources.dll",
-        "ref/netcoreapp3.0/PresentationCore-CommonResources.pdb",
-        "ref/netcoreapp3.0/PresentationCore.dll",
-        "ref/netcoreapp3.0/PresentationCore.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.Aero.dll",
-        "ref/netcoreapp3.0/PresentationFramework.Aero.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.Aero2.dll",
-        "ref/netcoreapp3.0/PresentationFramework.Aero2.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.AeroLite.dll",
-        "ref/netcoreapp3.0/PresentationFramework.AeroLite.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.Classic.dll",
-        "ref/netcoreapp3.0/PresentationFramework.Classic.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.Luna.dll",
-        "ref/netcoreapp3.0/PresentationFramework.Luna.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.Royale.dll",
-        "ref/netcoreapp3.0/PresentationFramework.Royale.pdb",
-        "ref/netcoreapp3.0/PresentationFramework.dll",
-        "ref/netcoreapp3.0/PresentationFramework.pdb",
-        "ref/netcoreapp3.0/PresentationUI.dll",
-        "ref/netcoreapp3.0/PresentationUI.pdb",
-        "ref/netcoreapp3.0/ReachFramework.dll",
-        "ref/netcoreapp3.0/ReachFramework.pdb",
-        "ref/netcoreapp3.0/System.CodeDom.dll",
-        "ref/netcoreapp3.0/System.Configuration.ConfigurationManager.dll",
-        "ref/netcoreapp3.0/System.Design.dll",
-        "ref/netcoreapp3.0/System.Design.pdb",
-        "ref/netcoreapp3.0/System.Drawing.Common.dll",
-        "ref/netcoreapp3.0/System.Drawing.Design.Primitives.dll",
-        "ref/netcoreapp3.0/System.Drawing.Design.dll",
-        "ref/netcoreapp3.0/System.Drawing.Design.pdb",
-        "ref/netcoreapp3.0/System.Media.SoundPlayer.dll",
-        "ref/netcoreapp3.0/System.Media.SoundPlayer.pdb",
-        "ref/netcoreapp3.0/System.Printing.dll",
-        "ref/netcoreapp3.0/System.Printing.pdb",
-        "ref/netcoreapp3.0/System.Security.AccessControl.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Cng.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Pkcs.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.ProtectedData.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Xml.dll",
-        "ref/netcoreapp3.0/System.Security.Permissions.dll",
-        "ref/netcoreapp3.0/System.Security.Principal.Windows.dll",
-        "ref/netcoreapp3.0/System.Windows.Controls.Ribbon.dll",
-        "ref/netcoreapp3.0/System.Windows.Controls.Ribbon.pdb",
-        "ref/netcoreapp3.0/System.Windows.Forms.Design.Editors.dll",
-        "ref/netcoreapp3.0/System.Windows.Forms.Design.Editors.pdb",
-        "ref/netcoreapp3.0/System.Windows.Forms.Design.dll",
-        "ref/netcoreapp3.0/System.Windows.Forms.Design.pdb",
-        "ref/netcoreapp3.0/System.Windows.Forms.dll",
-        "ref/netcoreapp3.0/System.Windows.Input.Manipulations.dll",
-        "ref/netcoreapp3.0/System.Windows.Input.Manipulations.pdb",
-        "ref/netcoreapp3.0/System.Windows.Presentation.dll",
-        "ref/netcoreapp3.0/System.Windows.Presentation.pdb",
-        "ref/netcoreapp3.0/System.Xaml.dll",
-        "ref/netcoreapp3.0/System.Xaml.pdb",
-        "ref/netcoreapp3.0/UIAutomationClient.dll",
-        "ref/netcoreapp3.0/UIAutomationClient.pdb",
-        "ref/netcoreapp3.0/UIAutomationClientSideProviders.dll",
-        "ref/netcoreapp3.0/UIAutomationClientSideProviders.pdb",
-        "ref/netcoreapp3.0/UIAutomationProvider.dll",
-        "ref/netcoreapp3.0/UIAutomationProvider.pdb",
-        "ref/netcoreapp3.0/UIAutomationTypes.dll",
-        "ref/netcoreapp3.0/UIAutomationTypes.pdb",
-        "ref/netcoreapp3.0/WindowsBase.dll",
-        "ref/netcoreapp3.0/WindowsBase.pdb",
-        "ref/netcoreapp3.0/WindowsFormsIntegration.dll",
-        "ref/netcoreapp3.0/WindowsFormsIntegration.pdb",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
-      ]
-    },
     "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
       "sha512": "LZpuf82ACZWldmfMuv3CTUMDh3o0xo0uHUaybR5HgqVLDBJJ9RZLykplQ/bTJd0/VDt3EhD4iDgUgbdIUAM+Kg==",
       "type": "package",
@@ -4078,31 +3907,6 @@
         "lib/netcoreapp3.1/Notification.Wpf.dll",
         "notification.wpf.5.0.0.nupkg.sha512",
         "notification.wpf.nuspec"
-      ]
-    },
-    "Notify/1.0.2": {
-      "sha512": "FlxmXmOYBA+K39YXt+iRNHj/LHDbU/52RvnGKEWqcCZrVPd8AigarFq96OZ+YGpLnVTDrJpzlr5MeV9xceB3CA==",
-      "type": "package",
-      "path": "notify/1.0.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Notify.pdb",
-        "lib/net40/Notify.dll",
-        "notify.1.0.2.nupkg.sha512",
-        "notify.nuspec"
-      ]
-    },
-    "NotifyIconWpf/1.0.0": {
-      "sha512": "w2qIVUkMEXhfkG442DYkCCMjo44SWophamOcJf82A4OHr8qhjwduX7ZyWKk1baZrfsVIRZcPR+UlHSrlV/UAEQ==",
-      "type": "package",
-      "path": "notifyiconwpf/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp3.0/NotifyIconWpf.dll",
-        "notifyiconwpf.1.0.0.nupkg.sha512",
-        "notifyiconwpf.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -8329,8 +8133,6 @@
       "MongoDB.Driver.Core >= 2.12.2",
       "Newtonsoft.Json >= 13.0.1",
       "Notification.Wpf >= 5.0.0",
-      "Notify >= 1.0.2",
-      "NotifyIconWpf >= 1.0.0",
       "System.Management.Automation >= 6.2.2",
       "System.ServiceProcess.ServiceController >= 5.0.0",
       "ToastNotifications >= 2.5.1",
@@ -8343,11 +8145,11 @@
   "project": {
     "version": "1.7.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+      "projectUniqueName": "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
       "projectName": "KrakenEasy",
-      "projectPath": "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
+      "projectPath": "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\KrakenEasy.csproj",
       "packagesPath": "C:\\Users\\contr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\contr\\source\\repos\\clone\\KrakenEasy\\KrakenEasy\\obj\\",
+      "outputPath": "D:\\Job\\Develop\\Kraken\\repo\\KrakenEasy\\KrakenEasy\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\contr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8416,14 +8218,6 @@
             "target": "Package",
             "version": "[5.0.0, )"
           },
-          "Notify": {
-            "target": "Package",
-            "version": "[1.0.2, )"
-          },
-          "NotifyIconWpf": {
-            "target": "Package",
-            "version": "[1.0.0, )"
-          },
           "System.Management.Automation": {
             "target": "Package",
             "version": "[6.2.2, )"
@@ -8459,7 +8253,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -8490,16 +8284,6 @@
       "warningLevel": 1,
       "message": "El paquete \"Microsoft.Expression.Drawing 3.0.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0-windows7.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
       "libraryId": "Microsoft.Expression.Drawing",
-      "targetGraphs": [
-        "net5.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "El paquete \"Notify 1.0.2\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net5.0-windows7.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
-      "libraryId": "Notify",
       "targetGraphs": [
         "net5.0-windows7.0"
       ]

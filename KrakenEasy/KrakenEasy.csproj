@@ -79,8 +79,6 @@
     <PackageReference Include="MongoDB.Driver.Core" Version="2.12.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Notification.Wpf" Version="5.0.0" />
-    <PackageReference Include="Notify" Version="1.0.2" />
-    <PackageReference Include="NotifyIconWpf" Version="1.0.0" />
     <PackageReference Include="System.Management.Automation" Version="6.2.2" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="5.0.0" />
     <PackageReference Include="ToastNotifications" Version="2.5.1" />

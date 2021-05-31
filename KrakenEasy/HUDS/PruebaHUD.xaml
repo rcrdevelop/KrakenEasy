@@ -10,6 +10,7 @@
         ShowInTaskbar="False"
         AllowsTransparency="True"
         Loaded="Window_Loaded"
+        MouseLeave="Window_MouseLeave"
         Background="Black"
         Name="Window"
         Title="MainWindow" Height="Auto"  Width="Auto" MaxHeight="260" MaxWidth="220">

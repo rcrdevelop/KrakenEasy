@@ -131,7 +131,7 @@ namespace KrakenEasy
 
             HUDS.MesaPrueba Mesa = new HUDS.MesaPrueba();
             Mesa.Show();
-            HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("PRUEBA", "Mesa_Prueba", false);
+            HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("PRUEBA", "MesaPrueba", false);
             HUD.Show();
         }
     }

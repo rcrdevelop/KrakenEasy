@@ -642,7 +642,7 @@ namespace KrakenEasy.Hands
             {
                 if (_888Poker.Identificador_HandID(linea))
                 {
-                    _Hand_ID = "888POKER "+ linea.Split(": ")[1];
+                    _Hand_ID = linea.Split(": ")[1];
                 }
                 if (_888Poker.Identificador_Mesa(linea))
                 {
