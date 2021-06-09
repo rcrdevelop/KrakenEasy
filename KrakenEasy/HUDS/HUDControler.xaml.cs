@@ -37,7 +37,7 @@ namespace KrakenEasy.HUDS
                     {
                             this.Topmost = false;
                             this.Topmost = true;
-                        if (!Propiedades.SystemActive)
+                        if (!SystemKraken.HUDS)
                         {
                             this.Close();
                         }

@@ -131,8 +131,28 @@ namespace KrakenEasy
 
             HUDS.MesaPrueba Mesa = new HUDS.MesaPrueba();
             Mesa.Show();
-            HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("PRUEBA", "MesaPrueba", false);
-            HUD.Show();
+            var path = System.Environment.CurrentDirectory + "/HUDS-Kraken/PRUEBA" + "-Mesa-MesaPrueba.json";
+            Win32 win32 = new Win32();
+            bool Mostrar = true;
+            foreach (var item in win32.FindWindowsWithText("PRUEBA"))
+            {
+                Mostrar = false;
+            }
+            if (Mostrar)
+            { 
+            
+            
+                HUDS.PruebaHUD HUD = new HUDS.PruebaHUD("PRUEBA", "MesaPrueba", false);
+                HUD.Show();
+                HUDS.PruebaHUD HUD2 = new HUDS.PruebaHUD("PRUEBA2", "MesaPrueba", false);
+                HUD2.Show();
+                HUDS.PruebaHUD HUD3 = new HUDS.PruebaHUD("PRUEBA3", "MesaPrueba", false);
+                HUD3.Show();
+                HUDS.PruebaHUD HUD4 = new HUDS.PruebaHUD("PRUEBA4", "MesaPrueba", false);
+                HUD4.Show();
+                HUDS.PruebaHUD HUD5 = new HUDS.PruebaHUD("PRUEBA5", "MesaPrueba", false);
+                HUD5.Show();
+            }
         }
     }
 }

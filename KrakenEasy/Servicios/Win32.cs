@@ -48,6 +48,7 @@ namespace KrakenEasy.Servicios
         private static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("user32.dll")]
+ 
         private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
 
         // Delegate to filter which windows to include 

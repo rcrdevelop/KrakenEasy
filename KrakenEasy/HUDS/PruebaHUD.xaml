@@ -13,6 +13,7 @@
         MouseLeave="Window_MouseLeave"
         Background="Black"
         Name="Window"
+        Closed="Window_Closed"
         Title="MainWindow" Height="Auto"  Width="Auto" MaxHeight="260" MaxWidth="220">
     <Viewbox  Name="Cotenedor_Principal" MaxHeight="260" Width="Auto" Height="Auto">
         <Grid  Width="Auto" Height="Auto">

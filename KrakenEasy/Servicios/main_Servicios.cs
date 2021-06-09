@@ -32,10 +32,11 @@ namespace KrakenEasy.Servicios
             {
                 try
                 {
-                    if (HUDS.Propiedades.SystemActive)
+                    if (SystemKraken.HUDS)
                     { 
                         ServiciosCasinos.main();
                         ServiciosFicheros.main();
+                        ServiciosSTATS.main();
                     }
                 }
                 catch (Exception ex)

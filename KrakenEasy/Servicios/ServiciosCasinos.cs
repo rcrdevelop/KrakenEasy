@@ -9,6 +9,7 @@ using KrakenEasy.KrakenBD;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Security.Principal;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,14 +25,14 @@ namespace KrakenEasy.Servicios
                 try
                 {
                     MongoAccess _Access = new MongoAccess();
-                    if (KrakenEasy.HUDS.Propiedades.SystemActive)
+                    if (SystemKraken.HUDS)
                     {
                         
                         try
                         {
                             if (KrakenEasy.Casinos.Winamax.Habilitado)
                             {
-                                AnalizarMesaWinamax("C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+                                AnalizarMesaWinamax("C:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
 
                             }
                         }
@@ -50,7 +51,7 @@ namespace KrakenEasy.Servicios
                         {
                             if (KrakenEasy.Casinos.Winamax.Habilitado)
                             {
-                                AnalizarMesa888Poker("C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+                                AnalizarMesa888Poker("C:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
 
                             }
                         }
@@ -70,7 +71,7 @@ namespace KrakenEasy.Servicios
                         {
                             if (KrakenEasy.Casinos.Winamax.Habilitado)
                             {
-                                AnalizarMesaPokerStars("C:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+                                AnalizarMesaPokerStars("C:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
 
                             }
                         }
@@ -182,7 +183,7 @@ namespace KrakenEasy.Servicios
         public static List<IntPtr> Mesas_Winamax()
         {
             Winamax _Winamax = new Winamax();
-            List<System.IntPtr> _Ventanas = new List<IntPtr>();
+            List<IntPtr> _Ventanas = new List<IntPtr>();
             foreach (String KeyVentana in _Winamax.Ventanas())
             {
                 Console.WriteLine(KeyVentana);
@@ -197,7 +198,7 @@ namespace KrakenEasy.Servicios
         public static List<IntPtr> Mesas_888Poker()
         {
             Poker888 _888Poker = new Poker888();
-            List<System.IntPtr> _Ventanas = new List<IntPtr>();
+            List<IntPtr> _Ventanas = new List<IntPtr>();
             foreach (String KeyVentana in _888Poker.Ventanas())
             {
                 foreach (var Id_Ventana in Win32.FindWindowsWithText(KeyVentana))
@@ -211,7 +212,7 @@ namespace KrakenEasy.Servicios
         public static List<IntPtr> Mesas_PokerStars()
         {
             PokerStars _PokerStars = new PokerStars();
-            List<System.IntPtr> _Ventanas = new List<IntPtr>();
+            List<IntPtr> _Ventanas = new List<IntPtr>();
             foreach (String KeyVentana in _PokerStars.Ventanas())
             {
                 foreach (var Id_Ventana in Win32.FindWindowsWithText(KeyVentana))

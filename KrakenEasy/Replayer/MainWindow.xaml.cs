@@ -294,10 +294,8 @@ namespace KrakenEasy.Replayer
         }
         void Player_Cards(string[] Cartas, string PosicionMesa, string PosicionPoker)
         {
-            Cards cards = new Cards();
-            cards.Width = 200;
-            cards.Card_Left.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[0] + ".png"));
-            cards.Card_Right.Source = new BitmapImage(new Uri(path + "/Replayer/Cartas/" + Cartas[1] + ".png"));
+            Cards cards = new Cards(Cartas[0],Cartas[1]);
+            cards.Width = 200;            
             Grid.SetColumn(cards, Seleccion_Posicion(PosicionPoker));
             Grid.SetRow(cards, 0);
             this.Ïnfo_Players.Children.Add(cards);

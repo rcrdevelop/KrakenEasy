@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Job\Develop\Kraken\repo\KrakenEasy\KrakenEasy\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Job\Develop\Kraken\repo\KrakenEasy\KrakenEasy\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
@@ -48,6 +48,9 @@
     <Compile Update="Replayer\Etapas.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Replayer\FiltrosReplayer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Replayer\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +64,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="STATSPruebaHUD.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Taskbar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -107,6 +113,9 @@
     <Page Update="Replayer\Etapas.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Replayer\FiltrosReplayer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Replayer\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -117,6 +126,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="STATSPruebaHUD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Taskbar.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

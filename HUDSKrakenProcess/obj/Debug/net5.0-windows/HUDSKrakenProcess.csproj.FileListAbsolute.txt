@@ -1,0 +1,11 @@
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDSKrakenProcess.csproj.AssemblyReference.cache
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\ContenedorHUD.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\Controls\ProgressControl.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\Controls\StatControl.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\HUDControler.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\MesaPrueba.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\Progress.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\PruebaHUD.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDS\PruebaHUDControler.g.cs
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDSKrakenProcess_MarkupCompile.cache
+D:\Job\Develop\Kraken\repo\KrakenEasy\HUDSKrakenProcess\obj\Debug\net5.0-windows\HUDSKrakenProcess_MarkupCompile.lref

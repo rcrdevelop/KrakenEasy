@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KrakenEasy.Hands"
         mc:Ignorable="d"
-        Title="ImportarHands" Height="128" Width="662">
-    <Grid>
+        Title="ImportarHands" Height="143" Width="662">
+    <Grid Margin="0,0,0,-16">
         <TextBox Name="RutaCarpeta" HorizontalAlignment="Left" Margin="27,61,0,0" Text="Ruta de carpeta" Foreground="gray" TextWrapping="Wrap" VerticalAlignment="Top" Width="277" Height="28" />
         <Button Click="Button_Click" Content="Importar Hands" HorizontalAlignment="Left" Margin="504,74,0,0" VerticalAlignment="Top" Height="28" Width="148"/>
         <Label Content="Carpeta a importar" HorizontalAlignment="Left" Margin="27,30,0,0" VerticalAlignment="Top"/>

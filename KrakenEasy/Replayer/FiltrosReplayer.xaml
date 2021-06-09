@@ -1,0 +1,27 @@
+﻿<Window x:Class="KrakenEasy.Replayer.FiltrosReplayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KrakenEasy.Replayer"
+        mc:Ignorable="d"
+        Title="FiltrosReplayer" Height="306" Width="579">
+    <Grid>
+        <DataGrid HorizontalAlignment="Left" Height="229" Margin="10,51,0,0" VerticalAlignment="Top" Width="360"/>
+        <DataGrid HorizontalAlignment="Left" Height="236" Margin="477,44,0,0" VerticalAlignment="Top" Width="92"/>
+        <TextBox HorizontalAlignment="Left" Height="19" Margin="10,27,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="360"/>
+        <Label FontSize="8" Content="1) Choose a player in the below list or search by name." Foreground="Black" HorizontalAlignment="Left" Height="23" Margin="10,0,0,0" VerticalAlignment="Top" Width="213"/>
+        <Label Content="Label" HorizontalAlignment="Left" Height="12" Margin="290,11,0,0" VerticalAlignment="Top" Width="218"/>
+        <Label FontSize="8" Content="2) Apply filters if needed." Foreground="Black" HorizontalAlignment="Left" Height="23" Margin="374,0,0,0" VerticalAlignment="Top" Width="98"/>
+        <Label FontSize="8" Content="3) Choose one or more hands." Foreground="Black" HorizontalAlignment="Left" Height="23" Margin="477,-1,0,0" VerticalAlignment="Top" Width="60"/>
+        <StackPanel  HorizontalAlignment="Left" Height="252" Margin="375,28,0,0" VerticalAlignment="Top" Width="89" Background="#FFDADADA">
+            <Label Content="GameType"/>
+            <Grid Height="57" Width="90"/>
+            <Label Content="Date"/>
+            <Grid Height="44" Width="87"/>
+            <Label Content="Position"/>
+            <Grid Height="40"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

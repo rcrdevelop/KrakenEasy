@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
+using System.Security.Principal;
 using KrakenEasy.Casinos;
 using KrakenEasy.KrakenBD;
 using KrakenEasy.Hands;
@@ -20,7 +21,7 @@ namespace KrakenEasy.Servicios
         {
 
                     MongoAccess _Access = new MongoAccess();
-                    if (KrakenEasy.HUDS.Propiedades.SystemActive)
+                    if (SystemKraken.HUDS)
                     {
                         Ficheros _Ficheros = new Ficheros();
                         Recorrer_Directorios_Casino();
@@ -82,25 +83,33 @@ namespace KrakenEasy.Servicios
         {
             try
             {
-                string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory";
-                string folderMesas = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
-                string folderName = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents";
-                string folderWinamax = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
-                string folder888Poker = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
-                string folderPokerStars = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
+                string folder = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory";
+                string folderMesas = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
+                string folderName = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents";
+                string folderWinamax = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
+                string folder888Poker = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
+                string folderPokerStars = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
                 if (!Directory.Exists(folder))
                 {
-                    string pathString = System.IO.Path.Combine(folderName, "KrakenHistory");
+                    string pathString = Path.Combine(folderName, "KrakenHistory");
                     Directory.CreateDirectory(pathString);
                 }
                 if (!Directory.Exists(folderMesas))
                 {
-                    string pathString = System.IO.Path.Combine(folderName, "KrakenHands");
+                    string pathString = Path.Combine(folderName, "KrakenHands");
                     Directory.CreateDirectory(pathString);
                 }
                 if (!Directory.Exists(Environment.CurrentDirectory+"/Mesas/Winamax"))
                 {
                     Directory.CreateDirectory(Environment.CurrentDirectory + "/Mesas/Winamax");
+                }
+                if (!Directory.Exists(Environment.CurrentDirectory + "/swap/stats_actualizar"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/swap/stats_actualizar");
+                }
+                if (!Directory.Exists(Environment.CurrentDirectory + "/swap/mainwindow"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/swap/mainwindow");
                 }
                 if (!Directory.Exists(Environment.CurrentDirectory + "/Mesas/888Poker"))
                 {
@@ -139,7 +148,7 @@ namespace KrakenEasy.Servicios
                                 if (file.Contains(".txt")) 
                                 {
                                     string fileToMove = file;
-                                    string moveTo = destinationPathWinamax + "WINAMAX" + System.IO.Path.GetFileName(file);
+                                    string moveTo = destinationPathWinamax + "WINAMAX" + Path.GetFileName(file);
                                     var Time = File.GetLastAccessTime(file);
                                     var TimeFile = Time.Year * 10000 + Time.Month * 10 + Time.Day * 10 + Time.Hour * 10 + Time.Minute * 10 + Time.Second * 10;
                                     Time = DateTime.Now;
@@ -164,16 +173,16 @@ namespace KrakenEasy.Servicios
                 {
                     if (KrakenEasy.Casinos.Poker888.Habilitado)
                     {
-                        string[] FolderList = System.IO.Directory.GetDirectories(rootFolderPath888Poker);
+                        string[] FolderList = Directory.GetDirectories(rootFolderPath888Poker);
                         foreach (string Folder in FolderList)
                         {
-                            string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+                            string[] ReadFolder = Directory.GetFiles(Folder);
                             foreach (string file in ReadFolder)
                             {
                                 if (file.Contains(".txt"))
                                 {
                                     string fileToMove = file;
-                                    string moveTo = destinationPath888Poker + "888POKER" + System.IO.Path.GetFileName(file);
+                                    string moveTo = destinationPath888Poker + "888POKER" + Path.GetFileName(file);
                                     File.Copy(fileToMove, moveTo, true);
                                 }
                             }
@@ -190,17 +199,17 @@ namespace KrakenEasy.Servicios
 
                     if (KrakenEasy.Casinos.PokerStars.Habilitado)
                     {
-                        string[] FolderList = System.IO.Directory.GetDirectories(rootFolderPathPokerStars);
+                        string[] FolderList = Directory.GetDirectories(rootFolderPathPokerStars);
 
                         foreach (string Folder in FolderList)
                         {
-                            string[] ReadFolder = System.IO.Directory.GetFiles(Folder);
+                            string[] ReadFolder = Directory.GetFiles(Folder);
                             foreach (string file in ReadFolder)
                             {
                                 if (file.Contains(".txt"))
                                 {
                                     string fileToMove = file;
-                                    string moveTo = destinationPathPokerStars + "POKERSTARS" + System.IO.Path.GetFileName(file);
+                                    string moveTo = destinationPathPokerStars + "POKERSTARS" + Path.GetFileName(file);
                                     File.Copy(fileToMove, moveTo, true);
                                 }
                             }

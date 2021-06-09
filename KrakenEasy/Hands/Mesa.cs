@@ -12,5 +12,6 @@ namespace KrakenEasy.Hands
         public string Nombre { get; set; }
         public List<string> Jugadores { get; set; }
         public string Hand { get; set; }
+        public bool Read { get; set; }
     }
 }

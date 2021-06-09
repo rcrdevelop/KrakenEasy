@@ -16,6 +16,7 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace KrakenEasy.HUDS
 {
@@ -24,12 +25,12 @@ namespace KrakenEasy.HUDS
     /// </summary>
     public partial class PruebaHUD : Window
     {
-        static string _Id_Ventana;
-        static string _Id_Jugador;
-        static bool _Replayer;
-        static bool _Click = false;
-        static List<double> _STATS = new List<double>();
-        static RECT dimensionesHUD = new RECT();
+        string _Id_Ventana;
+        string _Id_Jugador;
+        bool _Replayer;
+        bool _Click = false;
+        List<double> _STATS = new List<double>();
+        RECT dimensionesHUD = new RECT();
         int[] Posiciones { get; set; }
         public PruebaHUD(string Id_Jugador, string Id_Ventana, bool Replayer)
         {
@@ -37,6 +38,9 @@ namespace KrakenEasy.HUDS
             _Id_Jugador = Id_Jugador;
             _Id_Ventana = Id_Ventana;
             _Replayer = Replayer;
+
+
+
         }
         private void Posicion_HUD(string Posicion) 
         {
@@ -47,7 +51,24 @@ namespace KrakenEasy.HUDS
             if (!_Replayer)
             {
                 _Click = true;
-                this.DragMove();
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+                
+                Win32 win32 = new Win32();
+                foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
+                {
+                    foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
+                    {
+                        var Dimensiones = new RECT();
+                        var DimensionesHUD = new RECT();
+                        Win32.GetWindowRect(ventana, out Dimensiones);
+                        Win32.GetWindowRect(HUD, out DimensionesHUD);
+                        dimensionesHUD.Left = DimensionesHUD.Left - Dimensiones.Left;
+                        dimensionesHUD.Top = DimensionesHUD.Top - Dimensiones.Top;
+                    }
+                }
             }
         }
         private void Opacidad()
@@ -57,7 +78,7 @@ namespace KrakenEasy.HUDS
             {
                 try
                 {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    this.Dispatcher.Invoke(new Action(() =>
                     {
                         this.Opacity = Propiedades.Opacity;
                     }));
@@ -79,7 +100,7 @@ namespace KrakenEasy.HUDS
             {
                 while (true)
                 {
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    this.Dispatcher.Invoke(new Action(() =>
                     {
                         this.Width = _OriginalWidth * Propiedades.Size;
                         this.Height = _OriginalHeight * Propiedades.Size;
@@ -100,7 +121,10 @@ namespace KrakenEasy.HUDS
         
         private void HUD_Data()
         {
-            var path = Environment.CurrentDirectory + "/HUDS-Kraken/" + _Id_Jugador + "-Mesa-" + _Id_Ventana + ".json";
+            this.Dispatcher.Invoke(() =>
+            {
+                var path = Environment.CurrentDirectory + "/HUDS-Kraken/" + this.Window.Title + "-Mesa-" + _Id_Ventana + ".json";
+            });
             if (!Directory.Exists(Environment.CurrentDirectory + "/HUDS-Kraken"))
             {
                 Directory.CreateDirectory(Environment.CurrentDirectory + "/HUDS-Kraken");
@@ -185,7 +209,7 @@ namespace KrakenEasy.HUDS
                     }
                 });
             _HiloHUD.Start();
-            Dispatcher.Invoke(new Action(() =>
+            this.Dispatcher.Invoke(new Action(() =>
             {
                 this.Name_Jugador.Content = _Id_Jugador;
                 this.Title = _Id_Jugador;
@@ -198,40 +222,78 @@ namespace KrakenEasy.HUDS
             try
             {
                 Propiedades.SystemActive = true;
-                while (true)
+                bool condicion = true;
+                bool PrimerPlano = false;
+                while (condicion)
                 {
                     while (_Click)
                     {
                         Thread.Sleep(TimeSpan.FromMilliseconds(500));
                     }
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    this.Dispatcher.Invoke(new Action(() =>
                     {
-                        if (this.WindowState == WindowState.Minimized)
-                        {
-                            this.Activate();
-                        }
-
                         
+
+
 
                         Win32 win32 = new Win32();
-                            foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
+                        foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
+                        {
+                            foreach (var HUD in win32.FindWindowsWithText(this.Window.Title))
                             {
-                                foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
+
+
+                                //Remove WS_POPUP style and add WS_CHILD style 
+
+                                //Win32.SetWindowLongA(ventana, -16, 0x40000000L);
+                                //Win32.SetWindowLongPtrA(HUD, -16, 0x40000000L);
+                                //IntPtr NewVentana = Win32.SetParent(HUD, ventana);
+                                var Ventana = new RECT();
+                                var Dimensiones = new RECT();
+                                var DimensionesHUD = new RECT();
+                                Win32.GetWindowRect(ventana, out Dimensiones);
+                                Win32.GetWindowRect(HUD, out DimensionesHUD);
+                                Win32.GetWindowRect(ventana, out Ventana);
+                                this.Dispatcher.Invoke(() =>
                                 {
+                                    if (Ventana.Left < 0)
+                                    {
+                                        this.Hide();
+                                    }
+                                    else 
+                                    {
+                                        try
+                                        {
+                                            this.Show();
+                                        }
+                                        catch 
+                                        { 
+   
+                                        }
 
-                                    RECT dimensionesVentana = new RECT();
+
+                                    }
                                     
-                                Win32.GetWindowRect(ventana, out dimensionesVentana);
-                                Win32.GetWindowRect(ventana, out dimensionesHUD);
-                   
-                                Win32.MoveWindow(HUD, 2 * dimensionesVentana.Left - dimensionesHUD.Left, 2 * dimensionesVentana.Top - dimensionesHUD.Top, (int)this.Window.Width, (int)this.Window.Height, true);
-                                }
+                                    if (Win32.GetForegroundWindow() == ventana && !PrimerPlano)
+                                    {
+                                        Win32.MoveWindow(HUD, Ventana.Left + dimensionesHUD.Left, Ventana.Top + dimensionesHUD.Top, (int)this.Width, (int)this.Height, false);
+                                        PrimerPlano = true;
+                                        this.Topmost = false;
+                                        this.Topmost = true;
+
+
+
+                                    }
+                                    else 
+                                    {
+                                        PrimerPlano = false;
+                                        this.Topmost = false;
+                                    }
+                                    
+                                });
+
                             }
-
-                        
-
-                        this.Topmost = true;
-                        this.Topmost = false;
+                        }
 
                         if (!Propiedades.SystemActive)
                         {
@@ -251,7 +313,7 @@ namespace KrakenEasy.HUDS
                         //}
 
                     }));
-                    Thread.Sleep(TimeSpan.FromSeconds(0.2));
+                    Thread.Sleep(TimeSpan.FromSeconds(0.1));
                 }
 
             }
@@ -282,88 +344,93 @@ namespace KrakenEasy.HUDS
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Hilo();
-            Window window = new Window();
-            Grid grid = new Grid();
-            grid.RowDefinitions.Add(new RowDefinition());
-            grid.RowDefinitions.Add(new RowDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            //Window window = new Window();
+            //Grid grid = new Grid();
+            //grid.RowDefinitions.Add(new RowDefinition());
+            //grid.RowDefinitions.Add(new RowDefinition());
+            //grid.ColumnDefinitions.Add(new ColumnDefinition());
+            //grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            Label leftventana = new Label();
-            Label topventana = new Label();
-            Label lefthud = new Label();
-            Label tophud = new Label();
+            //Label leftventana = new Label();
+            //Label topventana = new Label();
+            //Label lefthud = new Label();
+            //Label tophud = new Label();
 
-            Thread windowhilo = new Thread(() => {
-                while (true)
-                {
+            //Thread windowhilo = new Thread(() => {
+            //    while (true)
+            //    {
 
-                
-                Win32 win32 = new Win32();
-                foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
-                {
-                    foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
-                    {
 
-                        RECT dimensionesVentana = new RECT();
+            //        Win32 win32 = new Win32();
+            //        foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
+            //        {
+            //            foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
+            //            {
 
-                        Win32.GetWindowRect(ventana, out dimensionesVentana);
-                        
-                        RECT hudDimensiones = new RECT();
+            //                var Dimensiones = new RECT();
+            //                var DimensionesHUD = new RECT();
+            //                Win32.GetWindowRect(ventana, out Dimensiones);
+            //                Win32.GetWindowRect(HUD, out DimensionesHUD);
+                            
+            //                Application.Current.Dispatcher.Invoke(() => {
+            //                    leftventana.Content = Dimensiones.Left + "Ventana " + DimensionesHUD.Left + "HUD " + "Diferencia: " + (DimensionesHUD.Left - Dimensiones.Left);
+            //                    topventana.Content = Dimensiones.Top + "Ventana " + DimensionesHUD.Top + "HUD " + "Diferencia: " + (DimensionesHUD.Top - Dimensiones.Top);
+                                
+            //                });
+                            
 
-                        Win32.GetWindowRect(HUD, out hudDimensiones);
-                            Application.Current.Dispatcher.Invoke(() => { 
-                                leftventana.Content = "Ventana left: " + dimensionesVentana.Left;
-                                topventana.Content = "Ventana top: " + dimensionesVentana.Top;
-                                lefthud.Content = "HUD left: " + hudDimensiones.Left;
-                                tophud.Content = "HUD top: " + hudDimensiones.Top;
-                            });
-                        }
-                }
-                }
-                Thread.Sleep(TimeSpan.FromMilliseconds(500));
-            });
-            windowhilo.Start();
-            Grid.SetColumn(leftventana, 0);
-            Grid.SetRow(leftventana, 0);
+            //            }
+            //        }
+            //    }
+            //    Thread.Sleep(TimeSpan.FromMilliseconds(500));
+            //});
+            //windowhilo.Start();
+            //Grid.SetColumn(leftventana, 0);
+            //Grid.SetRow(leftventana, 0);
 
-            Grid.SetColumn(topventana, 0);
-            Grid.SetRow(topventana, 1);
+            //Grid.SetColumn(topventana, 0);
+            //Grid.SetRow(topventana, 1);
 
-            Grid.SetColumn(lefthud, 1);
-            Grid.SetRow(lefthud, 0);
+            //Grid.SetColumn(lefthud, 1);
+            //Grid.SetRow(lefthud, 0);
 
-            Grid.SetColumn(tophud, 1);
-            Grid.SetRow(tophud, 1);
+            //Grid.SetColumn(tophud, 1);
+            //Grid.SetRow(tophud, 1);
 
-            grid.Children.Add(leftventana);
-            grid.Children.Add(topventana);
-            grid.Children.Add(lefthud);
-            grid.Children.Add(tophud);
+            //grid.Children.Add(leftventana);
+            //grid.Children.Add(topventana);
+            //grid.Children.Add(lefthud);
+            //grid.Children.Add(tophud);
 
-            window.Content = grid;
-            window.Show();
+            //window.Content = grid;
+            //window.Show();
         }
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-            Win32 win32 = new Win32();
-            RECT Dimensiones = new RECT();
-            foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
-            {
-                Win32.GetWindowRect(HUD, out Dimensiones);
-            }
-            int Left = Dimensiones.Left;
-            int Top = Dimensiones.Top;
-            foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
-            {
-                //Win32.GetWindowRect(ventana, out Dimensiones);
-                //dimensionesHUD.Left = Left - Dimensiones.Left;
-                //dimensionesHUD.Left = Top - Dimensiones.Top;
+           
+            //Win32 win32 = new Win32();
+            //RECT Dimensiones = new RECT();
+            //foreach (var HUD in win32.FindWindowsWithText(_Id_Jugador))
+            //{
+            //    Win32.GetWindowRect(HUD, out Dimensiones);
+            //}
+            //int Left = Dimensiones.Left;
+            //int Top = Dimensiones.Top;
+            //foreach (var ventana in win32.FindWindowsWithText(_Id_Ventana))
+            //{
+            //    //Win32.GetWindowRect(ventana, out Dimensiones);
+            //    //dimensionesHUD.Left = Left - Dimensiones.Left;
+            //    //dimensionesHUD.Left = Top - Dimensiones.Top;
 
 
-            }
+            //}
             _Click = false;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Propiedades.SystemActive = false;
         }
     }
 }

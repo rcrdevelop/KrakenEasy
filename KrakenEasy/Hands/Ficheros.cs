@@ -103,7 +103,12 @@ namespace KrakenEasy.Hands
             {
                 foreach (var file in ReadFolder)
                 {
-                    if (!file.Contains(".dat"))
+                    bool condicion = false;
+                    foreach (var mesa in System.IO.Directory.GetFiles(folderMesas))
+                    {
+                        condicion = mesa.Contains(Path.GetFileName(file).Replace("txt", "json"));
+                    }
+                    if (!file.Contains(".dat") && !condicion)
                     {
                         Analizador _Analizador = new Analizador();
                         _Analizador.Recorrer_Fichero(Path.GetFullPath(file));
@@ -133,13 +138,7 @@ namespace KrakenEasy.Hands
                                 Nombre_File = Nombre_File.Replace("-", "");
                             }
 
-                            var notificationManager = new NotificationManager();
-                            notificationManager.Show(new NotificationContent
-                            {
-                                Title = "KrakenEasy",
-                                Message = "Se ha detectado una mesa con nombre de '" + Nombre_File + "' del casino " + Casino,
-                                Type = NotificationType.Notification
-                            });
+
                             string line;
                             MongoAccess _Access = new MongoAccess();
                             StreamReader fileRead = new System.IO.StreamReader(file);
@@ -175,19 +174,26 @@ namespace KrakenEasy.Hands
                             while (0 == jugadores.Count)
                             {
                                 jugadores = _Access.Get_Players(ids[ids.Count - 1]);
-                                Thread.Sleep(TimeSpan.FromSeconds(0.2));
+                                Thread.Sleep(TimeSpan.FromSeconds(0.1));
                             }
                             Mesa _Mesa = new Mesa
                             {
                                 Hand = ids[ids.Count - 1],
                                 Casino = Casino,
                                 Nombre = Path.GetFileName(file).Replace("txt", "json"),
-                                Jugadores = jugadores
+                                Jugadores = jugadores,
+                                Read = false
 
                             };
                             string json = Newtonsoft.Json.JsonConvert.SerializeObject(_Mesa);
                             System.IO.File.WriteAllText(folderMesas + Path.GetFileName(file).Replace("txt", "json"), json);
-
+                            var notificationManager = new NotificationManager();
+                            notificationManager.Show(new NotificationContent
+                            {
+                                Title = "KrakenEasy",
+                                Message = "Se ha detectado una mesa con nombre de '" + Nombre_File + "' del casino " + Casino,
+                                Type = NotificationType.Notification
+                            });
                         }
                         else
                         {
@@ -217,6 +223,17 @@ namespace KrakenEasy.Hands
                                     File.Delete(folderMesas + Path.GetFileName(file).Replace("txt", "json"));
                                 }
                             }
+                        }
+                    }
+                    else
+                    {
+                        var Time = File.GetLastWriteTime(file);
+                        var HoraFichero = Time.Year * 10000000000 + Time.Month * 1000000 + Time.Day * 10000 + Time.Hour * 100 + Time.Minute;
+                        Time = DateTime.Now;
+                        var HoraActual = Time.Year * 10000000000 + Time.Month * 1000000 + Time.Day * 10000 + Time.Hour * 100 + Time.Minute;
+                        if (HoraActual != HoraFichero && condicion)
+                        {
+                            File.Delete(file.Replace("KrakenHistory","KrakenHands").Replace("txt","json"));
                         }
                     }
                 }

@@ -1,0 +1,43 @@
+﻿<Window x:Class="HUDSKrakenProcess.HUDS.HUDControler"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KrakenEasy.HUDS"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        MouseDown="Window_MouseDown"
+        BorderThickness="6"
+        Background="#FF111111"
+        Title="ControlerHUD" Height="149.334" Width="411.333" ShowInTaskbar="False">
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF1152D9" Offset="0"/>
+            <GradientStop Color="White" Offset="0.129"/>
+            <GradientStop Color="#FF7DA1EA" Offset="1"/>
+            <GradientStop Color="#FF4276E0" Offset="0.457"/>
+            <GradientStop Color="#FFEBF0FB" Offset="0.801"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
+    <Window.Resources>
+        <Style TargetType="Button" x:Name="RoundButton">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="0,0,3.333,-6.667">
+        <Grid Height="202.627" Width="Auto">
+            <Label Content="Controlador de HUD" Margin="131,10,137.666,158.667" Foreground="White" />
+            <Label Content="Opacidad" Margin="34,55,293,113.627" Foreground="White"/>
+            <Label Content="Tamaño" Margin="180.296,54.667,164.907,113.748" Foreground="White"/>
+            <Slider Name="Opacidad" Value="0.5"  Minimum="0" Maximum="1" TickFrequency="0.1" Margin="34,95.032,258.628,81.333" ValueChanged="Opacidad_ValueChanged"/>
+            <Slider Name="Size" Value="0.8"  Margin="180.296,95.032,112.332,81.333" Minimum="0.4" Maximum="1.1" TickFrequency="0.05" ValueChanged="Size_ValueChanged"/>
+            <Button Content="Cambiar HUD"  Margin="285,95,21,81.627" Click="Button_Click" />
+        </Grid>
+    </StackPanel>
+</Window>

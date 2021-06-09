@@ -31,6 +31,20 @@ namespace KrakenEasy
         private static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("user32.dll")]
+        public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+        [DllImport("user32.dll")]
+        public static extern long GetWindowLongPtrA(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern long SetWindowLongPtrA(IntPtr hWnd, int nIndex, long dwNewLong);
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        public static extern bool SetWindowPos(IntPtr hWnd, int hWndInsertAfter, double X, double Y, double cx, double cy, UIntPtr uFlags);
+        [DllImport("user32.dll")]
+        public static extern void SetBounds(int x, int y, int width, int height);
+        [DllImport("user32.dll")]
         private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
 
         // Delegate to filter which windows to include 

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\
+D:\Job\Develop\Kraken\repo\KrakenEasy\KrakenEasy\obj\Release\net5.0-windows\
 KrakenEasy
 none
 false
 TRACE;RELEASE;NET;NET5_0;NETCOREAPP
-C:\Users\contr\source\repos\clone\KrakenEasy\KrakenEasy\App.xaml
-17-889619776
+D:\Job\Develop\Kraken\repo\KrakenEasy\KrakenEasy\App.xaml
+201039992761
 6-100814219
-53-1293722303
-2541576756810
-HUDS\ContenedorHUD.xaml;HUDS\Controls\ProgressControl.xaml;HUDS\Controls\StatControl.xaml;HUDS\FullHUD.xaml;HUDS\HUDControler.xaml;HUDS\MesaPrueba.xaml;HUDS\Progress.xaml;HUDS\ProgressKraken.xaml;HUDS\PruebaHUD.xaml;HUDS\PruebaHUDControler.xaml;MainWindow.xaml;Replayer\Cards.xaml;Replayer\Etapas.xaml;Replayer\MainWindow.xaml;Servicios\Error.xaml;Settings.xaml;STATSPruebaHUD.xaml;
+571349129591
+258-828143259
+Hands\ImportarHands.xaml;HUDS\ContenedorHUD.xaml;HUDS\Controls\ProgressControl.xaml;HUDS\Controls\StatControl.xaml;HUDS\FullHUD.xaml;HUDS\HUDControler.xaml;HUDS\MesaPrueba.xaml;HUDS\Progress.xaml;HUDS\ProgressKraken.xaml;HUDS\PruebaHUD.xaml;HUDS\PruebaHUDControler.xaml;MainWindow.xaml;Replayer\Cards.xaml;Replayer\Etapas.xaml;Replayer\FiltrosReplayer.xaml;Replayer\MainWindow.xaml;Servicios\Error.xaml;Settings.xaml;STATSPruebaHUD.xaml;Taskbar.xaml;
 
 False
 

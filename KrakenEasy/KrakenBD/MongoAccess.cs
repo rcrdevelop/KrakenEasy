@@ -10,6 +10,7 @@ using KrakenEasy.Casinos;
 using System.Windows;
 using Notification.Wpf;
 using Newtonsoft.Json;
+using System.Security.Principal;
 
 namespace KrakenEasy.KrakenBD
 {
@@ -298,20 +299,63 @@ namespace KrakenEasy.KrakenBD
                 }
             }
         }
-        public string[] Get_NPlayers()
+        public double Get_NPlayers()
         {
             MongoAccess _Access = new MongoAccess();
             var _Session = _Access._Client.StartSession();
             var _Collection = _Session.Client.GetDatabase("Kraken");
-            var filter = Builders<BsonDocument>.Filter.Eq("Mostrar", true);
             string[] _Resultado = new string[2];
-            foreach (var Ventana in _Collection.GetCollection<BsonDocument>("Ventanas").Find(filter).ToList())
+            int Contador = 0;
+            foreach (var Ventana in _Collection.GetCollection<BsonDocument>("Jugadores").Find(new BsonDocument()).ToList())
             {
-                Console.WriteLine("Mostrar");
-                _Resultado[0] = Ventana.GetElement("N_Players").Value.ToString();
-                _Resultado[1] = Ventana.GetElement("_id").Value.ToString();
+                Contador++;
             }
-            return _Resultado;
+            return Contador;
+        }
+        public void Set_Hand_STAT_Actualizar()
+        {
+            if (!Directory.Exists(Environment.CurrentDirectory + "/swap/stats_actualizar/"))
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory + "/swap/stats_actualizar/");
+            }
+            var files = Directory.GetFiles(@"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands");
+            foreach (var file in files)
+            {
+                if (File.Exists(file))
+                { 
+                    string Casino = "";
+                    string Hand = "";
+                    List<string> Jugadores = new List<string>();
+                    string Nombre = "";
+                    File.Copy(file,Environment.CurrentDirectory + "/swap/stats_actualizar/"+Path.GetFileName(file));
+                    using (StreamReader jsonStream = File.OpenText(Environment.CurrentDirectory + "/swap/stats_actualizar/"+ Path.GetFileName(file)))
+                    {
+                        var json = jsonStream.ReadToEnd();
+                        jsonStream.Close();
+                        Hands.Mesa HUD_JSON = Newtonsoft.Json.JsonConvert.DeserializeObject<Hands.Mesa>(json);
+                        MongoAccess _Access = new MongoAccess();
+                        foreach (var Jugador in HUD_JSON.Jugadores)
+                        {
+                            _Access.STATS(Jugador);
+                        }
+                        Casino = HUD_JSON.Casino;
+                        Hand = HUD_JSON.Hand;
+                        Jugadores = HUD_JSON.Jugadores;
+                        Nombre = HUD_JSON.Nombre;
+                    }
+                    Hands.Mesa MesaFile = new Hands.Mesa
+                    {
+                        Casino = Casino,
+                        Hand = Hand,
+                        Jugadores = Jugadores,
+                        Nombre = Nombre,
+                        Read = true
+                    };
+                    string json2 = JsonConvert.SerializeObject(MesaFile);
+                    System.IO.File.WriteAllText(file, json2);
+                    File.Delete(Environment.CurrentDirectory + "/swap/stats_actualizar/"+ Path.GetFileName(file));
+                }
+            }
         }
         public List<string> Get_Players(string _Id_Hand)
         {

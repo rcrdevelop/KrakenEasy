@@ -21,18 +21,18 @@ namespace KrakenEasy.Replayer
     /// </summary>
     public partial class Cards : UserControl
     {
-        public Cards()
+        public Cards(string Left, string Right)
         {
             InitializeComponent();
-            HoleCards();
+            HoleCards(Left,Right);
         }
-        private void HoleCards() 
+        private void HoleCards(string Left, string Right) 
         {
             var CurrentDirectory = Environment.CurrentDirectory;
             var path = CurrentDirectory;
             var CardDorso = new BitmapImage(new Uri(path + "/Replayer/Cartas/Baraja Dorso2.png"));
-            var Card_Right = new BitmapImage(new Uri(path + "/Replayer/Cartas/TC.png"));
-            var Card_Left = new BitmapImage(new Uri(path + "/Replayer/Cartas/2H.png"));
+            var Card_Right = new BitmapImage(new Uri(path + "/Replayer/Cartas/"+Left+".png"));
+            var Card_Left = new BitmapImage(new Uri(path + "/Replayer/Cartas/"+Right+".png"));
             Thread thread = new Thread(() => { 
                 while (true) {
             

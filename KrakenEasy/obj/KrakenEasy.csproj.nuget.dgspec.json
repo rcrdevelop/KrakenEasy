@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[2.37.1, )"
             },
+            "Hardcodet.NotifyIcon.Wpf": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
             "LiveCharts.Wpf": {
               "target": "Package",
               "version": "[0.9.7, )"
@@ -79,6 +83,10 @@
             "Notification.Wpf": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "NuGet.Protocol": {
+              "target": "Package",
+              "version": "[5.9.1, )"
             },
             "System.Management.Automation": {
               "target": "Package",

@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Security.Principal;
 
 namespace KrakenEasy.Hands
 {
@@ -33,7 +34,7 @@ namespace KrakenEasy.Hands
             }
             else if (Directory.Exists(this.RutaCarpeta.Text))
             {
-                string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
+                string folder = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHistory/";
                 foreach (var file in Directory.GetFiles(this.RutaCarpeta.Text))
                 {
                     string fichero = "";

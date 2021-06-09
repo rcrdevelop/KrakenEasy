@@ -4,6 +4,7 @@ using System.Text;
 using KrakenEasy.Casinos;
 using System.IO;
 using System.Windows;
+using System.Security.Principal;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.IO;
@@ -46,9 +47,9 @@ namespace KrakenEasy.KrakenBD
             }
             else 
             {
-                Winamax._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/Winamax Poker/accounts/";
-                Poker888._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/888poker/HandHistory/";
-                PokerStars._Ruta = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/AppData/Local/PokerStars/HandHistory/";
+                Winamax._Ruta = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/Winamax Poker/accounts/";
+                Poker888._Ruta = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/888poker/HandHistory/";
+                PokerStars._Ruta = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/AppData/Local/PokerStars/HandHistory/";
                 var Casino = new Casinos.Casinos
                 {
                     Winamax_Ruta = Winamax._Ruta,
@@ -56,7 +57,7 @@ namespace KrakenEasy.KrakenBD
                     PokerStars_Ruta = PokerStars._Ruta,
                 };
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(Casino);
-                System.IO.File.WriteAllText(path, json);
+                File.WriteAllText(path, json);
                 Winamax.Habilitado = false;
                 Poker888.Habilitado = false;
                 PokerStars.Habilitado = false;

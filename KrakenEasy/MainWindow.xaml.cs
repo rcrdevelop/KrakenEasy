@@ -10,7 +10,14 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using MongoDB.Bson;
-
+using System.Windows.Forms;
+using Hardcodet.Wpf.TaskbarNotification;
+using System.Windows.Media.Imaging;
+using Application = System.Windows.Application;
+using NuGet.Protocol.Plugins;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
+using System.Drawing;
 namespace KrakenEasy
 {
 
@@ -18,8 +25,8 @@ namespace KrakenEasy
     public partial class MainWindow : Window
     {
 
-        static string path = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
-
+        static string path = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands/";
+        NotifyIcon icon = new NotifyIcon();
         static Servicios.Servicios _Servicios = new Servicios.Servicios();
         static List<string> Mesas_HUDS_Abiertos = new List<string>();
         static List<string> HUDS_Abiertos = new List<string>();
@@ -28,75 +35,124 @@ namespace KrakenEasy
         public MainWindow()
         {
             InitializeComponent();
+            this.Icon = new BitmapImage(new Uri(Environment.CurrentDirectory + "/HUDS/Badges/pulpo.ico"));
             Registros_Data.InicializarRecursos();
             KrakenBD.Settings.Inicializar();
-           
+            IconProgram();
         }
         private void HUD_Click(object sender, RoutedEventArgs e)
         {
-            MongoAccess _Access = new MongoAccess();
-            //_Access.Set_VPIP("POKER0545");
-            //_Access.Set_CC("POKER0545");
-            //_Access.Set_BET3("POKER0545");
-            //_Access.Set_BET4("POKER0545");
-            //_Access.Set_BET5("POKER0545");
-            //_Access.Set_Limp("POKER0545");
-            //_Access.Set_RB("POKER0545");
-            //_Access.Set_PFR("POKER0545");
-            //_Access.Set_FCB("POKER0545");
-            //_Access.Set_FoldFCB("POKER0545");
-            //_Access.Set_TCB("POKER0545");
-            //_Access.Set_FoldTCB("POKER0545");
-            //_Access.Set_FoldBET3("POKER0545");
-            //_Access.Set_WSD("POKER0545");
-            //_Access.Set_WTSD("POKER0545");
+            MongoAccess _Access = new MongoAccess(); ;
 
-            Thread _Hilo_Monitor = new Thread(Monitor_HUDS);
-            Thread _Hilo_Servicio = new Thread(Iniciar_Servicio);
-            Thread _Hilo_HUDS = new Thread(Iniciar_HUDS);
 
-            if (this.HUD.Content.ToString().ToUpper() == "Iniciar Kraken".ToUpper())
+            try
             {
-                try 
-                { 
-                
+
                 _Access.InicializarMain();
-                Propiedades.SystemActive = true;
+
+   
+
+            }
+            catch (Exception ex)
+            {
+                var notificationManager = new NotificationManager();
+
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "KrakenEasy",
+                    Message = "Error al iniciar Kraken... //" + ex.Message,
+                    Type = NotificationType.Error
+                });
+            }
+
+
+        }
+        private void IconProgram()
+        {            
+            icon.Icon = new Icon(Environment.CurrentDirectory + "/HUDS/Badges/pulpo.ico");
+            icon.Visible = true;
+            icon.ContextMenuStrip = new ContextMenuStrip();
+            icon.ContextMenuStrip.Items.Add("Abrir", null, Abrir);
+            icon.ContextMenuStrip.Items.Add("Iniciar Kraken", null, Iniciar_HUDS);
+            icon.ContextMenuStrip.Items.Add("Iniciar Replayer", null, Iniciar_Replayer);
+            icon.ContextMenuStrip.Items.Add("Salir", null, Salir);
+        }
+
+        void Salir (object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void Abrir(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Normal;
+            this.Topmost = false;
+            this.Topmost = true;
+        }
+        private void Iniciar_HUDS(object sender, EventArgs e)
+        {
+
+
+            if (!SystemKraken.HUDS)
+            {
+                Iniciar_Kraken();
+                icon.ContextMenuStrip = new ContextMenuStrip();
+                icon.ContextMenuStrip.Items.Add("Abrir", null, Abrir);
+                icon.ContextMenuStrip.Items.Add("Detener Kraken", null, Iniciar_HUDS);
+                icon.ContextMenuStrip.Items.Add("Iniciar Replayer", null, Iniciar_Replayer);
+                icon.ContextMenuStrip.Items.Add("Salir", null, Salir);
+            }
+            else
+            {
+                Detener_Kraken();
+                icon.ContextMenuStrip = new ContextMenuStrip();
+                icon.ContextMenuStrip.Items.Add("Abrir", null, Abrir);
+                icon.ContextMenuStrip.Items.Add("Iniciar Kraken", null, Iniciar_HUDS);
+                icon.ContextMenuStrip.Items.Add("Iniciar Replayer", null, Iniciar_Replayer);
+                icon.ContextMenuStrip.Items.Add("Salir", null, Salir);
+            }
+
+
+        }
+        void Iniciar_Replayer(object sender, EventArgs e)
+        {
+
+                Replayer.MainWindow _Replayer = new Replayer.MainWindow();
+                _Replayer.Show();
+
+        }
+
+        private void Iniciar_Kraken()
+        {
+            if (!SystemKraken.HUDS)
+            {
+                Thread _Hilo_Monitor = new Thread(Monitor_HUDS);
+                Thread _Hilo_Servicio = new Thread(Iniciar_Servicio);
+                Thread _Hilo_HUDS = new Thread(Iniciar_HUD);
                 this.HUD.Content = "Detener Kraken";
                 _Hilo_Servicio.Start();
                 _Hilo_Monitor.Start();
                 _Hilo_HUDS.Start();
-                    var notificationManager = new NotificationManager();
+                SystemKraken.HUDS = true;
+                var notificationManager = new NotificationManager();
 
-                    notificationManager.Show(new NotificationContent
-                    {
-                        Title = "KrakenEasy",
-                        Message = "Kraken iniciado... HUDS listos para mostrarse.",
-                        Type = NotificationType.Notification
-                    });
-                    //HUDS(" POKER0545 ", "");
-                }
-                catch(Exception ex)
+                notificationManager.Show(new NotificationContent
                 {
-                    var notificationManager = new NotificationManager();
+                    Title = "KrakenEasy",
+                    Message = "Kraken iniciado... HUDS listos para mostrarse.",
+                    Type = NotificationType.Notification
+                });
 
-                    notificationManager.Show(new NotificationContent
-                    {
-                        Title = "KrakenEasy",
-                        Message = "Error al iniciar Kraken... //" + ex.Message,
-                        Type = NotificationType.Error
-                    });
-                }
             }
-            else
-            {
-
-                Propiedades.SystemActive = false;
-
-                _Hilo_HUDS.Interrupt();
+            
+        }
+        private void Detener_Kraken()
+        {
+            if (SystemKraken.HUDS)
+            { 
                 this.HUD.Content = "Iniciar Kraken";
                 Mesas_HUDS_Abiertos = new List<string>();
                 HUDS_Abiertos = new List<string>();
+                SystemKraken.HUDS = false;
                 var notificationManager = new NotificationManager();
 
                 notificationManager.Show(new NotificationContent
@@ -105,7 +161,7 @@ namespace KrakenEasy
                     Message = "Kraken detenido.",
                     Type = NotificationType.Notification
                 });
-                Detener_Servicio();
+ 
             }
         }
         public static void Detener_Sistema() 
@@ -113,18 +169,14 @@ namespace KrakenEasy
 
         }
         //Iniciar RePlayer
-        private void Replayer_Click(object sender, RoutedEventArgs e)
-        {
-            Replayer.MainWindow _Replayer = new Replayer.MainWindow();
-            _Replayer.Show();
-
-        }
+        
 
         private void Window_Closed(object sender, EventArgs e)
         {
             Detener_Servicio();
             Process.GetCurrentProcess().Kill();
         }
+        
         //Llevar ficheros a KrakenHands manualmente
         private void Importar_Hands(object sender, RoutedEventArgs e)
         {
@@ -142,26 +194,21 @@ namespace KrakenEasy
         {
             Propiedades.SystemActive = true;
             _Servicios.main();
-            //string imagepath =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ManejadorServicios.exe");
-            //Process p = new Process();
-            //ProcessStartInfo psi = new ProcessStartInfo(imagepath);
-            //p.StartInfo = psi;
-            //p.Start();
-
         }
-        private static void Iniciar_HUDS()
+        private static void Iniciar_HUD()
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 HUDControler _Controler = new HUDControler();
                 _Controler.Show();
-                MongoAccess _Access = new MongoAccess();
-                Thread hilo = new Thread(() => { _Access.Obtener_Jugadores(); });
-                hilo.Start();
+            });
+            MongoAccess _Access = new MongoAccess();
+                //Thread hilo = new Thread(() => { _Access.Obtener_Jugadores(); });
+                //hilo.Start();
 
                 //Thread _Hilo_Monito_HUDS = new Thread(Monitor_HUDS);
                 //_Hilo_Monito_HUDS.Start();
-            });
+
         }
         //Procedimiento para mostras HUDS
         private static void Monitor_HUDS()
@@ -172,9 +219,9 @@ namespace KrakenEasy
             {
                 
                 Casinos.Mesas.Abiertas = Mesas_HUDS_Abiertos;
-                string folder = @"c:/Users/" + (System.Security.Principal.WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
+                string folder = @"c:/Users/" + (WindowsIdentity.GetCurrent().Name).Split('\\')[1] + "/Documents/KrakenHands";
 
-                string[] ReadFolder = System.IO.Directory.GetFiles(folder);
+                string[] ReadFolder = Directory.GetFiles(folder);
                 if (Casinos.Poker888.Habilitado || Casinos.Winamax.Habilitado || Casinos.PokerStars.Habilitado)
                 {
                     List<string> Lista_Nueva = new List<string>(); 
@@ -210,13 +257,15 @@ namespace KrakenEasy
                             
                         }
                     }
-
+                    string Casino = "";
+                    string Hand = "";
+                    List<string> Jugadores = new List<string>();
+                    string Nombre = "";
                     foreach (var file in ReadFolder)
                     {   
                         
                         
-                            if (!HUD_Duplicado(file)) 
-                            {
+
                                 string Nombre_File = "";
                                 if (file.Contains("WINAMAX"))
                                 {
@@ -237,24 +286,39 @@ namespace KrakenEasy
                                     }
                                     Casino_HUD = "PokerStars";
                                 }
-                                bool ProcesoHUDListo = false;
-                                Abrir_HUDS(file);
-                                
-                                if (ProcesoHUDListo)
+
+                        
+                        
+
+                        using (StreamReader jsonStream = File.OpenText(file))
+                        {
+                            var json = jsonStream.ReadToEnd();
+                            jsonStream.Close();
+                            Mesa HUD_JSON = Newtonsoft.Json.JsonConvert.DeserializeObject<Mesa>(json);
+                            if (HUD_JSON.Read == true)
+                            {
+                                foreach (var Jugador in HUD_JSON.Jugadores)
                                 {
-                                    NotificationManager notificationManager = new NotificationManager();
-                                    notificationManager.Show(new NotificationContent
-                                    {
-                                        Title = "KrakenEasy",
-                                        Message = "Cargando HUDS para la mesa '" + Nombre_File + "'",
-                                        Type = NotificationType.Information
-                                    });
+                                    HUDS(Jugador, Nombre_File);
                                 }
-  
+                                Casino = HUD_JSON.Casino;
+                                Hand = HUD_JSON.Hand;
+                                Jugadores = HUD_JSON.Jugadores;
+                                Nombre = HUD_JSON.Nombre;
+                                Hands.Mesa MesaFile = new Hands.Mesa
+                                {
+                                    Casino = Casino,
+                                    Hand = Hand,
+                                    Jugadores = Jugadores,
+                                    Nombre = Nombre,
+                                    Read = false
+                                };
+                                string json2 = JsonConvert.SerializeObject(MesaFile);
+                                System.IO.File.WriteAllText(file, json2);
+                            }
+        
 
-                                Mesas_HUDS_Abiertos.Add(Path.GetFileName(file));
-                
-
+                            Mesas_HUDS_Abiertos.Add(Path.GetFileName(file));
                         }
                     }
                 }
@@ -305,10 +369,11 @@ namespace KrakenEasy
 
             void Abrir_HUDS(string Nombre_File)
             {
-
-                using (StreamReader jsonStream = File.OpenText(Nombre_File))
+                File.Copy(Nombre_File, Environment.CurrentDirectory + "/swap/mainwindow/");
+                using (StreamReader jsonStream = File.OpenText(Environment.CurrentDirectory + "/swap/mainwindow/"+Path.GetFileName(Nombre_File)))
                 {
                     var json = jsonStream.ReadToEnd();
+                    jsonStream.Close();
                     Mesa HUD_JSON = Newtonsoft.Json.JsonConvert.DeserializeObject<Mesa>(json);
                     MongoAccess _Access = new MongoAccess();
                     foreach (var Jugador in HUD_JSON.Jugadores)
@@ -318,10 +383,9 @@ namespace KrakenEasy
                     foreach (var Jugador in HUD_JSON.Jugadores)
                     {
                         HUDS(Jugador, Nombre_File);
-
                     }
                 }
-  
+                File.Delete(Environment.CurrentDirectory + "/swap/mainwindow/" + Path.GetFileName(Nombre_File));
             }
         }
 
@@ -331,6 +395,25 @@ namespace KrakenEasy
         {
             Settings _Settings = new Settings();
             _Settings.Show();
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                var notificationManager = new NotificationManager();
+                notificationManager.Show(new NotificationContent
+                {
+                    Title = "KrakenEasy",
+                    Message = "Aplicacion oculta en barra de tareas",
+                    Type = NotificationType.Notification
+                });
+            }
+            else
+            {
+                this.ShowInTaskbar = true;
+            }
         }
     }
 }

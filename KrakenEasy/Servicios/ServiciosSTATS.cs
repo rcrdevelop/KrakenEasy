@@ -10,32 +10,13 @@ using KrakenEasy.KrakenBD;
 
 namespace KrakenEasy.Servicios
 {
-    class ServiciosSTATS: BackgroundService
+    public class ServiciosSTATS
     {
 
-        private readonly ILogger<ServiciosSTATS> _logger;
-
-        public ServiciosSTATS(ILogger<ServiciosSTATS> logger)
+        public static void main()
         {
-            _logger = logger;
-        }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                try
-                {
-                    _logger.LogInformation("Worker running at: {time} Estatus Kraken", DateTimeOffset.Now);
-
-                }
-                catch (Exception)
-                {
-
-
-                }
-                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
-            }
+            MongoAccess _Access = new MongoAccess();
+            _Access.Set_Hand_STAT_Actualizar();
         }
     }
 }
